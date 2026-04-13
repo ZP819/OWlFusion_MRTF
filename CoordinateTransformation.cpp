@@ -159,7 +159,13 @@ int CoordinateTransformation::GeographicCoordinates_Calculate(double RadarLongit
 		return -1;
 	}
 
-	if (TargetAzimuth > 360 || RadarLongitude < 0)
+	/*
+	 * P0-C：修复方位输入参数合法性判断。
+	 * 旧逻辑误把 RadarLongitude<0 当作方位非法条件，
+	 * 导致西经区域被错误判定为失败。
+	 * 这里应只校验 TargetAzimuth 是否落在 [0, 360]。
+	 */
+	if (TargetAzimuth > 360 || TargetAzimuth < 0)
 	{
 		return -1;
 	}

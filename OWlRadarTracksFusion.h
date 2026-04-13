@@ -143,6 +143,19 @@ private:
 		SPxRadarTrack* preferredSizeTrack);
 
 	void sendDeletePacketForFusedTrack(UINT32 fusedID);
+
+	/*
+	 * P0-B：融合元数据与成员列表一致性维护。
+	 * 1) deduplicateTrackVec:
+	 *    对成员统一 ID 列表做稳定去重，避免重复成员污染融合状态。
+	 * 2) rebuildFusionMetadataFromMembers:
+	 *    按 SDK 语义从成员重建 fusion.sensors / fusion.sensorTypes / fusion.trackID[]。
+	 * 3) findRadarTrackByFusionSlot:
+	 *    根据 fusion.sensors 与 trackID[] 的映射规则，反查对应雷达航迹。
+	 */
+	void deduplicateTrackVec(vector<UINT32>& trackVec);
+	void rebuildFusionMetadataFromMembers(SPxRadarTrack* fusedTrack);
+	SPxRadarTrack* findRadarTrackByFusionSlot(const SPxPacketTrackExtended* extRpt, int slotIndex);
 	
 	void resetRadarTrackUserData(RadarTrackUserData* rud);
 public:

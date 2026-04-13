@@ -25,6 +25,7 @@ static const char* g_owlRadarTracksFusionWriteParams[] = {
 
 static const double OWL_ASSOCIATION_DISTANCE_METRES = 1000.0;
 static const UINT32 OWL_FUSED_TRACK_SENDER_ID = 99;
+static const int OWL_FUSED_TRACK_MAX_IDS = 3000;
 
 static void RemoveUnifiedTrackFromVec(vector<UINT32>& trackVec, UINT32 trackUnifiedID)
 {
@@ -102,34 +103,79 @@ static bool IsFusedCandidateValid(
 class IDPool {
 private:
 	std::queue<int> availableIDs;
-	int currentID;
+	std::vector<unsigned char> m_idInPool;
+	int m_maxID;
 
 public:
-	IDPool(int maxIDs) : currentID(1) {
-		for (int i = 1; i <= maxIDs; ++i) {
+	/*
+	 * P0-D：强化 ID 池边界与状态管理。
+	 * - m_idInPool[id] == 1 表示该 ID 当前在池内可分配；
+	 * - getID() 返回后会把状态置 0，releaseID() 成功回收后置 1；
+	 * - 防止重复回收、非法 ID 回收以及池耗尽后脏值传播。
+	 */
+	IDPool(int maxIDs) : m_maxID(maxIDs)
+	{
+		if (m_maxID < 1)
+		{
+			m_maxID = 1;
+		}
+
+		m_idInPool.resize(m_maxID + 1, 0);
+		for (int i = 1; i <= m_maxID; ++i)
+		{
 			availableIDs.push(i);
+			m_idInPool[i] = 1;
 		}
 	}
 
-	int getID() {
-		if (availableIDs.empty()) {
-			return -1; // 或者抛出异常表示没有可用的ID
-		}
-		else {
+	int getID()
+	{
+		/*
+		 * 采用“弹出并校验”策略，兼容历史脏数据。
+		 * 若池耗尽，返回 -1，由调用方显式处理失败路径。
+		 */
+		while (!availableIDs.empty())
+		{
 			int id = availableIDs.front();
 			availableIDs.pop();
-			return id;
+
+			if (id >= 1 && id <= m_maxID && m_idInPool[id])
+			{
+				m_idInPool[id] = 0;
+				return id;
+			}
 		}
+
+		return -1;
 	}
 
-	void releaseID(int id) {
+	void releaseID(int id)
+	{
+		/*
+		 * 非法 ID 或重复回收直接忽略，避免污染可分配队列。
+		 */
+		if (id < 1 || id > m_maxID)
+		{
+			return;
+		}
+		if (m_idInPool[id])
+		{
+			return;
+		}
+
+		m_idInPool[id] = 1;
 		availableIDs.push(id);
+	}
+
+	int getMaxID() const
+	{
+		return m_maxID;
 	}
 };
 
 
 
-IDPool m_idPool(3000);
+IDPool m_idPool(OWL_FUSED_TRACK_MAX_IDS);
 
 
 
@@ -254,21 +300,58 @@ void  OWlRadarTracksFusion::onRadarTrackCreate(SPxRadarTrack* track)
 
 void OWlRadarTracksFusion::onFusedTrackUpdate(SPxRadarTrack* track)
 {
-	//check userData
+	if (!track)
+	{
+		return;
+	}
+
+	/*
+	 * 维护 fused 的内部成员列表。
+	 * P0-B 核心：不再假设 fusion.trackID[0] 是 UnifiedID，
+	 * 而是按 SDK 规定通过 sensors+trackID[] 反解成员轨迹。
+	 */
 	FusedTrackUserData* fud = (FusedTrackUserData*)track->GetUserData();
 	if (!fud)
 	{
 		fud = new FusedTrackUserData();
 		fud->trackVec.clear();
-		/*memset(fud, 0, sizeof(FusedTrackUserData));
-		fud->trackVec.clear();*/
-
-		const SPxPacketTrackExtended* extRpt = track->GetExtRpt();
-		fud->trackVec.push_back(extRpt->fusion.trackID[0]);
 		track->SetUserData(fud);
 	}
 
-	
+	const SPxPacketTrackExtended* extRpt = track->GetExtRpt();
+	if (!extRpt)
+	{
+		return;
+	}
+
+	vector<UINT32> memberUnifiedIDs;
+	for (int slot = 0; slot < SPX_MAX_NUM_TRACK_IDS; slot++)
+	{
+		SPxRadarTrack* radarTrack = findRadarTrackByFusionSlot(extRpt, slot);
+		if (radarTrack)
+		{
+			memberUnifiedIDs.push_back(radarTrack->GetUnifiedID());
+		}
+	}
+
+	/*
+	 * 兼容历史报文：旧逻辑把 UnifiedID 填在 trackID[0]。
+	 * 当按新语义反解失败时，回退到旧写法，避免中间版本失联。
+	 */
+	if (memberUnifiedIDs.empty() && extRpt->fusion.trackID[0] != 0)
+	{
+		SPxRadarTrack* radarTrack = (SPxRadarTrack*)m_uniTrackDb->GetTrack(extRpt->fusion.trackID[0]);
+		if (radarTrack)
+		{
+			memberUnifiedIDs.push_back(radarTrack->GetUnifiedID());
+		}
+	}
+
+	if (!memberUnifiedIDs.empty())
+	{
+		deduplicateTrackVec(memberUnifiedIDs);
+		fud->trackVec = memberUnifiedIDs;
+	}
 }
 
 void OWlRadarTracksFusion::onRadarTrackDelete(SPxRadarTrack* track)
@@ -282,7 +365,7 @@ void OWlRadarTracksFusion::onRadarTrackDelete(SPxRadarTrack* track)
 	SPxRadarTrack* fusedTrack = (SPxRadarTrack*)fusedTrackDB->GetTrack(rud->fusedID);
 	if (fusedTrack)
 	{
-		FusedTrackUserData* fud = (FusedTrackUserData*)fusedTrack->GetUserData();
+	FusedTrackUserData* fud = (FusedTrackUserData*)fusedTrack->GetUserData();
 		if (fud)
 		{
 			/*
@@ -462,10 +545,187 @@ bool OWlRadarTracksFusion::fuseEngine(SPxRadarTrack* track, SPxRadarTrack* fused
 
 
 /*
+ * 将统一成员列表做“稳定去重”。
+ * 说明：
+ * - 保持原有顺序，仅移除重复 UnifiedID；
+ * - 用于修复 trackVec 被重复插入后引发的融合状态污染。
+ */
+void OWlRadarTracksFusion::deduplicateTrackVec(vector<UINT32>& trackVec)
+{
+	for (int i = 0; i < (int)trackVec.size(); i++)
+	{
+		UINT32 id = trackVec[i];
+		for (int j = i + 1; j < (int)trackVec.size(); )
+		{
+			if (trackVec[j] == id)
+			{
+				trackVec.erase(trackVec.begin() + j);
+			}
+			else
+			{
+				j++;
+			}
+		}
+	}
+}
+
+/*
+ * 按 fusion 槽位反查成员雷达航迹。
+ * SDK 规则：trackID[] 的索引不是 sourceIndex，
+ * 而是 sensors 位图中“从低到高第 N 个置位 bit”。
+ */
+SPxRadarTrack* OWlRadarTracksFusion::findRadarTrackByFusionSlot(
+	const SPxPacketTrackExtended* extRpt,
+	int slotIndex)
+{
+	if (!extRpt || slotIndex < 0 || slotIndex >= SPX_MAX_NUM_TRACK_IDS)
+	{
+		return NULL;
+	}
+
+	UINT32 sensorTrackID = extRpt->fusion.trackID[slotIndex];
+	if (sensorTrackID == 0)
+	{
+		return NULL;
+	}
+
+	int sourceIndex = -1;
+	int mappedSlot = 0;
+	UINT32 sensors = extRpt->fusion.sensors;
+	for (int bit = 0; bit < 32; bit++)
+	{
+		if ((sensors & (1u << bit)) != 0)
+		{
+			if (mappedSlot == slotIndex)
+			{
+				sourceIndex = bit;
+				break;
+			}
+			mappedSlot++;
+		}
+	}
+	if (sourceIndex < 0)
+	{
+		return NULL;
+	}
+
+	SPxUniTrack* uniTrack = m_uniTrackDb->GetTrack(
+		sensorTrackID,
+		SPxUniTrack::TRACK_TYPE_RADAR,
+		FALSE,
+		sourceIndex);
+	if (!uniTrack)
+	{
+		return NULL;
+	}
+
+	return (SPxRadarTrack*)uniTrack;
+}
+
+/*
+ * 从成员集合重建 fusion 元数据。
+ * 目标：
+ * - 修复 fusion.sensors / fusion.sensorTypes / fusion.trackID[] 维护不一致；
+ * - 对外报文字段遵循 SDK 映射语义；
+ * - 内部仍继续使用 UnifiedID 维护成员关系。
+ */
+void OWlRadarTracksFusion::rebuildFusionMetadataFromMembers(SPxRadarTrack* fusedTrack)
+{
+	if (!fusedTrack)
+	{
+		return;
+	}
+
+	SPxPacketTrackExtended* fusedTrackExtRpt = (SPxPacketTrackExtended*)fusedTrack->GetExtRpt();
+	FusedTrackUserData* fud = (FusedTrackUserData*)fusedTrack->GetUserData();
+	if (!fusedTrackExtRpt || !fud)
+	{
+		return;
+	}
+
+	/* 先做一次去重，确保成员集合稳定。 */
+	deduplicateTrackVec(fud->trackVec);
+
+	UINT32 sensorTrackIdBySource[32] = { 0 };
+	UINT32 sensorsMask = 0;
+	UINT32 sensorTypesMask = 0;
+
+	for (int i = 0; i < (int)fud->trackVec.size(); i++)
+	{
+		UINT32 unifiedID = fud->trackVec[i];
+		SPxRadarTrack* memberTrack = (SPxRadarTrack*)m_uniTrackDb->GetTrack(unifiedID);
+		if (!memberTrack)
+		{
+			continue;
+		}
+
+		int sourceIndex = memberTrack->GetSourceIndex();
+		if (sourceIndex < 0 || sourceIndex >= 32)
+		{
+			continue;
+		}
+
+		UINT32 sensorBit = (1u << sourceIndex);
+		if ((sensorsMask & sensorBit) != 0)
+		{
+			/* 同一 source 的重复成员忽略，保持每 source 仅一个外发 trackID。 */
+			continue;
+		}
+
+		UINT32 sourceTrackID = memberTrack->GetID();
+		if (sourceTrackID == 0)
+		{
+			continue;
+		}
+
+		sensorsMask |= sensorBit;
+		sensorTrackIdBySource[sourceIndex] = sourceTrackID;
+
+		UINT32 sensorType = SPX_PACKET_TRACK_SENSOR_OTHER;
+		switch (memberTrack->GetTrackType())
+		{
+		case SPxUniTrack::TRACK_TYPE_RADAR:
+			sensorType = SPX_PACKET_TRACK_SENSOR_PRIMARY;
+			break;
+		case SPxUniTrack::TRACK_TYPE_AIS:
+			sensorType = SPX_PACKET_TRACK_SENSOR_AIS;
+			break;
+		case SPxUniTrack::TRACK_TYPE_ADSB:
+			sensorType = SPX_PACKET_TRACK_SENSOR_ADSB;
+			break;
+		default:
+			sensorType = SPX_PACKET_TRACK_SENSOR_OTHER;
+			break;
+		}
+		sensorTypesMask |= sensorType;
+	}
+
+	fusedTrackExtRpt->fusion.sensors = sensorsMask;
+	fusedTrackExtRpt->fusion.sensorTypes = sensorTypesMask;
+	for (int i = 0; i < SPX_MAX_NUM_TRACK_IDS; i++)
+	{
+		fusedTrackExtRpt->fusion.trackID[i] = 0;
+	}
+
+	int trackIdSlot = 0;
+	for (int sourceIndex = 0; sourceIndex < 32 && trackIdSlot < SPX_MAX_NUM_TRACK_IDS; sourceIndex++)
+	{
+		UINT32 sensorBit = (1u << sourceIndex);
+		if ((sensorsMask & sensorBit) == 0)
+		{
+			continue;
+		}
+
+		fusedTrackExtRpt->fusion.trackID[trackIdSlot] = sensorTrackIdBySource[sourceIndex];
+		trackIdSlot++;
+	}
+}
+
+/*
  * 统一的 fused 删除报文发送函数。
  * 说明：
  * - 删除 fused 航迹时，必须同时发本地 sender（驱动本地 fusedTrackDB 删除）和外发 sender。
- * - P0-A 目标是将删除路径统一，避免不同分支行为不一致。
+ * - P0-A 目标是将删除路径统一，避免分支散落导致行为不一致。
  */
 void OWlRadarTracksFusion::sendDeletePacketForFusedTrack(UINT32 fusedID)
 {
@@ -506,11 +766,27 @@ bool OWlRadarTracksFusion::refreshFusedTrackFromMembers(
 		return false;
 	}
 
+	/*
+	 * P0-B：成员列表在计算前先做去重，避免重复成员导致权重和元数据失真。
+	 */
+	deduplicateTrackVec(fud->trackVec);
+	if (fud->trackVec.empty())
+	{
+		sendDeletePacketForFusedTrack(fusedTrack->GetID());
+		return false;
+	}
+
 	SPxPacketTrackExtended* fusedTrackExtRpt = (SPxPacketTrackExtended*)fusedTrack->GetExtRpt();
 	if (!fusedTrackExtRpt)
 	{
 		return false;
 	}
+
+	/*
+	 * P0-B：每次输出 fused 前，按当前成员集重建 fusion 元数据，
+	 * 保证 sensors / sensorTypes / trackID[] 始终与成员集合一致。
+	 */
+	rebuildFusionMetadataFromMembers(fusedTrack);
 
 	SPxLatLong_t pos = { 0 };
 	double speed = 0.0;
@@ -866,7 +1142,14 @@ void OWlRadarTracksFusion::computeFusedTrackPosSpeedCourse(SPxRadarTrack* fusedT
 		//把x,y坐标转换为航向航速
 		double course = 0;
 		double speed = 0;
-		if (tracky == 0)
+
+		/*
+		 * P0-C：修复航向计算边界错误。
+		 * 旧逻辑只判断 tracky==0 就把 course 置 0，
+		 * 会把“正东/正西等横向运动”误判成 0°。
+		 * 正确做法是：只有速度向量近似为 0 时才置 0°，否则统一使用 atan2。
+		 */
+		if (fabs(trackx) < EPS && fabs(tracky) < EPS)
 		{
 			course = 0;
 		}
@@ -896,24 +1179,53 @@ void OWlRadarTracksFusion::computeFusedTrackPosSpeedCourse(SPxRadarTrack* fusedT
 
 void OWlRadarTracksFusion::onFusedTrackCreate(SPxRadarTrack* track)
 {
-	const SPxPacketTrackExtended* extRpt = track->GetExtRpt();
-	int trackUnifiedID = extRpt->fusion.trackID[0];
-	SPxRadarTrack* radarTrack = (SPxRadarTrack*)m_uniTrackDb->GetTrack(trackUnifiedID);
-	if (radarTrack)
+	if (!track)
 	{
+		return;
+	}
+
+	const SPxPacketTrackExtended* extRpt = track->GetExtRpt();
+	if (!extRpt)
+	{
+		return;
+	}
+
+	/*
+	 * fused 创建后，把“成员雷达轨迹 -> fusedID”的关系回填到雷达 userData。
+	 * P0-B：按 sensors+trackID[] 映射遍历所有成员，不再只使用 trackID[0]。
+	 */
+	bool hasMappedMember = false;
+	for (int slot = 0; slot < SPX_MAX_NUM_TRACK_IDS; slot++)
+	{
+		SPxRadarTrack* radarTrack = findRadarTrackByFusionSlot(extRpt, slot);
+		if (!radarTrack)
+		{
+			continue;
+		}
+
+		hasMappedMember = true;
 		RadarTrackUserData* rud = (RadarTrackUserData*)radarTrack->GetUserData();
 		if (rud)
 		{
-			//确定融合航迹已在数据库可访问，然后再将融合ID赋值给userData->fusedID
 			rud->fusedID = track->GetID();
 		}
 	}
-	else
+
+	/*
+	 * 兼容历史报文：旧版本 trackID[0] 可能直接存的是 UnifiedID。
+	 */
+	if (!hasMappedMember && extRpt->fusion.trackID[0] != 0)
 	{
-		//不会出现
-		int zp = 1;
+		SPxRadarTrack* radarTrack = (SPxRadarTrack*)m_uniTrackDb->GetTrack(extRpt->fusion.trackID[0]);
+		if (radarTrack)
+		{
+			RadarTrackUserData* rud = (RadarTrackUserData*)radarTrack->GetUserData();
+			if (rud)
+			{
+				rud->fusedID = track->GetID();
+			}
+		}
 	}
-	
 }
 
 
@@ -967,10 +1279,52 @@ void OWlRadarTracksFusion::handleUnAssiocatedRadarTrack(SPxRadarTrack* track)
 
 			ext.norm.min.uniTrackType = SPxUniTrack::TRACK_TYPE_FUSED;
 			ext.norm.min.senderID = OWL_FUSED_TRACK_SENDER_ID;
-			ext.norm.min.id = m_idPool.getID();//分配ID
+			/*
+			 * P0-D：ID 池耗尽防护。
+			 * 若 getID() 失败（返回 -1），必须立即终止创建流程，
+			 * 禁止把 -1 写入无符号 id 字段导致 0xFFFFFFFF 脏值外发。
+			 */
+			int newFusedID = m_idPool.getID();
+			if (newFusedID <= 0)
+			{
+				char buf[256] = { 0 };
+				sprintf_s(buf,
+					"P0-D: fused ID pool exhausted, skip fused create for radar track=%d",
+					track->GetID());
+				OWlError(OWL_ERR_ERROR, buf);
+
+				rud->fusedID = 0;
+				rud->preFusedID = 0;
+				rud->hitCount = 0;
+				return;
+			}
+			ext.norm.min.id = (UINT32)newFusedID;
 			ext.extMask = 0xFFFFFFFF;
-			ext.fusion.sensors = SENSOR_0_FLAG;
-			ext.fusion.trackID[0] = track->GetUnifiedID();
+
+			/*
+			 * P0-B：按 SDK 语义初始化 fusion 元数据。
+			 * - sensors: 由 sourceIndex 决定置位；
+			 * - sensorTypes: 当前雷达-雷达融合场景置 PRIMARY；
+			 * - trackID[0]: 填源雷达原始 track ID（非 UnifiedID）。
+			 */
+			ext.fusion.sensorTypes = SPX_PACKET_TRACK_SENSOR_PRIMARY;
+			ext.fusion.sensors = 0;
+			for (int i = 0; i < SPX_MAX_NUM_TRACK_IDS; i++)
+			{
+				ext.fusion.trackID[i] = 0;
+			}
+
+			int sourceIndex = track->GetSourceIndex();
+			if (sourceIndex >= 0 && sourceIndex < 32)
+			{
+				ext.fusion.sensors = (1u << sourceIndex);
+			}
+			else
+			{
+				/* 防御性回退：sourceIndex 异常时至少保持报文字段可用。 */
+				ext.fusion.sensors = SENSOR_0_FLAG;
+			}
+			ext.fusion.trackID[0] = track->GetID();
 			ext.age = 1;
 			ext.norm.min.sizeDegrees = track->GetMinRpt()->sizeDegrees;
 			ext.norm.min.sizeMetres = track->GetMinRpt()->sizeMetres;

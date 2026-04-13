@@ -1,0 +1,13 @@
+#pragma once
+//”≤º˛º”√‹π∑º”√‹
+
+class EncryptHasp
+{
+public:
+	EncryptHasp();
+	~EncryptHasp();
+
+public:
+	bool CheckHaspIsExist();
+};
+

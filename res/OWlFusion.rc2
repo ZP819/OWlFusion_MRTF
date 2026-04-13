@@ -1,0 +1,58 @@
+//
+// SPxLutDemo.rc2 - resources Microsoft Visual C++ does not edit directly
+//
+
+#ifdef APSTUDIO_INVOKED
+#error this file is not editable by Microsoft Visual C++
+#endif //APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Add manually edited resources here...
+
+// Include SPx version definitions.
+#include "SPxVersion.h"
+
+// Include the SPx library resource file.
+#include "SPxLib.rc"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION SPX_VERSION_MAJOR,SPX_VERSION_MINOR,SPX_VERSION_MICRO,SPX_VERSION_NANO
+ PRODUCTVERSION SPX_VERSION_MAJOR,SPX_VERSION_MINOR,SPX_VERSION_MICRO,SPX_VERSION_NANO
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904e4"
+        BEGIN
+            VALUE "CompanyName", "XWH."
+            VALUE "FileDescription", "OWlTrackUnified"
+            VALUE "FileVersion", SPX_VERSION_STRING
+            VALUE "InternalName", "OWlTrackUnified.exe"
+            VALUE "LegalCopyright", SPX_RC_LEGALCOPYRIGHT
+            VALUE "OriginalFilename", "OWlTrackUnified.exe"
+            VALUE "ProductName", "VTS"
+            VALUE "ProductVersion", SPX_VERSION_STRING
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////

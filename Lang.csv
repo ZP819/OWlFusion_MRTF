@@ -1,0 +1,1729 @@
+﻿V1.81,_0_EnglishName_,English,Chinese
+V1.81,_1_NativeName_,English,中文
+
+DEPRECATED,SPxLang.AlarmTimeout9,2 Hours,2 小时
+DEPRECATED,SPxLang.AlarmTimeout10,5 Hours,5 小时
+DEPRECATED,SPxLang.AlarmTimeout11,10 Hours,10 小时
+
+
+V1.82.3,SPxLang.CamFOVCalDialog1,Previous,上一步
+V1.82.3,SPxLang.CamFOVCalDialog2,Next,下一步
+V1.82.3,SPxLang.CamFOVCalDialog3,Save,保存
+V1.82.3,SPxLang.CamFOVCalDialog4,Cancel,取消
+V1.82.3,SPxLang.CamFOVCalDialog5,Camera:,摄像头:
+V1.82.3,SPxLang.CamFOVCalDialog6,Pan Position:,平移位置
+V1.82.3,SPxLang.CamFOVCalDialog7,Primary Controller,主控制器
+V1.82.3,SPxLang.CamFOVCalDialog8,Secondary Controller,辅助控制器
+V1.82.3,SPxLang.CamFOVCalDialog9,No supported cameras,不支持的摄像头
+V1.82.3,SPxLang.CamFOVCalDialog10,FOV:,视场角:
+V1.82.3,SPxLang.CamFOVCalDialog11,Store FOV:,存储FOV:
+V1.82.3,SPxLang.CamFOVCalDialog12,Point Stored,点保存
+V1.82.3,SPxLang.CamFOVCalDialog13,Points Stored,点保存
+V1.82.3,SPxLang.CamFOVCalDialog14,Preview Old Values,预览旧的数据
+V1.82.3,SPxLang.CamFOVCalDialog15,Preview New Values,预览新的数据
+V1.82.3,SPxLang.CamFOVCalDialog16,LUT File:,LUT文件
+V1.82.3,SPxLang.CamFOVCalPoint1,Centre Point,中心点
+V1.82.3,SPxLang.CamFOVCalPoint2,Offset Point,偏移点
+V1.82.3,SPxLang.CamFOVCalIns1,Please select a camera. then use a camera display to zoom in as far as possible and move the centre point over a known stationary object.  , 请选择一个相机，然后使用相机显示屏尽可能放大并将中心点移动到已知静止物体上
+V1.82.3,SPxLang.CamFOVCalIns2,Please move the offset point over the same object. then click Store FOV.  Repeat this process at a number of different zoom levels (including zoomed out as far as possible). , 请将偏移点移动到同一对象上，然后单击“存储 FOV”。 在多个不同的缩放级别（包括尽可能缩小）重复此过程
+V1.82.3,SPxLang.CamFOVCalIns3,Please use the controls to preview the new calibration against the old.  Click Save to save the new values are return to the application.  Click Cancel or close the dialog to discard the new values. ,请使用控件预览新校准与旧校准。 单击保存以保存返回到应用程序的新值。 单击取消或关闭对话框以放弃新值。
+V1.81,SPxLang.ConditionGroupDefault,Group,组
+V1.81,SPxLang.ConditionGroupNum1,Condition,条件
+V1.81,SPxLang.ConditionGroupNum2,Conditions,条件
+V1.81,SPxLang.ConditionGroupPrivate,Private,本地
+V1.81,SPxLang.ConditionGroupShared,Shared,共享
+V1.81,SPxLang.ConditionGroupState1,Not Configured,未配置
+V1.81,SPxLang.ConditionGroupState2,Enabled,启用
+V1.81,SPxLang.ConditionGroupState3,Disabled,未启用
+V1.81,SPxLang.ConditionGroupState4,Unknown,未知
+V1.85,SPxLang.ConditionsPanel1,STATE,状态
+V1.85,SPxLang.ConditionsPanel2,NAME,名称
+V1.85,SPxLang.ConditionsPanel3,CONDITIONS,条件
+V1.85,SPxLang.ConditionsPanel4,IS SHARED,是否共享
+V1.85,SPxLang.ConditionsTab1,Conditions,条件
+V1.85,SPxLang.ConditionsTab2,CONDITION,条件
+V1.85,SPxLang.ConditionsTab3,WITHIN,在...之内
+V1.85,SPxLang.ConditionsTab4,Right click to add new condition ,右击鼠标增加新的条件
+V1.85,SPxLang.ConditionsTab5,Set operation ,设定操作
+V1.85,SPxLang.ConditionsTab6,Set argument ,设定参数
+V1.85,SPxLang.ConditionsTab7,Set time limit ,设定时间限制
+V1.85,SPxLang.ConditionsTab8,Set range limit ,设定距离限制
+V1.85,SPxLang.ConditionsTab9,Name: ,名称:
+V1.85,SPxLang.ConditionsTab10,Within: ,在...之内:
+V1.85,SPxLang.ConditionsTab11,True ,是
+V1.85,SPxLang.ConditionsTab12,False ,非
+V1.81,SPxLang.ConditionType1,UNKNOWN,未知
+V1.81,SPxLang.ConditionType2,INSIDE AREA,区域内部
+V1.81,SPxLang.ConditionType3,VISITED AREA,访问区域
+V1.81,SPxLang.ConditionType4,GATE CROSSED,穿越边界
+V1.81,SPxLang.ConditionType5,GATE CROSSED FWD,前向穿越边界
+V1.81,SPxLang.ConditionType6,GATE CROSSED REV,反向穿越边界
+V1.81,SPxLang.ConditionType7,TRACK,航迹
+V1.81,SPxLang.ConditionType8,TRACK SECONDARY ID,二次航迹ID
+V1.81,SPxLang.ConditionType9,TRACK SPEED,航迹速度
+V1.81,SPxLang.ConditionType10,TRACK COURSE,航迹航向
+V1.81,SPxLang.ConditionType11,TRACK ALTITUDE,航迹高度
+V1.81,SPxLang.ConditionType12,TRACK CLASS,航迹类别
+V1.81,SPxLang.ConditionType13,CPA TO POINT,CPA到某点
+V1.81,SPxLang.ConditionType14,CPA TO TRACK,CPA到某航迹
+V1.81,SPxLang.ConditionType15,CPA TO ANY TRACK,CPA到任意航迹
+V1.81,SPxLang.ConditionType16,TRACK GROUP,航迹组
+V1.81,SPxLang.ConditionType17,CPA TO REF POINT,CPA到参考点
+V1.81,SPxLang.ConditionType18,TRACK SECONDARY TYPE,二次航迹类型
+V1.81.8,SPxLang.ConditionType19,AIS SHIP TYPE,AIS船类型
+V1.81.8,SPxLang.ConditionType20,AIS NAVIGATION STATUS,AIS航行状态
+V1.81.10,SPxLang.ConditionType21,TRACK ON GROUND,地面航迹
+V1.81.10,SPxLang.ConditionType22,TRACK IS TEST,测试航迹
+V1.81.10,SPxLang.ConditionType23,TRACK IS SIMULATED,模拟航迹
+V1.81.10,SPxLang.ConditionType24,NOT LEFT AREA,未离开区域
+V1.83,SPxLang.ConditionType25,AIS HAZARDOUS CARGO,AIS危险货物
+V1.85,SPxLang.ConditionType26,TRACK COMMS CAPABILITY,航迹通讯能力
+V1.85,SPxLang.ConditionType27,TRACK FLIGHT STATUS,航迹飞行状态
+V1.85.10,SPxLang.ConditionType28,PROXIMITY TO POINT,接近某点
+V1.85.10,SPxLang.ConditionType29,PROXIMITY TO REF POINT,接近参考点
+V1.85.10,SPxLang.ConditionType30,PROXIMITY TO ANY AIS,接近任何AIS目标
+V1.85.10,SPxLang.ConditionType31,PROXIMITY TO ANY ADS-B,接近任何ADS-B目标
+V1.85.10,SPxLang.ConditionType32,PROXIMITY TO LAND,靠近陆地
+V1.85.10,SPxLang.ConditionType33,APPROACH LAND,接近陆地
+V1.85.10,SPxLang.ConditionType34,TIMESTAMP,时戳
+V1.81.10,SPxLang.ConditionArg1,True,是
+V1.81.10,SPxLang.ConditionArg2,False,非
+V1.81,SPxLang.CovMapBBeamAngle,Bottom beam angle,底部波束角
+V1.81,SPxLang.CovMapCurvature,Curvature of the Earth,地球表面曲率
+V1.81,SPxLang.CovMapEndRange,End range,范围
+V1.81,SPxLang.CovMapHeightAbove,above,高于
+V1.81,SPxLang.CovMapHeightGround,Ground,地面
+V1.81,SPxLang.CovMapHeightSea,Sea Level,海平面
+V1.81,SPxLang.CovMapTargetHeights1,Target,目标
+V1.81,SPxLang.CovMapTargetHeights2,heights,高度
+V1.81,SPxLang.CovMapTBeamAngle,Top beam angle,顶部波束角
+V1.81,SPxLang.CovMapTransparency,Coverage transparency:,覆盖透明度:
+V1.81,SPxLang.ENCGroup1Desc,Base display
+V1.81,SPxLang.ENCGroup1Name,Base display
+V1.81,SPxLang.ENCGroup2Desc,Information about the chart display
+V1.81,SPxLang.ENCGroup2Name,Information
+V1.81,SPxLang.ENCGroup3Desc,Cursor [symbol SY(CURSRA01)]
+V1.81,SPxLang.ENCGroup3Name,Cursor
+V1.81,SPxLang.ENCGroup4Desc,"Scalebar, latitude scale [SY(SCALEB10),SY( SCALEB11)]"
+V1.81,SPxLang.ENCGroup4Name,Scale
+V1.81,SPxLang.ENCGroup5Desc,North arrow [SY(NORTHAR1)]
+V1.81,SPxLang.ENCGroup5Name,North arrow
+V1.81,SPxLang.ENCGroup6Desc,"No data [colour NODTA, AP(NODATA03)], unsurveyed (UNSARE), incompletely surveyed area"
+V1.81,SPxLang.ENCGroup6Name,"No data, unsurveyed"
+V1.81,SPxLang.ENCGroup7Desc,Non-HO data boundary LC(NONHODAT)
+V1.81,SPxLang.ENCGroup7Name,Non-HO data boundary
+V1.81,SPxLang.ENCGroup8Desc,Land areas
+V1.81,SPxLang.ENCGroup8Name,Land areas
+V1.81,SPxLang.ENCGroup9Desc,Land area (LANDARE)
+V1.81,SPxLang.ENCGroup9Name,Land area
+V1.81,SPxLang.ENCGroup10Desc,Dangers above water
+V1.81,SPxLang.ENCGroup10Name,Dangers above water
+V1.81,SPxLang.ENCGroup11Desc,"Bridge (BRIDGE), pylon (PYLONS), overhead cable (CBLOHD), conveyor (CONVYR), overhead pipeline (PIPOHD), offshore platform (OFSPLF)"
+V1.81,SPxLang.ENCGroup11Name,"Bridge, pylon, pipeline, overhead cable, conveyor, etc"
+V1.81,SPxLang.ENCGroup12Desc,Shoreline
+V1.81,SPxLang.ENCGroup12Name,Shoreline
+V1.81,SPxLang.ENCGroup13Desc,"Coastline (COALNE), ice shelf, glacier (ICEARE), shoreline construction (SLCONS), tie-up wall, dolphin (MORFAC), gate (GATCON, pile (PILPNT) crib, wellhead, ice boom (OBSTRN), floating dock (FLODOC), hulk (HULKES), pontoon (PONTON), oilboom (OILBAR), log boom (LOGPON), flood barrage (DAMCON, CATDAM3)"
+V1.81,SPxLang.ENCGroup13Name,"Coastline, ice shelf, glacier, shoreline construction, etc"
+V1.81,SPxLang.ENCGroup14Desc,"Dock (DOCARE), lock (LOKBSN), canal (CANALS)"
+V1.81,SPxLang.ENCGroup14Name,"Dock, lock, canal"
+V1.81,SPxLang.ENCGroup15Desc,Safety contours
+V1.81,SPxLang.ENCGroup15Name,Safety contours
+V1.81,SPxLang.ENCGroup16Desc,Safety contour (from conditional symbology procedure DEPCNT02)
+V1.81,SPxLang.ENCGroup16Name,Safety contour
+V1.81,SPxLang.ENCGroup17Desc,"Depth area (DEPARE), dredged area (DRGARE)"
+V1.81,SPxLang.ENCGroup17Name,"Depth area, dredged area"
+V1.81,SPxLang.ENCGroup18Desc,Dangers under water
+V1.81,SPxLang.ENCGroup18Name,Dangers under water
+V1.81,SPxLang.ENCGroup19Desc,"Isolated underwater dangers in own-ship safe water (rocks, wrecks, obstructions, mooring cables from conditional symbology procedure)"
+V1.81,SPxLang.ENCGroup19Name,"Rocks, wrecks, obstructions, mooring cables"
+V1.81,SPxLang.ENCGroup20Desc,Standard display
+V1.81,SPxLang.ENCGroup20Name,Standard display
+V1.81,SPxLang.ENCGroup21Desc,Information about the chart display
+V1.81,SPxLang.ENCGroup21Name,Chart information
+V1.81,SPxLang.ENCGroup22Desc,Unknown object (magenta question mark)
+V1.81,SPxLang.ENCGroup22Name,Unknown object
+V1.81,SPxLang.ENCGroup23Desc,Generic object (NEWOBJ01)
+V1.81,SPxLang.ENCGroup23Name,Generic object
+V1.81,SPxLang.ENCGroup24Desc,"Chart scale boundary, overscale data [AP(OVERSCO1)]"
+V1.81,SPxLang.ENCGroup24Name,"Scale boundary, overscale data"
+V1.81,SPxLang.ENCGroup25Desc,"Placeholder for geographic names (LNDRGN, SEAARE)"
+V1.81,SPxLang.ENCGroup25Name,Geographic name placeholder
+V1.81,SPxLang.ENCGroup26Desc,Major coastal features
+V1.81,SPxLang.ENCGroup26Name,Major coastal features
+V1.81,SPxLang.ENCGroup27Desc,"River (RIVERS), riverbank (RIVBNK), lake (LAKARE), lakeshore (LAKSHR), sloping ground (SLOGRD), slope top (SLOTOP), dyke (DYKCON), causeway (CAUSWY), dam (DAMCON)"
+V1.81,SPxLang.ENCGroup27Name,"River, riverbank, lake, lakeshore, sloping ground, etc"
+V1.81,SPxLang.ENCGroup28Desc,Conspicuous landmarks
+V1.81,SPxLang.ENCGroup28Name,Conspicuous landmarks
+V1.81,SPxLang.ENCGroup29Desc,Radar conspicuous object - (any object with attribute CONRAD 1)
+V1.81,SPxLang.ENCGroup29Name,Radar conspicuous object
+V1.81,SPxLang.ENCGroup30Desc,Visually conspicuous object (any object with attribute CONVIS 1)
+V1.81,SPxLang.ENCGroup30Name,Visually conspicuous object
+V1.81,SPxLang.ENCGroup31Desc,Built up area (BUAARE)
+V1.81,SPxLang.ENCGroup31Name,Built up area
+V1.81,SPxLang.ENCGroup32Desc,Depths
+V1.81,SPxLang.ENCGroup32Name,Depths
+V1.81,SPxLang.ENCGroup33Desc,Area of depth less than the safety contour (DIAMON01 pattern)
+V1.81,SPxLang.ENCGroup33Name,Depth less than the safety contour
+V1.81,SPxLang.ENCGroup34Desc,Swept area (SWPARE)
+V1.81,SPxLang.ENCGroup34Name,Swept area
+V1.81,SPxLang.ENCGroup35Desc,Seabed dangers
+V1.81,SPxLang.ENCGroup35Name,Seabed dangers
+V1.81,SPxLang.ENCGroup36Desc,"Mooring cables (MORFAC, CATMOR6), (CBLSUB, CATCBL6), tunnel on seabed (TUNNEL, BURDEP=0), sandwaves (SNDWAV)"
+V1.81,SPxLang.ENCGroup36Name,"Mooring cables, tunnel on seabed, sandwaves"
+V1.81,SPxLang.ENCGroup37Desc,"Isolated underwater dangers in waters between the displayed safety contour and the drying line (rocks, wrecks, obstructions, mooring cables from conditional symbology procedure UDWHAZnn)"
+V1.81,SPxLang.ENCGroup37Name,Isolated underwater dangers
+V1.81,SPxLang.ENCGroup38Desc,"Isolated above-water dangers in waters between the safety contour and the drying line (rocks, wrecks, obstructions which are always dry from conditional symbology procedure UDWHAZnn)"
+V1.81,SPxLang.ENCGroup38Name,Isolated above-water dangers
+V1.81,SPxLang.ENCGroup39Desc,Routes and tracks
+V1.81,SPxLang.ENCGroup39Name,Routes and tracks
+V1.81,SPxLang.ENCGroup40Desc,"Leading line, clearing line (NAVLINE)"
+V1.81,SPxLang.ENCGroup40Name,"Leading line, clearing line"
+V1.81,SPxLang.ENCGroup41Desc,Recommended track (RECTRC)
+V1.81,SPxLang.ENCGroup41Name,Recommended track
+V1.81,SPxLang.ENCGroup42Desc,Ferry route (FERYRT)
+V1.81,SPxLang.ENCGroup42Name,Ferry route
+V1.81,SPxLang.ENCGroup43Desc,"Radar line (RADLNE), limit of shore radar (RADRNG)"
+V1.81,SPxLang.ENCGroup43Name,"Radar line, limit of shore radar"
+V1.81,SPxLang.ENCGroup44Desc,Radio calling in point (RDOCAL)
+V1.81,SPxLang.ENCGroup44Name,Radio calling in point
+V1.81,SPxLang.ENCGroup45Desc,Restricted and cautionary areas
+V1.81,SPxLang.ENCGroup45Name,Restricted and cautionary areas
+V1.81,SPxLang.ENCGroup46Desc,Restricted area (RESARE)
+V1.81,SPxLang.ENCGroup46Name,Restricted area
+V1.81,SPxLang.ENCGroup47Desc,"Ferry route area (FERYRT), submarine transit lane (SUBTLN), military practice area (MIPARE), sea plane landing area (SPLARE), offshore production area (OSPARE)"
+V1.81,SPxLang.ENCGroup47Name,"Ferry route area, submarine transit lane, military practice area, etc"
+V1.81,SPxLang.ENCGroup48Desc,Fairway (FAIRWY)
+V1.81,SPxLang.ENCGroup48Name,Fairway
+V1.81,SPxLang.ENCGroup49Desc,Caution area (CTNARE)
+V1.81,SPxLang.ENCGroup49Name,Caution area
+V1.81,SPxLang.ENCGroup50Desc,Information areas and protected areas
+V1.81,SPxLang.ENCGroup50Name,Information areas and protected areas
+V1.81,SPxLang.ENCGroup51Desc,"Fishing ground (FSHGRD), marine farm (MARCUL)"
+V1.81,SPxLang.ENCGroup51Name,"Fishing ground, marine farm"
+V1.81,SPxLang.ENCGroup52Desc,"Anchorage area (ACHARE), anchor berth (ACHBRT)"
+V1.81,SPxLang.ENCGroup52Name,"Anchorage area, anchor berth"
+V1.81,SPxLang.ENCGroup53Desc,"Pipeline area (PIPARE), cable area (CBLARE)"
+V1.81,SPxLang.ENCGroup53Name,"Pipeline area, cable area"
+V1.81,SPxLang.ENCGroup54Desc,Dumping ground (DMPGRD)
+V1.81,SPxLang.ENCGroup54Name,Dumping ground
+V1.81,SPxLang.ENCGroup55Desc,"Cargo transhipment (CTSARE), incineration (ICNARE)"
+V1.81,SPxLang.ENCGroup55Name,"Cargo transhipment, incineration"
+V1.81,SPxLang.ENCGroup56Desc,"Archipelagic sea lane (ASLXIS, ARCSLN)"
+V1.81,SPxLang.ENCGroup56Name,Archipelagic sea lane
+V1.81,SPxLang.ENCGroup57Desc,"Buoys, beacons, topmarks, lights, fog signals"
+V1.81,SPxLang.ENCGroup57Name,"Buoys, beacons, topmarks, lights, fog signals"
+V1.81,SPxLang.ENCGroup58Desc,"Buoy (BOYxxx), light float (LITFLT), mooring buoy (MORFAC, CATMOR7)"
+V1.81,SPxLang.ENCGroup58Name,"Buoy, light float, mooring buoy"
+V1.81,SPxLang.ENCGroup59Desc,Light vessel (LITVES)
+V1.81,SPxLang.ENCGroup59Name,Light vessel
+V1.81,SPxLang.ENCGroup60Desc,Beacon (BCNxxx)
+V1.81,SPxLang.ENCGroup60Name,Beacon
+V1.81,SPxLang.ENCGroup61Desc,Daymark (DAYMAR)
+V1.81,SPxLang.ENCGroup61Name,Daymark
+V1.81,SPxLang.ENCGroup62Desc,Direction of buoyage IALA buoyage regions (M_NSYS)
+V1.81,SPxLang.ENCGroup62Name,Direction of buoyage regions
+V1.81,SPxLang.ENCGroup63Desc,Topmarks (TOPMAR) - for paper chart symbols
+V1.81,SPxLang.ENCGroup63Name,Topmarks
+V1.81,SPxLang.ENCGroup64Desc,Light (LIGHTS)
+V1.81,SPxLang.ENCGroup64Name,Light
+V1.81,SPxLang.ENCGroup65Desc,"Fog signal (FOGSIG), retro-reflector (RETRFL)"
+V1.81,SPxLang.ENCGroup65Name,"Fog signal, retro-reflector"
+V1.81,SPxLang.ENCGroup66Desc,Radar
+V1.81,SPxLang.ENCGroup66Name,Radar
+V1.81,SPxLang.ENCGroup67Desc,Racon (RTPBCN)
+V1.81,SPxLang.ENCGroup67Name,Racon
+V1.81,SPxLang.ENCGroup68Desc,Radar reflector (RADRFL)
+V1.81,SPxLang.ENCGroup68Name,Radar reflector
+V1.81,SPxLang.ENCGroup69Desc,Services
+V1.81,SPxLang.ENCGroup69Name,Services
+V1.81,SPxLang.ENCGroup70Desc,Pilot boarding point (PILBOP)
+V1.81,SPxLang.ENCGroup70Name,Pilot boarding point
+V1.81,SPxLang.ENCGroup71Desc,"Signal station, traffic (SISTAT), signal station warning (SISTAW)"
+V1.81,SPxLang.ENCGroup71Name,"Signal station, traffic, signal station warning"
+V1.81,SPxLang.ENCGroup72Desc,Other display
+V1.81,SPxLang.ENCGroup72Name,Other display
+V1.81,SPxLang.ENCGroup73Desc,Information about the chart display
+V1.81,SPxLang.ENCGroup73Name,Information about chart display
+V1.81,SPxLang.ENCGroup74Desc,"Accuracy of data (MPCCY), survey reliability (M_SREL), survey source (M_SSOR) quality of data (M_QUAL)"
+V1.81,SPxLang.ENCGroup74Name,"Accuracy of data, survey reliability, survey source, etc"
+V1.81,SPxLang.ENCGroup75Desc,"Symbol LOWACC01, identifying low accuracy data, applied to the spatial object of point and area wrecks, rocks and obstructions and to point land areas"
+V1.81,SPxLang.ENCGroup75Name,Low accuracy data
+V1.81,SPxLang.ENCGroup76Desc,Nautical publication (M_NPUB)
+V1.81,SPxLang.ENCGroup76Name,Nautical publication
+V1.81,SPxLang.ENCGroup77Desc,"Information from attributes INFORM, TXTDSC, PICREP"
+V1.81,SPxLang.ENCGroup77Name,Information from attributes
+V1.81,SPxLang.ENCGroup78Desc,"Data scale and coverage (M_CSCL, M_COVR)"
+V1.81,SPxLang.ENCGroup78Name,Data scale and coverage
+V1.81,SPxLang.ENCGroup79Desc,"Magnetic variation (MAGVAR), local magnetic anomaly (LOCMAG)"
+V1.81,SPxLang.ENCGroup79Name,"Magnetic variation, local magnetic anomaly"
+V1.81,SPxLang.ENCGroup80Desc,Natural features
+V1.81,SPxLang.ENCGroup80Name,Natural features
+V1.81,SPxLang.ENCGroup81Desc,"Dunes, hills (SLOGRD), ridge, clifftop (SLOTOP), contours and elevation (LNDELV)"
+V1.81,SPxLang.ENCGroup81Name,"Dunes, hills, ridge, clifftop, contours, elevation"
+V1.81,SPxLang.ENCGroup82Desc,"Trees, vegetation, mangrove (VEGATN), marsh (LNDRGN)"
+V1.81,SPxLang.ENCGroup82Name,"Trees, vegetation, mangrove, marsh"
+V1.81,SPxLang.ENCGroup83Desc,"River (RIVERS) or lake (LAKARE); also rapids (RAPIDS), waterfall (WATFAL)"
+V1.81,SPxLang.ENCGroup83Name,"River, lake, rapids, waterfall"
+V1.81,SPxLang.ENCGroup84Desc,"Tideway (TIDWAY), saltpan (SLTPAN)"
+V1.81,SPxLang.ENCGroup84Name,"Tideway, saltpan"
+V1.81,SPxLang.ENCGroup85Desc,Shore structures
+V1.81,SPxLang.ENCGroup85Name,Shore structures
+V1.81,SPxLang.ENCGroup86Desc,"Any of the following not classified as CONVIS1 (conspicuous): landmark (LNDMRK), building (BUISGL), tank, silo, water tower (SILTNK)cairn (CAIRNS), wall (FNCLNE), fort (FORSTC)"
+V1.81,SPxLang.ENCGroup86Name,"Landmark, building, tank, silo, water tower, cairn, wall, fort"
+V1.81,SPxLang.ENCGroup87Desc,"Airport (AIRARE), runway (RUNWAY)"
+V1.81,SPxLang.ENCGroup87Name,"Airport, runway"
+V1.81,SPxLang.ENCGroup88Desc,"Railway (RAILWY), road (ROADWY), tunnel (TUNNEL), control point (CTRPNT)"
+V1.81,SPxLang.ENCGroup88Name,"Railway, road, tunnel, control point"
+V1.81,SPxLang.ENCGroup89Desc,"Quarry, refinery, power station, tank farm, wind farm, factory, timber yard (PRDARE)"
+V1.81,SPxLang.ENCGroup89Name,"Quarry, refinery, power station, tank farm, wind farm, etc"
+V1.81,SPxLang.ENCGroup90Desc,Port features
+V1.81,SPxLang.ENCGroup90Name,Port features
+V1.81,SPxLang.ENCGroup91Desc,"Harbour type (HRBFAC), customs check point (CHKPNT) [note: 'small craft facilities' (SMCFAC) is in group 38210]"
+V1.81,SPxLang.ENCGroup91Name,"Harbour type, customs check point"
+V1.81,SPxLang.ENCGroup92Desc,Distance mark (DISMAR)
+V1.81,SPxLang.ENCGroup92Name,Distance mark
+V1.81,SPxLang.ENCGroup93Desc,"Berthing facility (such as wharf) (BRTFAC), berth number (BERTHS), mooring facility (such as bollard) (MORFAC), gate (such as lock gate) (GATCON) , dry dock (DRYDOC), crane (CRANES)"
+V1.81,SPxLang.ENCGroup93Name,"Berthing facility, berth number, mooring facility, etc"
+V1.81,SPxLang.ENCGroup94Desc,Gridiron (GRIDRN)
+V1.81,SPxLang.ENCGroup94Name,Gridiron
+V1.81,SPxLang.ENCGroup95Desc,"Depths, currents, tide rips, etc"
+V1.81,SPxLang.ENCGroup95Name,"Depths, currents, tide rips, etc"
+V1.81,SPxLang.ENCGroup96Desc,Soundings (SOUNDG)
+V1.81,SPxLang.ENCGroup96Name,Soundings
+V1.81,SPxLang.ENCGroup97Desc,"Depth contours (DEPCNT) other than the safety contour, line depth area (DEPARE)"
+V1.81,SPxLang.ENCGroup97Name,"Depth contours, line depth area"
+V1.81,SPxLang.ENCGroup98Desc,Label for the safety contour
+V1.81,SPxLang.ENCGroup98Name,Safety contour label
+V1.81,SPxLang.ENCGroup99Desc,Label for contours other than the safety contour
+V1.81,SPxLang.ENCGroup99Name,Other contour label
+V1.81,SPxLang.ENCGroup100Desc,Water turbulence (WATTUR)
+V1.81,SPxLang.ENCGroup100Name,Water turbulence
+V1.81,SPxLang.ENCGroup101Desc,"Tidal information (T_HMON, T_NHM, T_TIMS)"
+V1.81,SPxLang.ENCGroup101Name,Tidal information
+V1.81,SPxLang.ENCGroup102Desc,"Current and tidal stream information (CURENT, TS_FEB, TS_PAD, TS_PNH, TS_PRH, TS_TIS)"
+V1.81,SPxLang.ENCGroup102Name,Current and tidal stream information
+V1.81,SPxLang.ENCGroup103Desc,"Seabed information: rocks, wrecks & obstns, pipes & cables"
+V1.81,SPxLang.ENCGroup103Name,Seabed information
+V1.81,SPxLang.ENCGroup104Desc,Nature of seabed (SBDARE)
+V1.81,SPxLang.ENCGroup104Name,Nature of seabed
+V1.81,SPxLang.ENCGroup105Desc,"Spring (SPRING), sea weed (WEDKLP)"
+V1.81,SPxLang.ENCGroup105Name,"Spring, sea weed"
+V1.81,SPxLang.ENCGroup106Desc,"Fish haven (FSHHAV), fishing stakes, etc. (FSHFAC)"
+V1.81,SPxLang.ENCGroup106Name,"Fish haven, fishing stakes, etc"
+V1.81,SPxLang.ENCGroup107Desc,"Rocks (UWTROC), wrecks (WRECKS), obstructions (OBSTNS), which are not a danger to own-ship's navigation (these are all Display Base if a danger to own-ship)"
+V1.81,SPxLang.ENCGroup107Name,"Rocks, wrecks, obstructions"
+V1.81,SPxLang.ENCGroup108Desc,"Non-dangerous rocks (UWTROC), wrecks (WRECKS) and obstructions (OBSTRN) which have a VALSOU attribute and are not a danger to own-ship's navigation (these objects are all Display Base if a danger to own-ship)"
+V1.81,SPxLang.ENCGroup108Name,"Non-dangerous rocks, wrecks, obstructions"
+V1.81,SPxLang.ENCGroup109Desc,"Submarine cable (CBLSUB), submarine pipeline (PIPSOL)"
+V1.81,SPxLang.ENCGroup109Name,"Submarine cable, submarine pipeline"
+V1.81,SPxLang.ENCGroup110Desc,Routes
+V1.81,SPxLang.ENCGroup110Name,Routes
+V1.81,SPxLang.ENCGroup111Desc,"Administrative areas, (by cursor enquiry)"
+V1.81,SPxLang.ENCGroup111Name,Administrative areas
+V1.81,SPxLang.ENCGroup112Desc,Continental shelf (COSARE)
+V1.81,SPxLang.ENCGroup112Name,Continental shelf
+V1.81,SPxLang.ENCGroup113Desc,"Harbour area (HRBARE) free port area (FRPARE), customs zone (CUSZNE)"
+V1.81,SPxLang.ENCGroup113Name,"Harbour area, free port area, customs zone"
+V1.81,SPxLang.ENCGroup114Desc,Fishery zone (FSHZNE)
+V1.81,SPxLang.ENCGroup114Name,Fishery zone
+V1.81,SPxLang.ENCGroup115Desc,"Contiguous zone (CONZNE), exclusive economic zone (EXEZNE), national territorial area (NATARE), territorial sea (TESARE), territorial sea baseline (STSLNE), administration area (ADMARE)"
+V1.81,SPxLang.ENCGroup115Name,"Contiguous zone, exclusive economic zone, national territorial area, etc"
+V1.81,SPxLang.ENCGroup116Desc,Services
+V1.81,SPxLang.ENCGroup116Name,Services
+V1.81,SPxLang.ENCGroup117Desc,"Radar station (RADSTA), radio station (RDOSTA)"
+V1.81,SPxLang.ENCGroup117Name,"Radar station, radio station"
+V1.81,SPxLang.ENCGroup118Desc,"Coastguard station (CGUSTA), rescue station (RSCSTA)"
+V1.81,SPxLang.ENCGroup118Name,"Coastguard station, rescue station"
+V1.81,SPxLang.ENCGroup119Desc,Small craft facilities
+V1.81,SPxLang.ENCGroup119Name,Small craft facilities
+V1.81,SPxLang.ENCGroup120Desc,Small craft facility
+V1.81,SPxLang.ENCGroup120Name,Small craft facility
+V1.81,SPxLang.ENCGroup121Desc,Important text
+V1.81,SPxLang.ENCGroup121Name,Important text
+V1.81,SPxLang.ENCGroup122Desc,"Vertical clearance of bridges, overhead cable, pipe or conveyor (BRIDGE, CBLOHD, PIPOHD, CONVYR, VERCLR, VERCCL, VERCOP), bearing of navline, recommended route, deep water route centreline line (NAVLNE, RCRTCL, DWRTCL, ORIENT), name and communications channel of radio calling-in point (RDOCAL, OBJNAM, COMCHA)"
+V1.81,SPxLang.ENCGroup122Name,"Vertical clearance of bridges, overhead cable, pipe, etc"
+V1.81,SPxLang.ENCGroup123Desc,Other text
+V1.81,SPxLang.ENCGroup123Name,Other text
+V1.81,SPxLang.ENCGroup124Desc,"Names for position reporting: name or number (OBJNAM) of buoys (BOYxxx), beacons (BCNxxx), daymarks (DAYMAR), light vessel, light float (LITVES, LITFLT), offshore platform (OFSPLF)"
+V1.81,SPxLang.ENCGroup124Name,"Name or number of buoys, beacons, daymarks, light vessel, etc"
+V1.81,SPxLang.ENCGroup125Desc,Bearing for directional lights
+V1.81,SPxLang.ENCGroup125Name,Bearing for directional lights
+V1.81,SPxLang.ENCGroup126Desc,Light description string
+V1.81,SPxLang.ENCGroup126Name,Light description string
+V1.81,SPxLang.ENCGroup127Desc,Note on chart data (INFORM) or nautical publication (TXTDSC)
+V1.81,SPxLang.ENCGroup127Name,Note on chart data or nautical publication
+V1.81,SPxLang.ENCGroup128Desc,Nature of seabed (NATSUR of SBDARE)
+V1.81,SPxLang.ENCGroup128Name,Nature of seabed
+V1.81,SPxLang.ENCGroup129Desc,"Geographic names (OBJNAM of SEAARE, LNDRGN etc)"
+V1.81,SPxLang.ENCGroup129Name,Geographic names
+V1.81,SPxLang.ENCGroup130Desc,Value of: magnetic variation (VALMAG of MAGVAR); swept depth (DRVAL1 of SWPARE)
+V1.81,SPxLang.ENCGroup130Name,"Magnetic variation, swept depth"
+V1.81,SPxLang.ENCGroup131Desc,Height of islet or land feature
+V1.81,SPxLang.ENCGroup131Name,Height of islet or land feature
+V1.81,SPxLang.ENCGroup132Desc,"Berth number (OBJNAM of BERTHS, ACHBRT)"
+V1.81,SPxLang.ENCGroup132Name,Berth number
+V1.81,SPxLang.ENCGroup133Desc,"National language text (NOBJNM, NINFOM, NTXTDS)"
+V1.81,SPxLang.ENCGroup133Name,National language text
+V1.85,SPxLang.FilterConditionsTab1,Set filter name,设定滤波条件的名称
+V1.85,SPxLang.FilterConditionsPopupMenu1,New Condition,新条件
+V1.85,SPxLang.FilterConditionsPopupMenu2,Delete,删除
+V1.85,SPxLang.FilterConditionsPopupMenu3,Condition,条件
+V1.85,SPxLang.FilterConditionsPopupMenu4,Delete All Conditions,删除所有条件
+V1.85,SPxLang.FiltersPanel1,Right click to add new filter ,右击鼠标增加新的条件
+V1.81,SPxLang.JoystickFocus,Focus,Focus
+V1.81,SPxLang.JoystickZoom,Zoom,Zoom
+V1.81.5,SPxLang.LRADSearchlightDlg1,Enable Beam
+V1.81.5,SPxLang.LRADSearchlightDlg2,Enabled
+V1.81.5,SPxLang.LRADSearchlightDlg3,Disabled
+V1.81.5,SPxLang.LRADSearchlightDlg4,Enable Strobe
+V1.81.5,SPxLang.LRADSearchlightDlg5,Constant
+V1.81.5,SPxLang.LRADSearchlightDlg6,Strobe
+V1.81.5,SPxLang.LRADSearchlightDlg7,Beam Level
+V1.81.5,SPxLang.LRADSearchlightDlg8,Low
+V1.81.5,SPxLang.LRADSearchlightDlg9,Normal
+V1.81.5,SPxLang.LRADSearchlightDlg10,High
+V1.81.5,SPxLang.LRADSearchlightDlg11,Strobe Rate
+V1.81.5,SPxLang.LRADSearchlightDlg12,Hz
+V1.81.5,SPxLang.LRADSearchlightDlg13,Zoom Percent
+V1.81.5,SPxLang.LRADSearchlightDlg14,Flood
+V1.81.5,SPxLang.LRADSearchlightDlg15,Spot
+V1.81.5,SPxLang.LRADSearchlightDlg16,Unknown
+V1.81,SPxLang.MediaInfoName1,None,空
+V1.81,SPxLang.MediaInfoName2,HPx Card,HPx卡
+V1.81,SPxLang.MediaInfoName3,Serial,串口
+V1.81,SPxLang.MediaInfoName4,Direct Show Capture,Direct Show Capture
+V1.81,SPxLang.MediaInfoName5,Network UDP Headerless,网络UDP(无报头)
+V1.81,SPxLang.MediaInfoName6,Network UDP SPx, 网络UDP SPx
+V1.81,SPxLang.MediaInfoName7,Network UDP ASTERIX, 网络UDP ASTERIX
+V1.81,SPxLang.MediaInfoName8,Network Simrad, 网络Simrad
+V1.81,SPxLang.MediaInfoName9,Network P217, 网络P217
+V1.81,SPxLang.MediaInfoName10,Network TCP Headerless,网络TCP(无报头)
+V1.81,SPxLang.MediaInfoName11,Network RTSP,网络RTSP
+V1.81,SPxLang.MediaInfoName12,Headerless,无报头
+V1.81,SPxLang.MediaInfoName13,SPx,SPx
+V1.81,SPxLang.MediaInfoName14,ASTERIX,ASTERIX
+V1.81,SPxLang.NetCtrlDlg1,The standard network address,标准网络地址
+V1.81,SPxLang.NetCtrlDlg2,is,是
+V1.81,SPxLang.NetCtrlDlg3,port,端口
+V1.81,SPxLang.NetCtrlDlg4,Address:,地址:
+V1.81,SPxLang.NetCtrlDlg5,Port:,端口:
+V1.81,SPxLang.NetCtrlDlg6,Interface:,接口:
+V1.81,SPxLang.NetCtrlDlg7,Set,设置
+V1.81,SPxLang.NetCtrlDlg8,Default,默认
+V1.81,SPxLang.NetCtrlDlg9,Any,任意
+V1.81,SPxLang.NetCtrlDlg10,WARNING: Interface is disabled. ,警告: 接口未启用。
+V1.81,SPxLang.NetCtrlDlg11,WARNING: Interface is disconnected. ,警告: 接口未连接
+V1.81,SPxLang.NetCtrlDlg12,ERROR: Invalid interface selection. ,错误: 选择无效接口
+V1.81,SPxLang.NetCtrlDlg13,Use Defaults ,使用默认
+V1.81,SPxLang.OnvifDlg1,Status: ,状态:
+V1.81,SPxLang.OnvifDlg2,Discover,发现
+V1.81,SPxLang.OnvifDlg3,Username:,用户名:
+V1.81,SPxLang.OnvifDlg4,Password:,密码:
+V1.81,SPxLang.OnvifDlg5,Server:,服务:
+V1.81,SPxLang.OnvifDlg6,Profile:,配置文件:
+V1.81,SPxLang.OnvifDlg7,None,空
+V1.81,SPxLang.OnvifDlg8,Mode:,模式:
+V1.81,SPxLang.OnvifDlg9,UDP Unicast,UDP 单播
+V1.81,SPxLang.OnvifDlg10,UDP Multicast,UDP 多播(组播)
+V1.81,SPxLang.OnvifDlg11,TCP Interleaved,TCP 交织
+V1.81,SPxLang.OnvifDlg12,Connection failure,连接失败
+V1.81,SPxLang.OnvifDlg13,Bad request,错误请求
+V1.81,SPxLang.OnvifDlg14,Username or password incorrect,用户名或密码错误
+V1.81,SPxLang.OnvifDlg15,Media not found,未找到媒体
+V1.81,SPxLang.OnvifDlg16,Transport mode not supported,传输模式不支持
+V1.81,SPxLang.OnvifDlg17,Dropping packets,丢包
+V1.81,SPxLang.OnvifDlg18,Not configured,未配置
+V1.81,SPxLang.OnvifDlg19,Address:,地址:
+V1.81,SPxLang.OnvifDlg20,Custom,自定义
+V1.81,SPxLang.OnvifDlg21,Unknown,未知
+V1.81,SPxLang.OnvifDlg22,Unrecognised response,未识别响应
+V1.84.1,SPxLang.OnvifDlg23,HTTP,HTTP
+V1.84.3,SPxLang.OnvifDlg24,Not receiving data,未收到数据
+V1.81,SPxLang.P172RcActive,Active
+V1.81,SPxLang.P172RcAlarms,Alarms
+V1.81,SPxLang.P172RcAntenna,Antenna
+V1.81,SPxLang.P172RcBackup,Backup
+V1.81,SPxLang.P172RcBackupRestore,Backup / Restore
+V1.81,SPxLang.P172RcBlanking,Blanking
+V1.81,SPxLang.P172RcClear,Clear
+V1.81,SPxLang.P172RcClearAlarms,Clear Alarms
+V1.81,SPxLang.P172RcClearEvents,Clear Events
+V1.81,SPxLang.P172RcClutterMap,Clutter Map
+V1.81,SPxLang.P172RcCommandMesgs,Command Messages
+V1.81,SPxLang.P172RcCommands,Commands
+V1.81,SPxLang.P172RcControl,Control
+V1.81,SPxLang.P172RcControlPanel,Control Panel
+V1.81,SPxLang.P172RcDetails,Details
+V1.81,SPxLang.P172RcDisplayMode,Display Mode
+V1.84.3,SPxLang.P172RcDualMode,Dual Mode
+V1.81,SPxLang.P172RcEmergencyStop,EMERGENCY STOP
+V1.81,SPxLang.P172RcEmergencyStopProceed,Proceed with EMERGENCY STOP?
+V1.81,SPxLang.P172RcEmergencyStopTitle,Emergency Stop Confirmation
+V1.81,SPxLang.P172RcEnable,Enable
+V1.81,SPxLang.P172RcEvents,Events
+V1.81,SPxLang.P172RcHbRx,H/B Rx
+V1.81,SPxLang.P172RcHbTx,H/B Tx
+V1.81,SPxLang.P172RcHeartbeats,Heartbeats
+V1.81,SPxLang.P172RcIdentity,Identity
+V1.81,SPxLang.P172RcLimits,Limits
+V1.81,SPxLang.P172RcLogRx,Log Rx
+V1.81,SPxLang.P172RcLogTx,Log Tx
+V1.81,SPxLang.P172RcMiscellaneous,Miscellaneous
+V1.81,SPxLang.P172RcOffline,Off-Line
+V1.81,SPxLang.P172RcPolarisation,Polarisation
+V1.81,SPxLang.P172RcR8R9Chirp,Chirp
+V1.81,SPxLang.P172RcR8R9FreqNum,Freq Num
+V1.81,SPxLang.P172RcR8R9Gain,Gain
+V1.81,SPxLang.P172RcR8R9Ir,I/R
+V1.81,SPxLang.P172RcR8R9Mode,Mode
+V1.81,SPxLang.P172RcR8R9Power,Power
+V1.81,SPxLang.P172RcR8R9RainFilter,Rain Filter
+V1.81,SPxLang.P172RcR8R9Range,Range
+V1.81,SPxLang.P172RcR8R9SeaFilter,Sea Filter
+V1.81,SPxLang.P172RcR8R9Swap,Swap
+V1.81,SPxLang.P172RcRadarMode,Radar Mode
+V1.81,SPxLang.P172RcRdu,RDU
+V1.81,SPxLang.P172RcReserve,Reserve
+V1.81,SPxLang.P172RcRestart,RESTART
+V1.81,SPxLang.P172RcRestartProceed,Proceed with RESTART?
+V1.81,SPxLang.P172RcRestartTitle,Restart Confirmation
+V1.81,SPxLang.P172RcRestore,Restore
+V1.81,SPxLang.P172RcSaveConfig,Save Config
+V1.81,SPxLang.P172RcSBand,S-Band
+V1.81,SPxLang.P172RcScans,Scans
+V1.81,SPxLang.P172RcSector,Sector
+V1.81,SPxLang.P172RcSet,Set
+V1.81,SPxLang.P172RcSize,Size
+V1.81,SPxLang.P172RcSpeed,Speed
+V1.81,SPxLang.P172RcStart,Start
+V1.81,SPxLang.P172RcStatus,Status
+V1.81,SPxLang.P172RcStatusMesgs,Status Messages
+V1.81,SPxLang.P172RcStop,Stop
+V1.81,SPxLang.P172RcSystemType,System Type
+V1.81,SPxLang.P172RcTraffic,Radar Traffic
+V1.81,SPxLang.P172RcTrafficClear,Clear Buffer
+V1.81,SPxLang.P172RcTrafficFreeze,Freeze Window
+V1.81,SPxLang.P172RcTransceiver,Transceiver
+V1.81,SPxLang.P172RcTransmit,Transmit
+V1.81,SPxLang.P172RcTune,Tune
+V1.81,SPxLang.P172RcTxMute,TX Mute
+V1.81,SPxLang.P172RcUnit,Unit
+V1.81,SPxLang.P172RcUserMode,User Mode
+V1.81,SPxLang.P172RcViewTraffic,View Traffic
+V1.81,SPxLang.P172RcXBand,X-Band
+V1.81,SPxLang.P226AdvDlgLic1,Licence Key
+V1.81,SPxLang.P226AdvDlgLic2,Enter the licence key for the radar.
+V1.81,SPxLang.P226AdvDlgSerial1,Serial Number
+V1.81,SPxLang.P226AdvDlgSerial2,"Optionally enter the serial number of the radar to connect to, otherwise the first radar detected will be used."
+V1.81,SPxLang.P226AdvDlgTitle,Simrad Advanced Control Panel
+V1.81,SPxLang.P226DlgActual,Actual:
+V1.81,SPxLang.P226DlgAuto,Auto
+V1.81,SPxLang.P226DlgBlank1,Sector Blanking
+V1.81,SPxLang.P226DlgBlank2,Sector ID:
+V1.81,SPxLang.P226DlgBlank3,Blanking:
+V1.81,SPxLang.P226DlgBlank4,Start Angle:
+V1.81,SPxLang.P226DlgBlank5,End Angle:
+V1.81,SPxLang.P226DlgConf1,Radar Configuration
+V1.81,SPxLang.P226DlgConf2,Transmitting:
+V1.81,SPxLang.P226DlgConf3,Range:
+V1.81,SPxLang.P226DlgConf4,Scan Rate:
+V1.81,SPxLang.P226DlgConf5,Gain:
+V1.81,SPxLang.P226DlgConf6,Sea Clutter:
+V1.81,SPxLang.P226DlgConf7,Rain:
+V1.81,SPxLang.P226DlgConf8,FTC:
+V1.81,SPxLang.P226DlgConf9,Interference:
+V1.81,SPxLang.P226DlgConf10,Local IR:
+V1.81,SPxLang.P226DlgConf11,Normal
+V1.81,SPxLang.P226DlgConf12,Medium
+V1.81,SPxLang.P226DlgConf13,High
+V1.81,SPxLang.P226DlgConf14,harbour
+V1.81,SPxLang.P226DlgConf15,offshore
+V1.81,SPxLang.P226DlgDegs,degrees
+V1.81,SPxLang.P226DlgDisabled,Disabled
+V1.81,SPxLang.P226DlgEnable,Enable
+V1.81,SPxLang.P226DlgEnabled,Enabled
+V1.81,SPxLang.P226DlgRadar1,Radar
+V1.81,SPxLang.P226DlgRadar2,Type:
+V1.81,SPxLang.P226DlgRadar3,State:
+V1.81,SPxLang.P226DlgRadar4,License:
+V1.81,SPxLang.P226DlgRadar5,Info:
+V1.81,SPxLang.P226DlgRadar6,Setup:
+V1.81,SPxLang.P226DlgRadar7,Query
+V1.81,SPxLang.P226DlgRadar8,Advanced...
+V1.81,SPxLang.P226DlgRadar9,Channel:
+V1.81,SPxLang.P226DlgRadar10,Level
+V1.81,SPxLang.P226DlgRadar11,Insufficient
+V1.81,SPxLang.P226DlgRadar12,OK
+V1.81,SPxLang.P226DlgRadar13,Up
+V1.81,SPxLang.P226DlgRadar14,max range
+V1.81,SPxLang.P226DlgRadar15,Height
+V1.81,SPxLang.P226DlgRadar16,offset
+V1.81,SPxLang.P226DlgRequested,Requested:
+V1.81,SPxLang.P226DlgSec,sec
+V1.81,SPxLang.P226DlgSecs,secs
+V1.81,SPxLang.P226DlgSet,Set
+V1.81,SPxLang.P226DlgStatus1,P226 Status
+V1.81,SPxLang.P226DlgStatus2,Initialising
+V1.81,SPxLang.P226DlgStatus3,Initialising...
+V1.81,SPxLang.P226DlgStatus4,No radars detected.
+V1.81,SPxLang.P226DlgStatus5,Found
+V1.81,SPxLang.P226DlgStatus6,radar
+V1.81,SPxLang.P226DlgStatus7,radars
+V1.81,SPxLang.P226DlgStatus8,using serial number
+V1.81,SPxLang.P226DlgUnknown,Unknown
+V1.81,SPxLang.RemoteP226Dialog1,RPM
+V1.81,SPxLang.RemoteP226Dialog2,Manual
+V1.81,SPxLang.RemoteP226Dialog3,Harbour
+V1.81,SPxLang.RemoteP226Dialog4,Offshore
+V1.81.5,SPxLang.RemoteRDRChannels,Channels,通道
+V1.81,SPxLang.RemoteRDRCurrent,Current:,当前:
+V1.81.8,SPxLang.RemoteRDRDataRate,Data Rate:,数据率:
+V1.81,SPxLang.RemoteRDRDuration,Duration:,持续时间:
+V1.81,SPxLang.RemoteRDREnd,End:,结束:
+V1.81,SPxLang.RemoteRDREvent,Event:,事件:
+V1.84.3,SPxLang.RemoteRDRGo,Go,Go
+V1.84.3,SPxLang.RemoteRDRJumpTo,Jump To: ,跳转:
+V1.81,SPxLang.RemoteRDRLog,Log,日志
+V1.84.3,SPxLang.RemoteRDRLoop,Loop,循环:
+V1.81,SPxLang.RemoteRDRNote,Note:,备注:
+V1.81,SPxLang.RemoteRDRProject,Project:,项目:
+V1.81,SPxLang.RemoteRDRRecord,Record,记录
+V1.81,SPxLang.RemoteRDRReplay,Replay,回放
+V1.81,SPxLang.RemoteRDRSession,Session:,会话:
+V1.81,SPxLang.RemoteRDRStart,Start:,开始:
+V1.81,SPxLang.RemoteRDRVersion,Version:,版本:
+V1.84.8,SPxLang.RemoteRDRNoteLogged,Note logged ,备注记录
+V1.84.8,SPxLang.RemoteRDRNoteLogFailed,Failed to log note ,备注记录失败
+V1.84.8,SPxLang.RemoteRDREventLogged,Event logged ,事件记录
+V1.84.8,SPxLang.RemoteRDREventLogFailed,Failed to log event ,事件记录失败
+V1.84.8,SPxLang.RemoteRDRInputGroup,Input ,输入
+V1.84.8,SPxLang.RemoteRDRInputLive,Live ,实时
+V1.84.8,SPxLang.RemoteRDRInputReplay,Replay ,回放
+V1.81,SPxLang.RwAlarmAction1,Start Recording,开始记录
+V1.81,SPxLang.RwAlarmAction2,Add To Camera,添加到摄像头
+V1.84.8,SPxLang.RwAlarmAction3,Broadcast Over LRAD
+V1.81,SPxLang.RwAlarmActionsTab1,Actions,动作
+V1.81,SPxLang.RwAlarmActionsTab2,ACTION,动作
+V1.81,SPxLang.RwAlarmActionsTab3,OPTION,选项
+V1.81,SPxLang.RwAlarmActionsTab4,Value:,值:
+DEPRECATED,SPxLang.RwAlarmConditionsTab1,Set alarm name,设置警报名
+V1.81,SPxLang.RwAlarmsDialog1,Triggered Alarms,已触发警报
+V1.81,SPxLang.RwAlarmsDialog2,Active,已生效
+V1.81,SPxLang.RwAlarmsDialog3,Acknowledged,已知晓
+V1.81,SPxLang.RwAlarmsDialog4,Cleared,已清除
+V1.81,SPxLang.RwAlarmsPanel1,STATE,状态
+V1.81,SPxLang.RwAlarmsPanel2,TIME,时间
+V1.81,SPxLang.RwAlarmsPanel3,NAME,名称
+V1.81,SPxLang.RwAlarmsPanel4,TRACK,航迹
+V1.81,SPxLang.RwAlarmsPanel5,CPA,CPA
+V1.81,SPxLang.RwAlarmsPanel6,TCPA,TCPA
+V1.81,SPxLang.RwAlarmsPanel7,TRIGGERS,触发
+V1.81,SPxLang.RwAllCams,All Cameras,所有摄像机
+V1.82.1,SPxLang.RwAnchorAlarmDefaultName,Anchor Alarm,锚定警报
+V1.81.8,SPxLang.RwAppCloseConfim1,Closing the main window will close the whole RadarWatch application  please confirm. ,关闭主窗口将会关闭所有应用，请确认。
+V1.81.8,SPxLang.RwAppCloseConfim2,Save and Close,保存并关闭
+V1.81.8,SPxLang.RwAppCloseConfim3,Close Without Saving,不保存关闭
+V1.81.8,SPxLang.RwAppCloseConfim4,Keep RadarWatch Open,继续开启应用
+V1.81,SPxLang.RwAppInit1,Initialising,正在初始化
+V1.81,SPxLang.RwAppInit2,Creating channels,创建通道
+V1.81,SPxLang.RwAppInit3,Creating PPIs,创建PPI窗口
+V1.81,SPxLang.RwAppInit4,Creating video windows,创建视频窗口
+V1.81,SPxLang.RwAppInit5,Creating dialogs,创建对话框
+V1.81,SPxLang.RwAppInit6,Initialisation complete,初始化完成
+V1.81,SPxLang.RwAppMenu1,Application,应用
+V1.81,SPxLang.RwAppMenu2,Application Wizard,应用向导
+V1.81,SPxLang.RwAppMenu3,Track Table,航迹列表
+V1.81,SPxLang.RwAppMenu4,Track Filtering,航迹过滤
+V1.81,SPxLang.RwAppMenu5,Configured Alarms,配置报警
+V1.81,SPxLang.RwAppMenu6,Triggered Alarms,触发报警
+V1.81,SPxLang.RwAppMenu7,Record and Replay,记录回放
+V1.81,SPxLang.RwAppMenu8,Access Control,登录控制
+V1.81,SPxLang.RwAppMenu9,Layout,布局设置
+V1.81,SPxLang.RwAppMenu10,Set,设置
+V1.81,SPxLang.RwAppMenu11,Restore,还原
+V1.81,SPxLang.RwAppMenu12,Layout 1,布局设置 1
+V1.81,SPxLang.RwAppMenu13,Layout 2,布局设置 2
+V1.81,SPxLang.RwAppMenu14,Layout 3,布局设置 3
+V1.81,SPxLang.RwAppMenu15,Settings,设置
+V1.81,SPxLang.RwAppMenu16,Save Settings,保存设置
+V1.81,SPxLang.RwAppMenu17,Save Areas Alarms and Filters,保存报警区域和过滤区域
+V1.81,SPxLang.RwAppMenu18,Save All,全部保存
+V1.81,SPxLang.RwAppMenu19,Exit,退出
+V1.81,SPxLang.RwAppMenu20,Shared Mode,共享模式
+V1.81,SPxLang.RwAppMenu21,Set Default,默认配置
+V1.81,SPxLang.RwAppMenu22,None,空
+V1.81,SPxLang.RwAreasDefaultName1,Group,组
+V1.81,SPxLang.RwAreasDefaultName2,Poly,多边形
+V1.81,SPxLang.RwAreasDefaultName3,Line,线
+V1.81,SPxLang.RwAreasDefaultName4,Circle,圆形
+V1.81,SPxLang.RwAreasDefaultName5,Sector,扇形
+V1.81,SPxLang.RwAreasDefaultName6,Symbol,符号
+V1.81,SPxLang.RwAreasDefaultName7,Text,文本
+V1.81,SPxLang.RwAreasDefaultName8,New Text,新文本
+V1.82.1,SPxLang.RwAreasDefaultName9,Anchor Zones Group,锚定区组
+V1.82.1,SPxLang.RwAreasDefaultName10,Anchor Zone,锚定区
+V1.81,SPxLang.RwAreasPopupMenu1,Flip Crossing Direction,翻转方向
+V1.81,SPxLang.RwAreasPopupMenu2,Append Points,增加点
+V1.81,SPxLang.RwAreasPopupMenu3,Rename,重命名
+V1.81,SPxLang.RwAreasPopupMenu4,Delete,删除
+V1.81,SPxLang.RwAreasPopupMenu5,Create Group,创建组
+V1.81,SPxLang.RwAreasPopupMenu6,Create Polygon,创建多边形
+V1.81,SPxLang.RwAreasPopupMenu7,Create Polyline,创建线段
+V1.81,SPxLang.RwAreasPopupMenu8,Create Circle,创建圆形
+V1.81,SPxLang.RwAreasPopupMenu9,Create Sector,创建扇形
+V1.81,SPxLang.RwAreasPopupMenu10,Create Symbol,创建符号
+V1.81,SPxLang.RwAreasPopupMenu11,Create Text,创建文本
+V1.81,SPxLang.RwBestCam,Best Camera,最优摄像头
+V1.81,SPxLang.RwBPanel1,On Top,最上方
+V1.81,SPxLang.RwBPanel2,Keep window on top,保持窗口在最上方
+V1.81,SPxLang.RwBPanel3,Alarm,报警
+V1.81,SPxLang.RwBPanel4,Alarms,报警
+V1.81,SPxLang.RwBPanel5,Track Filters,航迹过滤
+V1.81,SPxLang.RwBPanel6,ON,开
+V1.81,SPxLang.RwBPanel7,OFF,关
+V1.81,SPxLang.RwCamCorrDialog1,Camera Correction,摄像头校准
+V1.81,SPxLang.RwCameraAutoPopupMenu1,Remove,删除
+V1.81,SPxLang.RwCameraAutoPopupMenu2,Remove All Tracks,删除所有航迹
+V1.81,SPxLang.RwCameraAutoTab1,Tracks,航迹
+V1.81,SPxLang.RwCameraAutoTab2,Cycle:,循环:
+V1.81,SPxLang.RwCameraAutoTab3,Enable cycling of tracks,激活航迹循环
+V1.81,SPxLang.RwCameraAutoTab4,Set cycle interval in seconds,设置循环周期（秒）
+V1.81,SPxLang.RwCameraJoystickTab1,Joystick,操纵杆
+V1.81,SPxLang.RwCameraJoystickTab2,Auto Focus,自动聚焦
+V1.81,SPxLang.RwCameraJoystickTab3,Clear Correction,清除校准
+V1.81.5,SPxLang.RwCameraJoystickTab4,Stow,收起
+V1.82.1,SPxLang.RwCameraJoystickTab5,External Joystick:,外部操纵杆
+V1.82.1,SPxLang.RwCameraJoystickTab6,None,无
+V1.82.1,SPxLang.RwCameraJoystickTab7,ACTIVE ,有效
+V1.82.1,SPxLang.RwCameraJoystickTab8,INACTIVE,无效
+V1.81.5,SPxLang.RwCameraLRADAudioTab1,Loud Hailer,扩音器
+V1.81.5,SPxLang.RwCameraLRADSearchlightTab1,Searchlight,探照灯
+V1.81,SPxLang.RwCameraMenu1,Camera,摄像头
+V1.81,SPxLang.RwCameraMenu2,Camera Wizard,摄像头向导
+V1.81,SPxLang.RwCameraMenu3,Video Multiview,多窗口视频
+V1.81,SPxLang.RwCameraMenu4,Video-1,视频-1
+V1.81,SPxLang.RwCameraMenu5,Video-2,视频-2
+V1.81,SPxLang.RwCameraMenu6,Camera Correction,视频校准
+V1.82.3,SPxLang.RwCameraMenu7,Camera FOV Calibration,视频FOV校准
+V1.81,SPxLang.RwCameraPresetsTab1,Presets,预设
+V1.81,SPxLang.RwCameraStatus1,Video,视频
+V1.81,SPxLang.RwCameraStatus2,Control,控制
+V1.81.5,SPxLang.RwCameraStatus3,Secondary Control,副控制
+V1.81.5,SPxLang.RwCameraStatus4,Searchlight Control,探照灯控制
+V1.81.5,SPxLang.RwCameraStatus5,Amplifier Control,扬声器控制
+V1.81.5,SPxLang.RwCameraStatus6,Audio Streamer,音频流
+DEPRECATED,SPxLang.RwCameraTourPopupMenu1,Append Stage
+DEPRECATED,SPxLang.RwCameraTourPopupMenu2,Insert Stage Before Stage
+DEPRECATED,SPxLang.RwCameraTourPopupMenu3,Delete Stage
+DEPRECATED,SPxLang.RwCameraTourPopupMenu4,Delete All Stages
+V1.84.8,SPxLang.CamTourPopupMenu1,Append Stage,添加State
+V1.84.8,SPxLang.CamTourPopupMenu2,Insert Stage Before Stage,插入Stage
+V1.84.8,SPxLang.CamTourPopupMenu3,Delete Stage,删除Stage
+V1.84.8,SPxLang.CamTourPopupMenu4,Delete All Stages,删除所有Stages
+V1.82.5,SPxLang.RwCameraTourTab1,Tour,巡航
+DEPRECATED,SPxLang.RwCameraTourTab2,Enable Tour
+DEPRECATED,SPxLang.RwCameraTourTab3,Start
+DEPRECATED,SPxLang.RwCameraTourTab4,Enable Editing
+DEPRECATED,SPxLang.RwCameraTourTab5,Save
+DEPRECATED,SPxLang.RwCameraTourTab6,Append
+DEPRECATED,SPxLang.RwCameraTourTab7,Delete
+DEPRECATED,SPxLang.RwCameraTourTab8,Delete All
+DEPRECATED,SPxLang.RwCameraTourTab9,Wait Time (s):
+DEPRECATED,SPxLang.RwCameraTourTab10,Bearing
+DEPRECATED,SPxLang.RwCameraTourTab11,Elevation
+DEPRECATED,SPxLang.RwCameraTourTab12,FOV
+DEPRECATED,SPxLang.RwCameraTourTab13,Start running the tour
+DEPRECATED,SPxLang.RwCameraTourTab14,Save current tour configuration
+DEPRECATED,SPxLang.RwCameraTourTab15,Append new stage
+DEPRECATED,SPxLang.RwCameraTourTab16,Delete selected stage
+DEPRECATED,SPxLang.RwCameraTourTab17,Delete all stages
+V1.84.8,SPxLang.CamTourDialog2,Enable Tour,巡航生效
+V1.84.8,SPxLang.CamTourDialog3,Start,开始
+V1.84.8,SPxLang.CamTourDialog4,Enable Editing,编辑
+V1.84.8,SPxLang.CamTourDialog5,Save,保存
+V1.84.8,SPxLang.CamTourDialog6,Append,添加
+V1.84.8,SPxLang.CamTourDialog7,Delete,删除
+V1.84.8,SPxLang.CamTourDialog8,Delete All,删除所有
+V1.84.8,SPxLang.CamTourDialog9,Wait Time (s):,等待时间:
+V1.84.8,SPxLang.CamTourDialog10,Bearing,方位
+V1.84.8,SPxLang.CamTourDialog11,Elevation,俯仰
+V1.84.8,SPxLang.CamTourDialog12,FOV,FOV
+V1.84.8,SPxLang.CamTourDialog13,Start running the tour,开始巡航
+V1.84.8,SPxLang.CamTourDialog14,Save current tour configuration,保存当前巡航参数
+V1.84.8,SPxLang.CamTourDialog15,Append new stage,添加新的stage
+V1.84.8,SPxLang.CamTourDialog16,Delete selected stage,删除选择的stage
+V1.84.8,SPxLang.CamTourDialog17,Delete all stages,删除所有stage
+V1.82.3,SPxLang.RwCamFOVCalDialog1,Camera FOV Calibration,摄像头FOV校准
+V1.81,SPxLang.RwConditionsPanel1,STATE,状态
+V1.81,SPxLang.RwConditionsPanel2,NAME,名称
+V1.81,SPxLang.RwConditionsPanel3,CONDITIONS,条件
+V1.81,SPxLang.RwConditionsPanel4,IS SHARED,共享
+DEPRECATED,SPxLang.RwConditionsTab1,Conditions
+DEPRECATED,SPxLang.RwConditionsTab2,CONDITION
+DEPRECATED,SPxLang.RwConditionsTab3,WITHIN
+DEPRECATED,SPxLang.RwConditionsTab4,Right click to add new condition
+DEPRECATED,SPxLang.RwConditionsTab5,Set operation
+DEPRECATED,SPxLang.RwConditionsTab6,Set argument
+DEPRECATED,SPxLang.RwConditionsTab7,Set time limit
+DEPRECATED,SPxLang.RwConditionsTab8,Set range limit
+DEPRECATED,SPxLang.RwConditionsTab9,Name:
+DEPRECATED,SPxLang.RwConditionsTab10,Within:
+DEPRECATED,SPxLang.RwConditionsTab11,True
+DEPRECATED,SPxLang.RwConditionsTab12,False
+V1.81,SPxLang.RwConfigAlarmsDialog1,Configured Alarms,配置报警
+V1.81,SPxLang.RwConfigAlarmsPanel1,Right click to add new alarm,点击右键新增报警
+V1.81,SPxLang.RwConfigAlarmsPopupMenu1,Make Alarm Private,设置报警本地化
+V1.81,SPxLang.RwConfigAlarmsPopupMenu2,Make Alarm Shared,设置报警共享化
+V1.81.5,SPxLang.RwCopyright,© 2019 - 2021 Cambridge Pixel Ltd. ,版权:2018~2021 CP 
+V1.81,SPxLang.RwCovMapDialog1,Coverage Map,覆盖地图
+V1.81,SPxLang.RwCovMapDialog2,Update,升级
+V1.81,SPxLang.RwCurrCam,Current Camera,当前摄像头
+V1.DEPECRATED,SPxLang.RwFilterConditionsTab1,Set filter name,设置过滤器名称
+V1.81,SPxLang.RwFiltersDialog1,Track Filters,航迹过滤
+DEPRECATED,SPxLang.RwFiltersPanel1,Right click to add new filter
+V1.81,SPxLang.RwHelpMenu1,Help,帮助
+V1.81,SPxLang.RwHelpMenu2,About,关于
+V1.81,SPxLang.RwHelpMenu3,View Help,查看帮助
+V1.81,SPxLang.RwHelpMenu4,RadarWatch Help,RadarWatch帮助
+V1.81,SPxLang.RwLayoutMesgBox1,Overwrite layout assigned to slot,覆盖分配给插槽的布局
+V1.81,SPxLang.RwLayoutMesgBox2,Overwrite Layout,覆盖布局
+V1.81,SPxLang.RwLayoutMesgBox3,Cancel,取消
+V1.82.3,SPxLang.RwLocationCheckButton,Check,查看
+V1.82.3,SPxLang.RwLocationSearchCueText,Location latitude and longitude,位置经纬度
+V1.82.3,SPxLang.RwLocationSearchTooltip,Enter a location latitude and longitude,输入位置纬度和经度
+V1.81,SPxLang.RwMainStatus1,Combined Tracks,融合后航迹
+V1.81,SPxLang.RwMainStatus2,AIS Tracks,AIS航迹
+V1.81,SPxLang.RwMainStatus3,ADS-B Tracks,ADS-B航迹
+V1.81,SPxLang.RwMainStatus4,RDR,RDR
+V1.81,SPxLang.RwMainStatus5,Recording,记录
+V1.81,SPxLang.RwMainStatus6,Replay,回放
+V1.81,SPxLang.RwMesgPopupMenu1,Clear Messages,清除信息
+V1.81,SPxLang.RwMonTPanel1,Select,选择
+V1.81,SPxLang.RwMoveStatus1,GPS,GPS
+V1.82.1,SPxLang.RwOnTour,On Tour,在巡航
+V1.81,SPxLang.RwPanelHide,Hide panel,隐藏面板
+V1.81,SPxLang.RwPanelShow,Show panel,显示面板
+V1.81,SPxLang.RwPopupMenu1,Monitor,监视
+V1.81,SPxLang.RwPopupMenu2,View,查看
+V1.81,SPxLang.RwPopupMenu3,In,In
+V1.81,SPxLang.RwPopupMenu4,With,With
+V1.81,SPxLang.RwPopupMenu5,Add,Add
+V1.81,SPxLang.RwPopupMenu6,To,To
+V1.81,SPxLang.RwPopupMenu7,Create,创建
+V1.81,SPxLang.RwPopupMenu8,CPA Alarm To,CPA警报
+V1.81,SPxLang.RwPopupMenu9,CPA Alarm To Any Track,CPA到任意航迹的警报
+V1.81,SPxLang.RwPopupMenu10,With Camera,和摄像头
+V1.81,SPxLang.RwPopupMenu11,To Camera,到摄像头
+V1.81,SPxLang.RwPopupMenu12,View Position In,在……观察位置
+V1.81,SPxLang.RwPopupMenu13,Acknowledge All Active Alarms,知晓所有激活的报警
+V1.81,SPxLang.RwPopupMenu14,Clear All Acknowledged Alarms,清除所有已知晓的报警
+V1.81,SPxLang.RwPopupMenu15,Delete Alarm,删除报警
+V1.81,SPxLang.RwPopupMenu16,Delete All Cleared Alarms,删除所有已清除的报警
+V1.81,SPxLang.RwPopupMenu17,New Alarm,新增报警
+V1.81,SPxLang.RwPopupMenu18,Enable All Alarms,启用所有报警
+V1.81,SPxLang.RwPopupMenu19,Disable All Alarmss,禁用所有报警
+V1.81,SPxLang.RwPopupMenu20,Delete,删除
+V1.81,SPxLang.RwPopupMenu21,Delete All Alarms,删除所有报警
+DEPRECATED,SPxLang.RwPopupMenu22,New Condition
+DEPRECATED,SPxLang.RwPopupMenu23,Condition
+DEPRECATED,SPxLang.RwPopupMenu24,Delete All Conditions
+DEPRECATED,SPxLang.RwPopupMenu25,New Filter
+DEPRECATED,SPxLang.RwPopupMenu26,Enable All Filters
+DEPRECATED,SPxLang.RwPopupMenu27,Disable All Filters
+DEPRECATED,SPxLang.RwPopupMenu28,Delete All Filters
+V1.81,SPxLang.RwPopupMenu29,Log Note For,记录
+V1.81,SPxLang.RwPopupMenu30,View Log For,查看记录
+V1.82.1,SPxLang.RwPopupMenu31,Anchor Zone Alarm,锚区报警
+V1.82.3,SPxLang.RwPopupMenu32,Radius,半径
+V1.82.3,SPxLang.RwPopupMenu33,Information,信息
+V1.82.3,SPxLang.RwPopupMenu34,Quick Alarm,快速报警
+V1.82.3,SPxLang.RwPopupMenu35,View Position With Camera,在此处用摄像头观察
+V1.81,SPxLang.RwPPIAreasTab1,Areas,区域
+V1.81,SPxLang.RwPPIAreasTab2,Enable Editing,启用编辑
+V1.81,SPxLang.RwPPIAreasTab3,Undo,撤销
+V1.81,SPxLang.RwPPIAreasTab4,Line:,线:
+V1.81,SPxLang.RwPPIAreasTab5,Fill:,填充:
+V1.81,SPxLang.RwPPIAreasTab6,Sym:,符号:
+V1.81,SPxLang.RwPPIAreasTab7,Scale,范围
+V1.81,SPxLang.RwPPIAreasTab8,Text:,文本:
+V1.81,SPxLang.RwPPIAreasTab9,Create new group,创建新组
+V1.81,SPxLang.RwPPIAreasTab10,Create new polygon,创建新多边形
+V1.81,SPxLang.RwPPIAreasTab11,Create new polyline,创建新线段
+V1.81,SPxLang.RwPPIAreasTab12,Create new circle,创建新圆形
+V1.81,SPxLang.RwPPIAreasTab13,Create new sector,创建新扇形
+V1.81,SPxLang.RwPPIAreasTab14,Create new symbol,创建新符号
+V1.81,SPxLang.RwPPIAreasTab15,Create new text,创建新文本
+V1.81,SPxLang.RwPPIAreasTab16,Undo last action,撤销上一步
+V1.81,SPxLang.RwPPIAreasTab17,Flip crossing direction,翻转方向
+V1.81,SPxLang.RwPPIAreasTab18,Override group line colour,覆盖组的线颜色
+V1.81,SPxLang.RwPPIAreasTab19,Override group fill colour,覆盖组的填充颜色
+V1.81,SPxLang.RwPPIAreasTab20,Set line colour...,设置线颜色...
+V1.81,SPxLang.RwPPIAreasTab21,Set fill colour...,设置填充颜色...
+V1.81,SPxLang.RwPPIAreasTab22,Line alpha,线 alpha
+V1.81,SPxLang.RwPPIAreasTab23,Fill alpha,填充 alpha
+V1.81,SPxLang.RwPPIAreasTab24,AllAreas,所有区域
+V1.81,SPxLang.RwPPIAreasTab25,PrivateAreas,本地区域
+V1.81,SPxLang.RwPPIAreasTab26,SharedAreas,共享区域
+V1.81,SPxLang.RwPPIChartTab1,Chart,海图
+V1.81,SPxLang.RwPPIChartTab2,Declutter,清理
+V1.81,SPxLang.RwPPIDialog1,PPI,PPI
+V1.81,SPxLang.RwPPIDisplayTab1,Display,显示
+V1.81,SPxLang.RwPPIDisplayTab2,Map,地图
+V1.81,SPxLang.RwPPIDisplayTab3,World Map,世界地图
+V1.81,SPxLang.RwPPIDisplayTab4,Tiled Map,瓦片地图
+V1.81,SPxLang.RwPPIDisplayTab5,Coverage Map,威力覆盖地图
+V1.81,SPxLang.RwPPIDisplayTab6,Chart,海图
+V1.81,SPxLang.RwPPIDisplayTab7,Underlay,铺在下面
+V1.81,SPxLang.RwPPIDisplayTab8,Overlay,铺在上面
+V1.81,SPxLang.RwPPIDisplayTab9,Areas,区域
+V1.81,SPxLang.RwPPIDisplayTab10,Shapes,形状
+V1.81,SPxLang.RwPPIDisplayTab11,Labels,标签
+V1.81,SPxLang.RwPPIDisplayTab12,Cameras,摄像头
+V1.81,SPxLang.RwPPIDisplayTab13,Names,名称
+V1.81,SPxLang.RwPPIDisplayTab14,FOVs,FOVs
+V1.81,SPxLang.RwPPIDisplayTab15,Tracker Areas,跟踪区域
+V1.81,SPxLang.RwPPIDisplayTab16,Tracks,航迹
+V1.81,SPxLang.RwPPIDisplayTab17,Combined,融合
+V1.81,SPxLang.RwPPIDisplayTab18,AIS,AIS
+V1.81,SPxLang.RwPPIDisplayTab19,ADS-B,ADS-B
+V1.81,SPxLang.RwPPIDisplayTab20,Vectors,矢量
+V1.81,SPxLang.RwPPIDisplayTab21,Trails,尾迹
+V1.81,SPxLang.RwPPIDisplayTab22,Labels,标签
+V1.81,SPxLang.RwPPIDisplayTab23,Position,位置
+V1.81,SPxLang.RwPPIDisplayTab24,Range Rings,距离环
+V1.81,SPxLang.RwPPIDisplayTab25,Compass,罗盘
+V1.81,SPxLang.RwPPIDisplayTab26,Video,视频
+V1.81,SPxLang.RwPPIDisplayTab27,New Video,新视频
+V1.81,SPxLang.RwPPIDisplayTab28,Trail Video,尾迹视频
+V1.82.3,SPxLang.RwPPIGoToDialog1,PPI,PPI
+V1.82.3,SPxLang.RwPPIGoToDialog2,Go To,跳转
+V1.82.3,SPxLang.RwPPIGoToLocationExample1,52.069944 -0.079949
+V1.82.3,SPxLang.RwPPIGoToLocationExample2,52.069944 N 0.079949 W
+V1.82.3,SPxLang.RwPPIGoToLocationExample3,52 4.1966 N 0 4.7969 W
+V1.82.3,SPxLang.RwPPIGoToLocationExample4,52 4 11.80 N 0 4 47.82 W
+V1.82.3,SPxLang.RwPPIGoToLocationInstructions,Supported latitude and longitude entry formats:
+V1.82.3,SPxLang.RwPPIGoToSearchType1,Go to track,跳转到航迹
+V1.82.3,SPxLang.RwPPIGoToSearchType2,Go to location,跳转到位置
+V1.82.3,SPxLang.RwPPIPopupMenu1,Here,以此为中心
+V1.82.3,SPxLang.RwPPIPopupMenu2,On,Recentre On
+V1.82.3,SPxLang.RwPPIPopupMenu3,On Selected Track,以选择的航迹为中心
+V1.81,SPxLang.RwPPIPopupMenu4,Create Track Here,在此创建航迹
+V1.81,SPxLang.RwPPIPopupMenu5,Delete Track,删除航迹
+V1.81,SPxLang.RwPPIPopupMenu6,Move Track,移动航迹
+V1.81,SPxLang.RwPPIPopupMenu7,To Here,到这
+V1.81,SPxLang.RwPPIPopupMenu8,Use as point for camera correction.,作为摄像头校准点
+V1.82.3,SPxLang.RwPPIPopupMenu9,Recentre Window,Recentre窗口
+V1.81,SPxLang.RwPPIRulersTab1,Rulers,测量尺
+V1.81,SPxLang.RwPPIRulersTab2,CPA,CPA
+V1.81,SPxLang.RwPPIRulersTab3,START,起点
+V1.81,SPxLang.RwPPIRulersTab4,END,终点
+V1.81,SPxLang.RwPPIRulersTab5,Right click to add new ruler,点击右键新增测量尺
+V1.81,SPxLang.RwPPITPanel1,Set display scale,设置显示范围
+V1.81,SPxLang.RwPPITPanel2,Set displayed track trails,设置显示航迹轨迹
+V1.81,SPxLang.RwPPITPanel3,Open PPI settings,打开PPI设置
+V1.81,SPxLang.RwPPITPanel4,All Track Trails,所有航迹轨迹
+V1.81,SPxLang.RwPPITPanel5,Selected Track Trail,选择航迹轨迹
+V1.81,SPxLang.RwPPITPanel6,Hide Track Trails,隐藏航迹轨迹
+V1.81,SPxLang.RwPPITPanel7,Restore,还原
+V1.81,SPxLang.RwPPITPanel8,or press and hold to update,或点击长按修改
+V1.81,SPxLang.RwPPITPanel9,Press and hold to set,点击长按设置
+V1.81,SPxLang.RwPPITPanel10,Custom,自定义
+V1.82.3,SPxLang.RwPPITPanel11,Go to location/track,挑选到位置/航迹
+DEPRECATED,SPxLang.RwPPITrackSearchDialog1,PPI
+DEPRECATED,SPxLang.RwPPITrackSearchDialog2,Track Locator
+V1.81,SPxLang.RwRadarControlDialog,Radar Control,雷达控制
+V1.81,SPxLang.RwRadarMenu1,Radar,雷达
+V1.81,SPxLang.RwRadarMenu2,Radar Wizard,雷达向导
+V1.81,SPxLang.RwRadarMenu3,PPI-1,PPI-1
+V1.81,SPxLang.RwRadarMenu4,PPI-2,PPI-2
+V1.81,SPxLang.RwRadarMenu5,Radar Control,雷达控制
+V1.81,SPxLang.RwRadarStatus1,Video,视频
+V1.81,SPxLang.RwRadarStatus2,Tracks,航迹
+V1.81,SPxLang.RwRadarStatus3,Control,控制
+V1.81,SPxLang.RwRDRDialog1,RDR Control,RDR控制
+V1.81,SPxLang.RwReplayMode,Replay Mode,回放模式
+V1.81,SPxLang.RwRestartMesgBox1,RadarWatch must be restarted using the saved configuration file for the changes to take effect.  ,必须重启RadarWatch以确保修改和保存的配置文件生效。
+V1.81,SPxLang.RwRestartMesgBox2,Do you wish to restart RadarWatch now? ,需要重启RadarWatch吗？
+V1.81,SPxLang.RwRestartMesgBox3,Restart RadarWatch,重启RadarWatch
+V1.81,SPxLang.RwRestartMesgBox4,Keep RadarWatch Open,继续开启RadarWatch
+V1.81,SPxLang.RwRulersPopupMenu1,New Ruler,新测量尺
+V1.81,SPxLang.RwRulersPopupMenu2,Delete Ruler,删除测量尺
+V1.81,SPxLang.RwRulersPopupMenu3,Delete All Rulers,删除所有测量尺
+V1.81.5,SPxLang.RwSaveFailedMesgBox1,Failed to save application config!,保存应用配置失败！
+V1.81.5,SPxLang.RwSaveFailedMesgBox2,Failed to save area config!,保存区域配置失败！
+V1.81.5,SPxLang.RwSaveFailedMesgBox3,Failed to save shared area config!,保存共享区域失败！
+V1.81.5,SPxLang.RwSaveFailedMesgBox4,Failed to save alarm config!,保存报警配置失败！
+V1.81.5,SPxLang.RwSaveFailedMesgBox5,Failed to save shared alarm config!,保存共享报警配置失败！
+V1.81.5,SPxLang.RwSaveFailedMesgBox6,Failed to save track filters!,保存航迹过滤失败！
+V1.81.5,SPxLang.RwSaveFailedMesgBox7,Failed to save shared track filters!,保存共享航迹过滤失败！
+V1.81.5,SPxLang.RwSaveFailedMesgBox8,OK,OK
+V1.85,SPxLang.RwSaveFailedMesgBox9,Failed to save track group!,保存航迹组失败！
+DEPRECATED,SPxLang.RwSaveMesgBox1,Save changes to configuration?,保存航迹过滤失败！
+DEPRECATED,SPxLang.RwSaveMesgBox2,Do you wish to restart RadarWatch now?,你希望重启RadarWatch吗?
+V1.81,SPxLang.RwSaveMesgBox3,Save changes to configuration file?,将修改保存到配置文件？
+V1.81,SPxLang.RwSaveMesgBox4,Save Changes,保存修改
+V1.81,SPxLang.RwSaveMesgBox5,Discard Changes,放弃修改
+V1.81,SPxLang.RwSecDataType1,AIS,AIS
+V1.81,SPxLang.RwSecDataType2,ADS-B,ADS-B
+V1.81,SPxLang.RwSecDataType3,IFF,IFF
+V1.81,SPxLang.RwSecDataType4,User,用户
+V1.81,SPxLang.RwSecDataType5,Other,其他
+V1.81,SPxLang.RwSecDataType6,Unknown,未知
+V1.81,SPxLang.RwServerConfigFileText1,Custom,自定义
+V1.81,SPxLang.RwServerConfigFileText2,Unknown,未知
+V1.81,SPxLang.RwServerStatus1,Server,服务
+V1.81,SPxLang.RwSettingsDlgType1,Settings,设置
+V1.81,SPxLang.RwSettingsGroupDlg1,GPS input:,GPS 输入:
+V1.81,SPxLang.RwSettingsGroupDlg2,"Latitude (degrees, +ve north):","纬度 (度, 北纬正值):"
+V1.81,SPxLang.RwSettingsGroupDlg3,"Longitude (degrees, +ve east):","经度 (度, 东经正值):"
+V1.81,SPxLang.RwSettingsGroupDlg4,Height above sea level (metres):,海拔高度 (米):
+V1.81,SPxLang.RwSettingsGroupDlg5,Height above ground:,地面高度:
+V1.81,SPxLang.RwSettingsGroupDlg6,Track vector length (seconds):,航迹长度 (秒):
+V1.81,SPxLang.RwSettingsGroupDlg7,Track trail length (seconds):,轨迹长度 (秒):
+V1.81,SPxLang.RwSettingsGroupDlg8,Radar trail length (seconds):,雷达尾迹长度 (秒):
+V1.81,SPxLang.RwSettingsGroupDlg9,Radar video brightness:,雷达视频亮度:
+V1.81,SPxLang.RwSettingsGroupDlg10,Map brightness:,地图亮度:
+V1.81,SPxLang.RwSettingsGroupDlg11,Day,白天
+V1.81,SPxLang.RwSettingsGroupDlg12,Dusk,黄昏
+V1.81,SPxLang.RwSettingsGroupDlg13,Night,夜晚
+V1.81,SPxLang.RwSettingsGroupDlg14,Colour palette:,调色板:
+V1.81,SPxLang.RwSettingsGroupDlg15,Tiled map:,瓦片地图:
+V1.81,SPxLang.RwSettingsGroupDlg16,Coverage map:,覆盖地图:
+V1.81,SPxLang.RwSettingsGroupDlg17,Configure...,配置...
+V1.81,SPxLang.RwSettingsGroupDlg18,Fixed range,固定范围
+V1.81,SPxLang.RwSettingsGroupDlg19,None,空
+V1.81,SPxLang.RwSettingsGroupDlg20,Video,视频
+V1.81,SPxLang.RwSettingsGroupDlg21,external joystick:,外部摇杆:
+V1.81,SPxLang.RwSettingsGroupDlg22,Invert X axis:,反转 X 轴:
+V1.81,SPxLang.RwSettingsGroupDlg23,Invert Y axis:,反转 Y 轴:
+V1.81,SPxLang.RwSettingsGroupDlg24,Invert zoom:,反转变焦:
+V1.81,SPxLang.RwSettingsGroupDlg25,Track class,航迹类别
+V1.81,SPxLang.RwSettingsGroupDlg26,name:,名称:
+V1.81,SPxLang.RwSettingsGroupDlg27,Code:,代码:
+V1.81,SPxLang.RwSettingsGroupDlg28,Colour:,颜色:
+V1.81,SPxLang.RwSettingsGroupDlg29,Alarms triggered by combined tracks:,由融合航迹触发的报警:
+V1.81,SPxLang.RwSettingsGroupDlg30,Alarms triggered by radar Tracks:,由雷达航迹触发的报警:
+V1.81,SPxLang.RwSettingsGroupDlg31,Alarms triggered by AIS tracks:,由AIS航迹触发的报警:
+V1.81,SPxLang.RwSettingsGroupDlg32,Alarms triggered by ADS-B tracks:,由ADS-B航迹触发的报警:
+V1.81,SPxLang.RwSettingsGroupDlg33,Default video window for user action:,默认用户操作视频窗口:
+V1.81,SPxLang.RwSettingsGroupDlg34,Default video window for alarm action:,默认报警操作视频窗口:
+V1.81,SPxLang.RwSettingsGroupDlg35,Disabled,未启用
+V1.81,SPxLang.RwSettingsGroupDlg36,Message type:,信息类型:
+V1.81,SPxLang.RwSettingsGroupDlg37,Format:,格式:
+V1.81,SPxLang.RwSettingsGroupDlg38,Period:,周期:
+V1.81,SPxLang.RwSettingsGroupDlg39,PRF:,PRF:
+V1.81,SPxLang.RwSettingsGroupDlg40,Test input:,测试输入:
+V1.81,SPxLang.RwSettingsGroupDlg41,New video colour:,新视频颜色:
+V1.81,SPxLang.RwSettingsGroupDlg42,Trail video colour:,尾迹视频颜色:
+V1.81,SPxLang.RwSettingsGroupDlg43,Gain:,增益:
+V1.81,SPxLang.RwSettingsGroupDlg44,Server status:,服务状态:
+V1.81,SPxLang.RwSettingsGroupDlg45,Fusion sensor index:,融合的传感器索引:
+V1.81,SPxLang.RwSettingsGroupDlg46,Tracking enabled:,启用跟踪:
+V1.81,SPxLang.RwSettingsGroupDlg47,Global ATI enabled:,全局ATI启用:
+V1.81,SPxLang.RwSettingsGroupDlg48,Threshold delta:,门限delta:
+V1.81,SPxLang.RwSettingsGroupDlg49,Steady gain in range:,径向固定增益:
+V1.81,SPxLang.RwSettingsGroupDlg50,Steady gain in azimuth:,方位固定增益:
+V1.81,SPxLang.RwSettingsGroupDlg51,Manoeuvre gain in range:,径向机动增益:
+V1.81,SPxLang.RwSettingsGroupDlg52,Manoeuvre gain in azimuth:,方位机动增益:
+V1.81,SPxLang.RwSettingsGroupDlg53,Max coasts (scans):,最大coast (扫描周期):
+V1.81,SPxLang.RwSettingsGroupDlg54,Max target speed (mps):,最大目标速度 (m/s):
+V1.81,SPxLang.RwSettingsGroupDlg55,Delete all tracks:,删除所有目标:
+V1.81,SPxLang.RwSettingsGroupDlg56,Type:,类型:
+V1.81,SPxLang.RwSettingsGroupDlg57,Colocated with:,共轨:
+V1.81,SPxLang.RwSettingsGroupDlg58,Field of view:,FOV视角:
+V1.81,SPxLang.RwSettingsGroupDlg59,Bearing:,方位:
+V1.81,SPxLang.RwSettingsGroupDlg60,Elevation:,俯仰:
+V1.81,SPxLang.RwSettingsGroupDlg61,Camera manager priority:,摄像头管理优先级:
+V1.81,SPxLang.RwSettingsGroupDlg62,Max pan speed (degs/sec):,最大转速(度/秒):
+V1.81,SPxLang.RwSettingsGroupDlg63,Smooth slew-to-cue:,平滑联动追踪:
+V1.81,SPxLang.RwSettingsGroupDlg64,Home field of view:,初始FOV视角:
+V1.81,SPxLang.RwSettingsGroupDlg65,Home bearing:,初始方位:
+V1.81,SPxLang.RwSettingsGroupDlg66,Home elevation:,初始俯仰:
+V1.81,SPxLang.RwSettingsGroupDlg67,Seconds,秒
+V1.81,SPxLang.RwSettingsGroupDlg68,Hz,Hz
+V1.81,SPxLang.RwSettingsGroupDlg69,Primary,主
+V1.81,SPxLang.RwSettingsGroupDlg70,Secondary,副
+V1.81,SPxLang.RwSettingsGroupDlg71,None,空
+V1.81,SPxLang.RwSettingsGroupDlg72,Connected,已连接
+V1.81,SPxLang.RwSettingsGroupDlg73,Not Connected,未连接
+V1.81,SPxLang.RwSettingsGroupDlg74,Not available,不可用
+V1.81,SPxLang.RwSettingsGroupDlg75,See Radar Control dialog,查看雷达控制对话框
+V1.81,SPxLang.RwSettingsGroupDlg76,Delete,删除
+V1.81,SPxLang.RwSettingsGroupDlg77,Manual override:,手动覆盖:
+V1.81,SPxLang.RwSettingsGroupDlg78,Rotation (degrees):,旋转(度):
+V1.81,SPxLang.RwSettingsGroupDlg79,Calculate lat/long:,计算 经纬度:
+V1.81,SPxLang.RwSettingsGroupDlg80,Configuration 1 name:,配置1名称:
+V1.81,SPxLang.RwSettingsGroupDlg81,Configuration 2 name:,配置2名称:
+V1.81,SPxLang.RwSettingsGroupDlg82,Configuration 3 name:,配置3名称:
+V1.81,SPxLang.RwSettingsGroupDlg83,Linked to:,连接到:
+V1.81,SPxLang.RwSettingsGroupDlg84,Slew and follow,旋转和跟随
+V1.81,SPxLang.RwSettingsGroupDlg85,Slew only,只旋转
+V1.81,SPxLang.RwSettingsGroupDlg86,Auto mode:,自动模式:
+V1.81,SPxLang.RwSettingsGroupDlg87,Show window when viewing in it:,观察时显示窗口:
+V1.81.10,SPxLang.RwSettingsGroupDlg88,Save Server settings:,保存Server设置:
+V1.81.10,SPxLang.RwSettingsGroupDlg89,Save,保存
+DEPRECATED,SPxLang.RwSettingsGroupDlg90,Tour enabled:
+V1.82.1,SPxLang.RwSettingsGroupDlg91,Idle time (seconds):,空闲时间(s)
+V1.82.1,SPxLang.RwSettingsGroupDlg92,Zone radius,区域半径
+V1.82.3,SPxLang.RwSettingsGroupDlg93,TTM (Version 1),TTM报文(格式1)
+V1.82.3,SPxLang.RwSettingsGroupDlg94,TTM (Version 2),TTM报文(格式2)
+V1.82.5,SPxLang.RwSettingsGroupDlg95,Default stage wait time (seconds): ,默认stage等待时间(s):
+V1.82.7,SPxLang.RwSettingsGroupDlg96,Expected position error (degrees): ,预期位置误差(度):
+V1.84.8,SPxLang.RwSettingsGroupDlg97,Unit for broadcasting:,广播单位：
+V1.84.8,SPxLang.RwSettingsGroupDlg98,Broadcast delay (seconds): ,广播延迟(s):
+V1.85,SPxLang.RwSettingsGroupDlg99,Reverse at tour end: ,巡航结束时反转:
+DEPRECATED,SPxLang.RwSettingsGroupType1,GPS Input,GPS输入
+V1.81,SPxLang.RwSettingsGroupType2,Position,位置
+V1.81,SPxLang.RwSettingsGroupType3,Information,信息
+V1.81,SPxLang.RwSettingsGroupType4,Display,显示
+V1.81,SPxLang.RwSettingsGroupType5,Fixed Ranges,固定范围
+V1.81,SPxLang.RwSettingsGroupType6,External Joysticks,外部摇杆
+V1.81,SPxLang.RwSettingsGroupType7,AIS Input,AIS 输入
+V1.81,SPxLang.RwSettingsGroupType8,ADS-B Input,ADS-B 输入
+V1.81,SPxLang.RwSettingsGroupType9,Classification,识别分类
+V1.81,SPxLang.RwSettingsGroupType10,General,总体
+V1.81,SPxLang.RwSettingsGroupType11,Network Messages,网络信息
+V1.81,SPxLang.RwSettingsGroupType12,Video Input,视频输入
+V1.81,SPxLang.RwSettingsGroupType13,Video Display,视频显示
+V1.81,SPxLang.RwSettingsGroupType14,Track Input,航迹输入
+V1.81,SPxLang.RwSettingsGroupType15,Server Connection,服务器连接
+V1.81,SPxLang.RwSettingsGroupType16,Server Tracker,跟踪服务器
+V1.81,SPxLang.RwSettingsGroupType17,PTZ Control,PTZ 控制
+V1.81,SPxLang.RwSettingsGroupType18,Camera Video Input,摄像头视频输入
+V1.81,SPxLang.RwSettingsGroupType19,Home Position,初始位置
+V1.81,SPxLang.RwSettingsGroupType20,Combined Track Input,融合的航迹输入
+V1.81,SPxLang.RwSettingsGroupType21,PPI-1 Configuration Names,PPI-1 配置名称
+V1.81,SPxLang.RwSettingsGroupType22,PPI-2 Configuration Names,PPI-2 配置名称
+V1.81.5,SPxLang.RwSettingsGroupType23,Secondary PTZ Control,副 PTZ 控制
+V1.81.5,SPxLang.RwSettingsGroupType24,LRAD Searchlight Control,LRAD 探照灯控制
+V1.81.5,SPxLang.RwSettingsGroupType25,LRAD Amplifier Control,LRAD 放大器控制
+V1.81.5,SPxLang.RwSettingsGroupType26,LRAD Audio Streaming,LRAD 音频流
+V1.82.1,SPxLang.RwSettingsGroupType27,Camera Tour,摄像头巡航
+V1.82.1,SPxLang.RwSettingsGroupType28,Anchor Zone Sizes,锚定区大小
+V1.84.8,SPxLang.RwSettingsGroupType29,LRAD Auto Broadcast,LRAD 自动广播
+V1.81,SPxLang.RwSettingsSrvConfDlg1,Configuration:,配置:
+V1.81,SPxLang.RwSettingsSrvConfDlg2,Load,加载
+V1.81,SPxLang.RwSettingsSrvConfDlg3,Current Configuration:,当前配置:
+V1.81,SPxLang.RwSettingsTabType1,Ref Point,参考点
+V1.81,SPxLang.RwSettingsTabType2,PPI
+V1.81,SPxLang.RwSettingsTabType3,Video Win,视频窗口
+V1.81,SPxLang.RwSettingsTabType4,Tracks,航迹
+V1.81,SPxLang.RwSettingsTabType5,Alarms,报警
+V1.81,SPxLang.RwSharedEnvMesgBox1,SPX_SHARED environment variable not set. ,SPX_SHARED环境变量未设置.
+V1.81,SPxLang.RwSharedEnvMesgBox2,Certain features of shared mode are not expected to work properly without the SPX_SHARED environment variable. ,某些共享模式的功能在未设置SPX_SHARED环境变量时，将不会生效。
+V1.81,SPxLang.RwSharedEnvMesgBox3,Continue (shared mode can be disabled through the Application Wizard),继续(共享模式可以通过应用向导禁用)
+V1.81,SPxLang.RwSharedEnvMesgBox4,Close RadarWatch and set the environment variable,关闭RadarWatch并设置环境变量
+V1.81,SPxLang.RwSharedModeDialog1,Shared Mode Permissions,共享模式许可
+V1.81,SPxLang.RwSharedModeDialog2,All,全部
+V1.81,SPxLang.RwSharedModeDialog3,Area Editing,区域编辑
+V1.81,SPxLang.RwSharedModeDialog4,Alarm Editing,报警编辑
+V1.81,SPxLang.RwSharedModeDialog5,Track Filter Editing,航迹过滤器编辑
+V1.81,SPxLang.RwSharedModeDialog6,Server Control,服务器控制
+V1.81,SPxLang.RwStatus1,Status,状态
+V1.81,SPxLang.RwStatus2,Status OK,状态 OK
+V1.81,SPxLang.RwStatusPopupMenu1,Expand All,全部展开
+V1.81,SPxLang.RwStatusPopupMenu2,Collapse All,全部折叠
+V1.81,SPxLang.RwTPanel1,Open settings,打开设置
+V1.81,SPxLang.RwTPanel2,Open track filters,打开航迹过滤器
+V1.81.5,SPxLang.RwTPanel3,Open triggered alarms,打开已触发的报警
+V1.81.8,SPxLang.RwTPanel4,Open track table,打开航迹列表
+V1.81,SPxLang.RwTrackAction1,Acknowledge,知晓
+V1.81,SPxLang.RwTrackAction2,Clear,清除
+DEPRECATED,SPxLang.RwTrackClassCombo1,None,空
+V1.81,SPxLang.RwTrackDetailsTab1,Details,详细
+V1.81,SPxLang.RwTrackDetailsTab2,Name:,名称:
+V1.81,SPxLang.RwTrackDetailsTab3,Note:,备注:
+V1.81,SPxLang.RwTrackDetailsTab4,Class:,类别:
+V1.81,SPxLang.RwTrackField1,GENERAL,总体
+V1.81,SPxLang.RwTrackField2,NAME,名称
+V1.81,SPxLang.RwTrackField3,TYPE,类型
+V1.81,SPxLang.RwTrackField4,ID,编号
+V1.81,SPxLang.RwTrackField5,CLASS,类别
+V1.81,SPxLang.RwTrackField6,ALARM,报警
+V1.81,SPxLang.RwTrackField7,POSITION,位置
+V1.81,SPxLang.RwTrackField8,RANGE,距离
+V1.81,SPxLang.RwTrackField9,BEARING,方位
+V1.81,SPxLang.RwTrackField10,SOG,SOG(航速)
+V1.81,SPxLang.RwTrackField11,COG,COG(航向)
+V1.81,SPxLang.RwTrackField12,NOTE,备注
+V1.81,SPxLang.RwTrackField13,COMBINED,融合
+V1.81,SPxLang.RwTrackField14,SECONDARY,二次
+V1.81,SPxLang.RwTrackField15,RADAR,雷达
+V1.81,SPxLang.RwTrackField16,AIS,AIS
+V1.81,SPxLang.RwTrackField17,MMSI,MMSI
+V1.81,SPxLang.RwTrackField18,IMO,IMO
+V1.81,SPxLang.RwTrackField19,CALLSIGN,呼号
+V1.81,SPxLang.RwTrackField20,VESSEL NAME,船名
+V1.81,SPxLang.RwTrackField21,NAV STATUS,航行状态
+V1.81,SPxLang.RwTrackField22,WIDTH,宽度
+V1.81,SPxLang.RwTrackField23,LENGTH,长度
+V1.81,SPxLang.RwTrackField24,DRAUGHT,吃水深度
+V1.81,SPxLang.RwTrackField25,TURN RATE,转弯速率
+V1.81,SPxLang.RwTrackField26,SHIP TYPE,船型
+V1.81,SPxLang.RwTrackField27,DESTINATION,目的地
+V1.81,SPxLang.RwTrackField28,ETA,到达时间
+V1.81,SPxLang.RwTrackField29,SIZE,尺寸
+V1.81,SPxLang.RwTrackField30,ADS-B,ADS-B
+V1.81,SPxLang.RwTrackField31,CALLSIGN,呼号
+V1.81,SPxLang.RwTrackField32,ALTITUDE,高度
+V1.81,SPxLang.RwTrackField33,VERTICAL RATE,垂直速率
+V1.81,SPxLang.RwTrackField34,CAPABILITIES,CAPABILITIES
+V1.81,SPxLang.RwTrackField35,CATEGORY,CATEGORY
+V1.81.10,SPxLang.RwTrackField36,AA,AA
+V1.81,SPxLang.RwTrackFieldAlarm1,Yes,是
+V1.81,SPxLang.RwTrackFieldAlarm2,No,否
+V1.81,SPxLang.RwTrackFieldClassNone,None,空
+V1.81,SPxLang.RwTrackFieldUnknown,Unknown,未知
+DEPRECATED,SPxLang.RwTrackFiltersPopupMenu1,Make Filter Private,设置过滤器为本地
+DEPRECATED,SPxLang.RwTrackFiltersPopupMenu2,Make Filter Shared,设置过滤器为共享
+V1.81,SPxLang.RwTrackImageTab1,Image,图像
+V1.81,SPxLang.RwTrackImageTab2,Image not available,图像不可用
+V1.81,SPxLang.RwTrackLogDialog1,Track Log,航迹日志
+V1.81,SPxLang.RwTrackNoteDialog1,Log Note,日志备注
+V1.81,SPxLang.RwTrackPPITab1,PPI,PPI
+V1.82.1,SPxLang.RwTrackTableSearchCueText,Search for track name/ID/callsign ,搜索航迹的名称/ID/呼号
+V1.82.1,SPxLang.RwTrackLocatorSearchCueText,Track name/ID/callsign,航迹的名称/ID/呼号
+V1.82.1,SPxLang.RwTrackSearchTooltip,Enter track name/ID/callsign to search for,输入航迹的名称/ID/呼号 进行搜索
+V1.81,SPxLang.RwTrackSidePanel1,Selected Track,已选航迹
+V1.81,SPxLang.RwTrackTable1,Track Table,航迹列表
+V1.81,SPxLang.RwTrackTable2,Radar,雷达
+V1.81,SPxLang.RwTrackTable3,AIS,AIS
+V1.81,SPxLang.RwTrackTable4,ADS-B,ADS-B
+V1.81,SPxLang.RwTrackTable5,Combined,融合
+V1.81,SPxLang.RwTrackTableDetails1,Details,详细
+V1.81,SPxLang.RwTrackTableDetails2,Tracks,航迹
+V1.81,SPxLang.RwTrackTableDetails3,Fields,字段
+V1.81,SPxLang.RwTrackTPanel1,Open track settings,打开航迹设置
+V1.82.1,SPxLang.RwTrackTablePopupMenu1,Locate,定位
+V1.82.1,SPxLang.RwTrackTablePopupMenu2,In,In
+V1.81,SPxLang.RwUACDlg1,Access Control,登录控制
+V1.82.1,SPxLang.RwVideoBPanel1,Tour,巡航
+V1.82.1,SPxLang.RwVideoBPanel2,ENABLED,有效
+V1.82.1,SPxLang.RwVideoBPanel3,DISABLED,无效
+V1.81,SPxLang.RwVideoDialog1,Video,视频
+V1.81,SPxLang.RwVideoDisplayTab1,Display,显示
+V1.81,SPxLang.RwVideoDisplayTab2,Camera View,摄像头查看
+V1.81,SPxLang.RwVideoDisplayTab3,Name,名称
+V1.81,SPxLang.RwVideoDisplayTab4,Bearing,方位
+V1.81,SPxLang.RwVideoDisplayTab5,Elevation,俯仰
+V1.81,SPxLang.RwVideoDisplayTab6,Field of view,FOV视场
+V1.81,SPxLang.RwVideoDisplayTab7,Tracks,航迹
+V1.81,SPxLang.RwVideoDisplayTab8,Combinedd,融合
+V1.81,SPxLang.RwVideoDisplayTab9,Radar,雷达
+V1.81,SPxLang.RwVideoDisplayTab10,AIS,AIS
+V1.81,SPxLang.RwVideoDisplayTab11,ADS-B,ADS-B
+V1.81,SPxLang.RwVideoDisplayTab12,Radar Video,雷达视频
+V1.81,SPxLang.RwVideoDisplayTab13,Min Track Range:,最小跟踪距离:
+V1.81,SPxLang.RwVideoDisplayTab14,Max Track Range:,最大跟踪距离:
+V1.81,SPxLang.RwVideoMultiBPanel1,Select camera in Video-1,在Video-1中选择摄像头
+V1.81,SPxLang.RwVideoMultiBPanel2,Select camera in Video-2,在Video-2中选择摄像头
+V1.81,SPxLang.RwVideoMultiDialog1,Video Multiview,多窗口视频
+V1.81,SPxLang.RwVideoPopupMenu1,Set as horizon location for camera correction.,设置为摄像头校准地平线位置。
+V1.81,SPxLang.RwVideoPopupMenu2,Set as position of the correction point in the camera view.,在摄像视频中设置为校准点位置。
+V1.81,SPxLang.RwVideoTPanel1,Select camera to view,选择观看摄像头
+V1.81,SPxLang.RwVideoTPanel2,Open video settings,打开视频设置
+V1.81,SPxLang.RwVideoTPanel3,Select auto or manual camera control,选择摄像头手动或自动控制
+V1.81,SPxLang.RwVideoTPanel4,Auto,自动
+V1.81,SPxLang.RwVideoTPanel5,None,空
+V1.81,SPxLang.RwVideoTPanel6,Take a snapshot,截图
+V1.81,SPxLang.RwWizAppAC1,Access Control,登录控制
+V1.81,SPxLang.RwWizAppAC2,Please select whether Access Control should be enabled.,请选择是否启用登录控制。
+V1.81,SPxLang.RwWizAppAC3,Enabled,启用
+V1.81,SPxLang.RwWizAppAC4,"If Access Control is enabled, please specify which features should be controlled.","如果启用登录控制，请指定哪些功能被控制。"
+V1.81,SPxLang.RwWizAppAC5,Application Wizard,应用向导
+V1.81,SPxLang.RwWizAppAC6,Radar Wizard,雷达向导
+V1.81,SPxLang.RwWizAppAC7,Camera Wizard,摄像头向导
+V1.81,SPxLang.RwWizAppAC8,Settings,设置
+V1.81,SPxLang.RwWizAppAC9,Track Filtering,航迹过滤器
+V1.81,SPxLang.RwWizAppAC10,Configured Alarms,报警设置
+V1.81,SPxLang.RwWizAppAC11,Layout Set,布局设置
+V1.81,SPxLang.RwWizAppAC12,Layout Restore,布局还原
+V1.81,SPxLang.RwWizAppAC13,Save,保存
+V1.81,SPxLang.RwWizAppAC14,Area Editing,区域编辑
+V1.81,SPxLang.RwWizAppAC15,RDR Control,RDR控制
+V1.81,SPxLang.RwWizAppAC16,Radar Control,Radar控制
+V1.81,SPxLang.RwWizAppAC17,Language,语言
+V1.81,SPxLang.RwWizAppAC18,Camera Correction,摄像头校准
+V1.81,SPxLang.RwWizAppAC19,PPI Configuration Set,PPI配置设置
+V1.81,SPxLang.RwWizAppAC20,Layout Set Default,默认布局设置
+V1.81.10,SPxLang.RwWizAppAC21,Save Server Settings,保存Server设置
+V1.82.3,SPxLang.RwWizAppAC22,Camera FOV Calibration,摄像头FOV校准
+V1.82.5,SPxLang.RwWizAppAC23,Camera Tour Editing,摄像头巡航编辑
+V1.81.8,SPxLang.RwWizAppCAS1,Custom Alarm Sounds,自定义报警音
+V1.81.8,SPxLang.RwWizAppCAS2,Please specify the filename of up to 10 audio files to be used for playing custom alarm sounds.,请指定最多10个声音文件用于播放自定义报警音。
+V1.81.8,SPxLang.RwWizAppCAS3,Custom Alarm Sound 1 Filename:,自定义报警音1文件名:
+V1.81.8,SPxLang.RwWizAppCAS4,Custom Alarm Sound 2 Filename:,自定义报警音2文件名:
+V1.81.8,SPxLang.RwWizAppCAS5,Custom Alarm Sound 3 Filename:,自定义报警音3文件名:
+V1.81.8,SPxLang.RwWizAppCAS6,Custom Alarm Sound 4 Filename:,自定义报警音4文件名:
+V1.81.8,SPxLang.RwWizAppCAS7,Custom Alarm Sound 5 Filename:,自定义报警音5文件名:
+V1.81.8,SPxLang.RwWizAppCAS8,Custom Alarm Sound 6 Filename:,自定义报警音6文件名:
+V1.81.8,SPxLang.RwWizAppCAS9,Custom Alarm Sound 7 Filename:,自定义报警音7文件名:
+V1.81.8,SPxLang.RwWizAppCAS10,Custom Alarm Sound 8 Filename:,自定义报警音8文件名:
+V1.81.8,SPxLang.RwWizAppCAS11,Custom Alarm Sound 9 Filename:,自定义报警音9文件名:
+V1.81.8,SPxLang.RwWizAppCAS12,Custom Alarm Sound 10 Filename:,自定义报警音10文件名:
+V1.81,SPxLang.RwWizAppGen1,General,总体
+V1.81,SPxLang.RwWizAppGen2,Please select the units to use for displaying distance.,请选择显示距离单位。
+V1.81,SPxLang.RwWizAppGen3,Metres (m),米(m)
+V1.81,SPxLang.RwWizAppGen4,Kilometres (km),千米(km)
+V1.81,SPxLang.RwWizAppGen5,Nautical Miles (NM),海里 (NM)
+V1.81,SPxLang.RwWizAppGen6,Feet (ft),英尺 (ft)
+V1.81,SPxLang.RwWizAppGen7,Please select the units to use for displaying speed.,请选择显示速度单位。
+V1.81,SPxLang.RwWizAppGen8,Metres per second (m/s),米/秒 (m/s)
+V1.81,SPxLang.RwWizAppGen9,Kilometres per hour (km/h),千米/小时 (km/h)
+V1.81,SPxLang.RwWizAppGen10,Knots (knots),节 (knots)
+V1.81,SPxLang.RwWizAppGen11,Please select the format for displaying latitude and longitude.,请选择经纬度的显示格式.
+V1.81,SPxLang.RwWizAppGen12,"ddd.dddddd° N, ddd.dddddd° E","ddd.dddddd° N, ddd.dddddd° E"
+V1.81,SPxLang.RwWizAppGen13,"ddd° mm.mmmm' N, ddd° mm.mmmm' E","ddd° mm.mmmm' N, ddd° mm.mmmm' E"
+V1.81,SPxLang.RwWizAppGen14,"ddd° mm' ss.ss'' N, ddd° mm' ss.ss'' E","ddd° mm' ss.ss'' N, ddd° mm' ss.ss'' E"
+V1.84.8,SPxLang.RwWizAppLRADAlarms1,LRAD Alarm Auto Broadcast,LRAD 警报自动广播
+V1.84.8,SPxLang.RwWizAppLRADAlarms2,"If you have an LRAD unit, please specify the filename of up to 10 audio files that can be automatically broadcast when alarms are triggered.","如果您有 LRAD 装置，请指定最多 10 个可在触发警报时自动广播的音频文件的文件名"
+V1.84.8,SPxLang.RwWizAppLRADAlarms3,LRAD Alarm Audio Filename 1:,LRAD 警报音频文件名 1:
+V1.84.8,SPxLang.RwWizAppLRADAlarms4,LRAD Alarm Audio Filename 2:,LRAD 警报音频文件名 2:
+V1.84.8,SPxLang.RwWizAppLRADAlarms5,LRAD Alarm Audio Filename 3:,LRAD 警报音频文件名 3:
+V1.84.8,SPxLang.RwWizAppLRADAlarms6,LRAD Alarm Audio Filename 4:,LRAD 警报音频文件名 4:
+V1.84.8,SPxLang.RwWizAppLRADAlarms7,LRAD Alarm Audio Filename 5:,LRAD 警报音频文件名 5:
+V1.84.8,SPxLang.RwWizAppLRADAlarms8,LRAD Alarm Audio Filename 6:,LRAD 警报音频文件名 6:
+V1.84.8,SPxLang.RwWizAppLRADAlarms9,LRAD Alarm Audio Filename 7:,LRAD 警报音频文件名 7:
+V1.84.8,SPxLang.RwWizAppLRADAlarms10,LRAD Alarm Audio Filename 8:,LRAD 警报音频文件名 8:
+V1.84.8,SPxLang.RwWizAppLRADAlarms11,LRAD Alarm Audio Filename 9:,LRAD 警报音频文件名 9:
+V1.84.8,SPxLang.RwWizAppLRADAlarms12,LRAD Alarm Audio Filename 10:,LRAD 警报音频文件名 10:
+V1.81,SPxLang.RwWizAppPPI1,PPI Options,PPI选项
+V1.81,SPxLang.RwWizAppPPI2,Please select which of the following PPI map options are required.,请选择下列所需PPI地图。
+V1.81,SPxLang.RwWizAppPPI3,Tiled Map,瓦片地图
+V1.81,SPxLang.RwWizAppPPI4,World Vector Shoreline Map,世界矢量海岸线地图
+V1.81,SPxLang.RwWizAppPPI5,Electronic Navigation Chart,电子导航海图（ENC）
+V1.81,SPxLang.RwWizAppPPI6,"If ENC support is enabled, please specify the directory where chart data is installed.","如果支持ENC,请指定ENC地图安装的文件目录。"
+V1.81,SPxLang.RwWizAppPPI7,"For the Radar Coverage Map, please specify the format of the terrain data to be received.","对于雷达覆盖图，请选择地形数据格式。"
+V1.81,SPxLang.RwWizAppPPI8,SRTM1,SRTM1
+V1.81,SPxLang.RwWizAppPPI9,SRTM3,SRTM3
+V1.81,SPxLang.RwWizAppPPI10,DTED,DTED
+V1.81,SPxLang.RwWizAppPPI11,Please also specify the URL or the file path for the source of the terrain data.,请为地形图指定URL或文件路径。
+V1.81.10,SPxLang.RwWizAppRC1,Remote Control,远程控制
+V1.81.10,SPxLang.RwWizAppRC2,"If remote control of RadarWatch is required, please enable it here and set the network port to use.","如需远程控制RadarWatch，请在此启用并设置网络端口。"
+V1.81.10,SPxLang.RwWizAppRC3,Remote control enabled,远程控制启用
+V1.81.10,SPxLang.RwWizAppRC4,Network port:,网络端口:
+V1.81.10,SPxLang.RwWizAppRC5,"RadarWatch supports a beta web interface for development and testing.  If required, please enable it here and set the network port to use.","RadarWatch支持web接口用于开发和测试，如需要，请在此启用并设置网络端口。"
+V1.81.10,SPxLang.RwWizAppRC6,Web interface enabled,Web接口启用
+V1.81.10,SPxLang.RwWizAppRC7,Network port:,网络端口:
+V1.81,SPxLang.RwWizAppRDR1,RDR Control,RDR控制
+V1.85.10,SPxLang.RwWizAppRDR2,"If control of a remote RDR is required, please it enable it here and configure network settings and the features RadarWatch will control.","如果需要启用远程控制RDR，请在此启用并配置网络参数。"
+V1.81,SPxLang.RwWizAppRDR3,RDR Control Enabled,RDR控制启用
+V1.81,SPxLang.RwWizAppRDR4,Host address:,主机地址:
+V1.81,SPxLang.RwWizAppRDR5,Network port:,网络端口:
+V1.81,SPxLang.RwWizAppRDR6,If recording/replaying of camera position is required please enable it here and configure network settings.,如果需要启用摄像头位置的记录/回放，请在此激活并配置网络参数。
+V1.81,SPxLang.RwWizAppRDR7,Camera Position Record/Replay Enabled,摄像头位置记录/回放启用
+V1.81,SPxLang.RwWizAppRDR8,Please set the network address and port to report camera positions on (for RDR to record).,请为摄像头位置报告设置网络地址和端口（用于RDR记录）
+V1.81,SPxLang.RwWizAppRDR9,Please set the network address and port to receive camera positions on (that RDR will replay).,请为摄像头位置接收设置网络地址和端口（用于RDR回放）
+V1.81,SPxLang.RwWizAppRDR10,Network address:,网络地址:
+V1.85.10,SPxLang.RwWizAppRDR11,Recording control only,仅记录控制有效
+V1.85.10,SPxLang.RwWizAppRDR12,Replay control only,仅回放控制有效
+V1.85.10,SPxLang.RwWizAppRDR13,Recording and Replay control,记录和回放控制
+V1.81,SPxLang.RwWizAppRefIn1,Inputs,输入
+V1.81,SPxLang.RwWizAppRefIn2,"Please select which of the following network inputs are required for this reference point and, where applicable, specify the data format.","请为该参考点选择需要的网络输入，并指定合适的格式。"
+V1.81,SPxLang.RwWizAppRefIn3,Please select the format for GPS/compass data.,请为GPS/罗盘数据选择格式
+V1.81,SPxLang.RwWizAppRefIn4,None,空
+V1.81,SPxLang.RwWizAppRefIn5,UDP NMEA-0183 Headerless,UDP NMEA-0183(无报头)
+V1.81,SPxLang.RwWizAppRefIn6,UDP NMEA-0183 SPx Header,UDP NMEA-0183(SPx报头)
+V1.81,SPxLang.RwWizAppRefName1,Name,名称
+V1.81,SPxLang.RwWizAppRefName2,Please specify the name to use for this reference point.,请为该参考点命名
+V1.81,SPxLang.RwWizAppRefNum1,Number of Reference Points,参考点序号
+V1.82.7,SPxLang.RwWizAppRefNum2,Please select the number of reference points (1 to 5).,请选择参考点序号(1或2).
+V1.81,SPxLang.RwWizAppSharedMode1,Shared Mode,共享模式
+V1.81,SPxLang.RwWizAppSharedMode2,Please select whether or not RadarWatch should be started in shared mode (requires the SPX_SHARED environment variable to be set to work properly).,请选择RadarWatch是否以共享模式启动 (需要SPX_SHARED环境变量正确设置生效).
+V1.81,SPxLang.RwWizAppSharedMode3,Start in shared mode,以共享模式启动
+V1.81,SPxLang.RwWizAppSharedMode4,Please enter a user ID to help distinguish this instance of RadarWatch from others.  The ID should be different to those used by other instances.,请输入用户ID以区分该RadarWatch与其他RadarWatch实体，该ID需要与其他实体的ID不同。 
+V1.81,SPxLang.RwWizAppSharedMode5,Please enter a user name to be used to help identify this instance of RadarWatch to other users.,请为该RadarWatch实体输入一个用户名以区别其他RadarWatch用户。
+V1.81,SPxLang.RwWizAppTitle,RadarWatch Application Setup Wizard,RadarWatch应用设置向导
+V1.81,SPxLang.RwWizAppTrackIn1,Track Inputs,航迹输入
+V1.81,SPxLang.RwWizAppTrackIn2,"Please select which of the following network track inputs are required and, where applicable, specify the data format. Configuration of radar track inputs is configured on per-radar basis later in the wizard.","请选择需要的下列网络航迹输入，并指定合适的数据格式，雷达航迹输入配置在本向导中的后段设置。"
+V1.81,SPxLang.RwWizAppTrackIn3,Please select the format for AIS tracks.,请为AIS航迹选择格式。
+V1.81,SPxLang.RwWizAppTrackIn4,None,空
+V1.81,SPxLang.RwWizAppTrackIn5,UDP NMEA-0183 Headerless,UDP NMEA-0183(无报头)
+V1.81,SPxLang.RwWizAppTrackIn6,UDP NMEA-0183 SPx Header,UDP NMEA-0183(SPx报头)
+V1.81,SPxLang.RwWizAppTrackIn7,Please select the format for ADS-B tracks.,请为ADS-B航迹选择格式。
+V1.81,SPxLang.RwWizAppTrackIn8,TCP 112-bit,TCP 112-bit
+V1.82.1,SPxLang.RwWizAppTrackIn9,UDP 112-bit,UDP 112-bit
+V1.81,SPxLang.RwWizAppTrackIn10,UDP ASTERIX Cat-21,UDP ASTERIX Cat-21
+V1.81,SPxLang.RwWizAppTrackIn11,Please select the format for combined (fused) tracks.,请为融合的航迹选择格式。
+V1.81,SPxLang.RwWizAppTrackIn12,UDP SPx,UDP SPx
+V1.81,SPxLang.RwWizAppTrackIn13,"If AIS support is enabled, RadarWatch can download and display images from www.marinetraffic.com. A key must be purchased to enable this service and can be entered below.","如果AIS支持启用，RadarWatch可以从www.marinetraffic.com下载和显示图片，但需要额外购买服务许可才能在下面使用"
+V1.81,SPxLang.RwWizAppTrackIn14,Display AIS Images,显示AIS图片
+V1.82.1,SPxLang.RwWizAppTrackIn15,"If either of the 112-bit formats have been selected, please specify the format of 112-bit data to be received.","如果选择了112位格式，请指定要接收的112位数据的格式"
+V1.82.1,SPxLang.RwWizAppTrackIn16,SPx Header,SPx报头
+V1.82.1,SPxLang.RwWizAppTrackIn17,Kinetic SBS-3,Kinetic SBS-3
+DEPRECATED,SPxLang.RwWizAppTrackIn18,ASTERIX,ASTERIX
+V1.82.1,SPxLang.RwWizAppTrackIn19,AVR,AVR
+V1.82.1,SPxLang.RwWizAppTrackIn20,BEAST,BEAST
+V1.84.8,SPxLang.RwWizAppTrackIn21,FR24,FR24
+DEPRECATED,SPxLang.RwWizAppTrkGrp1,Track Groups,航迹组
+DEPRECATED,SPxLang.RwWizAppTrkGrp2,Please configure any track groups that will be used in alarm and track filter conditions.  Each track group is assigned a display name and a filename.  The filename defines a text file that will be read at start-up to populate the group.  Please refer to the RadarWatch user manual for details of how to specify tracks in the file.,请为报警和航迹过滤器应用配置任意的航迹组。每个航迹组会分配一个显示名称和文件名。该文件名定义了一个文本文件，在软件启动时读取该文件名以布置到组。请参考RadarWatch用户手册。
+DEPRECATED,SPxLang.RwWizAppTrkGrp3,Track group 1,航迹组 1
+DEPRECATED,SPxLang.RwWizAppTrkGrp4,Name:,名称:
+DEPRECATED,SPxLang.RwWizAppTrkGrp5,Filename:,文件名:
+DEPRECATED,SPxLang.RwWizAppTrkGrp6,Track group 2,航迹组 2
+DEPRECATED,SPxLang.RwWizAppTrkGrp7,Track group 3,航迹组 3
+V1.81,SPxLang.RwWizAppWel,This wizard will help you to perform initial configuration of RadarWatch.,该向导会帮助你完成RadarWatch的初步设置。
+V1.81,SPxLang.RwWizCamCon1,PTZ Control,PTZ控制
+V1.81,SPxLang.RwWizCamCon2,"If the camera can be controlled by RadarWatch, please provide details here.","如果摄像头可以由RadarWatch控制，请在此留下详细内容。"
+V1.81,SPxLang.RwWizCamCon3,Please select the control type.,请选择控制类型。
+V1.81,SPxLang.RwWizCamCon4,None,空
+V1.81,SPxLang.RwWizCamCon5,Pelco,Pelco
+V1.82.1,SPxLang.RwWizCamCon6,"If this is a primary camera and the field-of-view can be controlled, please specify the name of a file that will be used to translate zoom position to a field-of-view in degrees.","如果是主摄像头并且视角可以被控制，请指定一个文件名，该文件用于将以米表示的距离转换到视角中的角度。"
+V1.82.1,SPxLang.RwWizCamCon7,"If this camera has a colocated secondary camera, please specify the name of a file that will be used by the secondary camera to translate zoom position to a field-of-view in degrees.","如果该摄像头有一个副摄像头并且视角可以被控制，请指定一个文件名，该文件被副摄像头用于将以米表示的距离转换到视角中的角度。"
+V1.81,SPxLang.RwWizCamCon8,ONVIF,ONVIF
+V1.81.5,SPxLang.RwWizCamCon9,"If this camera has a second controller, please select the control type here.","如果该摄像头有第二个控制器，请选择控制类型。"
+V1.81.5,SPxLang.RwWizCamCon10,LRAD PTSS,LRAD PTSS
+V1.82.1,SPxLang.RwWizCamCon11,"Please specify below if this camera has a tour configured, and if so provide the name of the file containing the tour definition (tours are only available for primary cameras).","请在下面指定此摄像机是否配置了巡航功能，如果是，请提供包含巡航定义的文件的名称（巡航仅适用于主摄像机）"
+V1.82.1,SPxLang.RwWizCamCon12,Tour configured,巡航配置
+V1.82.1,SPxLang.RwWizCamCon13,Tour definition filename:,巡航定义文件名
+V1.81,SPxLang.RwWizCamIn1,Inputs,输入
+V1.81,SPxLang.RwWizCamIn2,"Please select which of the following network inputs are required and, where applicable, specify the data format.","请选择下列需要的网络输入，并设定合适的数据格式。"
+V1.81,SPxLang.RwWizCamIn3,Please select the format for GPS/compass data.,请选择GPS/罗盘数据.
+V1.81,SPxLang.RwWizCamIn4,None,空
+V1.81,SPxLang.RwWizCamIn5,UDP NMEA-0183 Headerless,UDP NMEA-0183(无报头)
+V1.81,SPxLang.RwWizCamIn6,UDP NMEA-0183 SPx Header,UDP NMEA-0183(SPx 报头)
+V1.81,SPxLang.RwWizCamIn7,Please select the format for video data.,请为视频数据选择格式.
+V1.81,SPxLang.RwWizCamIn8,RTSP H.264,RTSP H.264
+V1.81,SPxLang.RwWizCamIn9,"If this camera is colocated with another camera, please specify the zero referenced index of the secondary colocated camera. Set to -1 if not colocated.","如果该摄像头与另一个摄像头联合工作，请为副摄像头指定0参考索引；如果不是，请设置为-1"
+V1.81,SPxLang.RwWizCamIn10,Secondary camera index:,副摄像头索引:
+V1.81,SPxLang.RwWizCamIn11,ONVIF,ONVIF
+V1.81.5,SPxLang.RwWizCamIn12,Please select what LRAD functionality is present.,请选择需要呈现的LRAD功能.
+V1.81.5,SPxLang.RwWizCamIn13,None,空
+V1.81.5,SPxLang.RwWizCamIn14,LRAD platform,LRAD 平台
+V1.81.5,SPxLang.RwWizCamIn15,LRAD platform with searchlight,带探照灯的LRAD平台
+V1.81,SPxLang.RwWizCamName1,Name,名称
+V1.81,SPxLang.RwWizCamName2,Please specify the name to use for this camera.,请为该摄像头命名。
+V1.81,SPxLang.RwWizCamNum1,Number of Cameras,摄像头数量
+V1.81,SPxLang.RwWizCamNum2,Please select the number of cameras (0 to 16).,请选择摄像头数量 (0 to 16).
+V1.81,SPxLang.RwWizCamPos1,Position,位置
+V1.81,SPxLang.RwWizCamPos2,"The camera may optionally be located at a reference point so that the position of the camera moves and rotates with the reference point. If required, please specify the zero referenced index of the point to use. Set to -1 to disable.","该摄像头可以选择性的定位在一个参考点，这样摄像头可以和参考点一同移动和旋转，如果需要，请指定0参考索引；设置为-1表示不启用。 "
+V1.81,SPxLang.RwWizCamPos3,Reference point index:,参考点索引:
+V1.81,SPxLang.RwWizCamPos4,"If required, please specify the offset from the reference position.","如需要，请指定与参考点之间的偏置。"
+V1.81,SPxLang.RwWizCamPos5,X offset (metres):,X 偏置 (米):
+V1.81,SPxLang.RwWizCamPos6,Y offset (metres):,Y 偏置 (米):
+V1.81,SPxLang.RwWizCamPre1,Presets (1 to 5),预置位 (1到5)
+V1.81,SPxLang.RwWizCamPre2,"If the camera can be controlled, please configure any presets supported by this camera.","如果能控制摄像头，请为该摄像头设置其支持的任意预置位"
+V1.81,SPxLang.RwWizCamPre3,Number of presets:,预置位数量:
+V1.81,SPxLang.RwWizCamPre4,Preset 1 name and value:,预置位 1 名称和数值:
+V1.81,SPxLang.RwWizCamPre5,Preset 2 name and value:,预置位 2 名称和数值:
+V1.81,SPxLang.RwWizCamPre6,Preset 3 name and value:,预置位 3 名称和数值:
+V1.81,SPxLang.RwWizCamPre7,Preset 4 name and value:,预置位 4 名称和数值:
+V1.81,SPxLang.RwWizCamPre8,Preset 5 name and value:,预置位 5 名称和数值:
+V1.81,SPxLang.RwWizCamPre9,Continues on next page.,下一页继续.
+V1.81,SPxLang.RwWizCamPre10,Presets (6 to 10),预置位 (6到10)
+V1.81,SPxLang.RwWizCamPre11,Please configure any additional presets supported by this camera.,若摄像头支持，可以为该摄像头继续设置额外的预置位。
+V1.81,SPxLang.RwWizCamPre12,Preset 6 name and value:,预置位 6 名称和数值:
+V1.81,SPxLang.RwWizCamPre13,Preset 7 name and value:,预置位 7 名称和数值:
+V1.81,SPxLang.RwWizCamPre14,Preset 8 name and value:,预置位 8 名称和数值:
+V1.81,SPxLang.RwWizCamPre15,Preset 9 name and value:,预置位 9 名称和数值:
+V1.81,SPxLang.RwWizCamPre16,Preset 10 name and value:,预置位 10 名称和数值:
+V1.81,SPxLang.RwWizCamTitle,RadarWatch Camera Setup Wizard,RadarWatch摄像头设置向导
+V1.81,SPxLang.RwWizCamWel,This wizard will help you to perform initial configuration of cameras in RadarWatch.,该向导会帮助你完成摄像头的初始配置。
+V1.81,SPxLang.RwWizComp1,Wizard Complete,向导完成。
+V1.81,SPxLang.RwWizComp2,You have reached the end of the Wizard. If you have made any changes you will be prompted to save the changes to the configuration file. The changes will not take effect until the application is restarted.,你已经到向导的终点，如果你做了任何修改，建议您保存修改到配置文件。修改会在应用重新启动后生效。
+V1.81,SPxLang.RwWizRadCon1,Control,控制
+V1.81,SPxLang.RwWizRadCon2,"If this radar will be controlled from RadarWatch, please specify the radar type and connection settings.","如果该雷达要从RadarWatch控制，请指定雷达型号和连接设置。"
+V1.81,SPxLang.RwWizRadCon3,Please select the radar type for control..请选择要控制的雷达型号。
+V1.81,SPxLang.RwWizRadCon4,None,空
+V1.81,SPxLang.RwWizRadCon5,Kelvin Hughes Sharpeye,Kelvin Hughes Sharpeye
+V1.81,SPxLang.RwWizRadCon6,Simrad 3G/4G/Halo,Simrad 3G/4G/Halo
+V1.81,SPxLang.RwWizRadCon7,Remote Simrad 3G/4G/Halo (via SPxServer),Remote Simrad 3G/4G/Halo (通过 SPxServer)
+V1.81,SPxLang.RwWizRadCon8,"For Kelvin Hughes Sharpeye only, please specify the connection settings.","如果仅是KelvinHughes SharpEye, 请指定连接设置。"
+V1.81,SPxLang.RwWizRadCon9,PKSER,PKSER
+V1.81,SPxLang.RwWizRadCon10,PCAN,PCAN
+V1.81,SPxLang.RwWizRadCon11,Network address:,网络地址:
+V1.81,SPxLang.RwWizRadCon12,Network port:,网络端口:
+V1.81,SPxLang.RwWizRadCon13,Controller SAC:,控制器SAC:
+V1.81,SPxLang.RwWizRadCon14,Controller SIC:,控制器SIC:
+V1.81,SPxLang.RwWizRadCon15,Controller Local ID:,控制器本地ID:
+V1.81,SPxLang.RwWizRadCon16,Radar SAC:,雷达SAC
+V1.81,SPxLang.RwWizRadCon17,Radar X-band SIC:,X波段雷达SIC:
+V1.81,SPxLang.RwWizRadCon18,Radar S-band SIC:,S波段雷达SIC:
+V1.81,SPxLang.RwWizRadCon19,Radar Local ID:,雷达本地ID:
+V1.81,SPxLang.RwWizRadIn1,Inputs,输入
+V1.81,SPxLang.RwWizRadIn2,"Please select which of the following network inputs are required for this radar and, where applicable, specify the data format.","请为本雷达选择下列需要的网络输入，并指定格式。"
+V1.81,SPxLang.RwWizRadIn3,Please select the format for GPS/compass data.,请选择GPS/罗盘数据格式。
+V1.81,SPxLang.RwWizRadIn4,None,空
+V1.81,SPxLang.RwWizRadIn5,UDP NMEA-0183 Headerless,UDP NMEA-0183(无报头)
+V1.81,SPxLang.RwWizRadIn6,UDP NMEA-0183 SPx Header,UDP NMEA-0183(SPx报头)
+V1.81,SPxLang.RwWizRadIn7,Please select the format for radar video.,请选择雷达视频格式。
+V1.81,SPxLang.RwWizRadIn8,UDP SPx,UDP SPx
+V1.81,SPxLang.RwWizRadIn9,UDP ASTERIX Cat-240,UDP ASTERIX Cat-240
+V1.81,SPxLang.RwWizRadIn10,Simrad,Simrad
+V1.81,SPxLang.RwWizRadIn11,P217,P217
+V1.81,SPxLang.RwWizRadIn12,Please select the format for tracks.,请选择航迹格式。
+V1.81,SPxLang.RwWizRadIn13,UDP ASTERIX Cat-10 or Cat-48,UDP ASTERIX Cat-10 or Cat-48
+V1.81,SPxLang.RwWizRadIn14,"Please specify if SPx Server, used to perform tracking for this radar, can be controlled by RadarWatch.","请选择RadarWatch是否控制SPxServer为该雷达提供目标航迹跟踪功能。"
+V1.81,SPxLang.RwWizRadIn15,Server Control Enabled,Server控制启用
+V1.81,SPxLang.RwWizRadName1,Name,名称
+V1.81,SPxLang.RwWizRadName2,Please specify the name to use for this radar.,请为雷达命名。
+V1.81,SPxLang.RwWizRadNum1,Number of Radars,雷达数量
+V1.82.3,SPxLang.RwWizRadNum2,Please select the number of radars (0 to 4).,选择雷达数量(0到4).
+V1.81,SPxLang.RwWizRadPos1,Position,位置
+V1.81,SPxLang.RwWizRadPos2,"The radar may optionally be located at a reference point so that the position of the radar moves and rotates with the reference point. If required, please specify the zero referenced index of the point to use. Set to -1 to disable.","该雷达可以选择定位在一个参考点，这样摄像头可以和参考点一同移动和旋转，如果需要，请指定0参考索引；设置为-1表示不启用。"
+V1.81,SPxLang.RwWizRadPos3,Reference point index:,参考点索引:
+V1.81,SPxLang.RwWizRadPos4,"If required, please specify the offset from the reference position.","如需要，请指定参考点的偏移量。"
+V1.81,SPxLang.RwWizRadPos5,X offset (metres):,X 偏置(米):
+V1.81,SPxLang.RwWizRadPos6,Y offset (metres):,Y 偏置(米):
+V1.81.8,SPxLang.RwWizRadPos7,Please specify whether this radar is mounted on a floating platform.,请确认该雷达是否安装在浮动平台上。
+V1.81.8,SPxLang.RwWizRadPos8,Floating platform,浮动平台
+V1.81,SPxLang.RwWizRadRes1,Resolution,分辨率
+V1.81,SPxLang.RwWizRadRes2,Please select the resolution for this radar.,请为该雷达选择分辨率。
+V1.81,SPxLang.RwWizRadRes3,Standard (2K x 2K),标准 (2K x 2K)
+V1.81,SPxLang.RwWizRadRes4,Extended range (4K x 2K),径向扩展 (4K x 2K)
+V1.81,SPxLang.RwWizRadRes5,Extended azimuth (2K x 4K),方位扩展 (2K x 4K)
+V1.81,SPxLang.RwWizRadSrvConfig1,Server Configuration,SPx Server配置
+V1.81,SPxLang.RwWizRadSrvConfig2,"If the instance of SPx Server for this radar will be controlled from RadarWatch you may specify a display name and file path for up to 5 SPx Server configuration files which can then be loaded via RadarWatch.  Please note that any relative path specified will be considered relative to the instance of SPx Server, not RadarWatch.","如果该SPx Server由RadarWatch控制，你可以为最多5个SPx Server配置文件指定一个配置名称和文件路径。请注意任意指定的路径都是与SPx Server相关的，而不是RadarWatch"
+V1.81,SPxLang.RwWizRadSrvConfig3,Configuration 1 display name:,配置1 配置名称:
+V1.81,SPxLang.RwWizRadSrvConfig4,Configuration 1 file path:,配置1文件路径:
+V1.81,SPxLang.RwWizRadSrvConfig5,Configuration 2 display name:,配置2 配置名称:
+V1.81,SPxLang.RwWizRadSrvConfig6,Configuration 2 file path:,配置2文件路径:
+V1.81,SPxLang.RwWizRadSrvConfig7,Configuration 3 display name:,配置3 配置名称:
+V1.81,SPxLang.RwWizRadSrvConfig8,Configuration 3 file path:,配置3文件路径:
+V1.81,SPxLang.RwWizRadSrvConfig9,Configuration 4 display name:,配置4 配置名称:
+V1.81,SPxLang.RwWizRadSrvConfig10,Configuration 4 file path:,配置4文件路径:
+V1.81,SPxLang.RwWizRadSrvConfig11,Configuration 5 display name:,配置5 配置名称:
+V1.81,SPxLang.RwWizRadSrvConfig12,Configuration 5 file path:,配置5文件路径:
+V1.81,SPxLang.RwWizRadTitle,RadarWatch Radar Setup Wizard,RadarWatch雷达设置向导
+V1.81,SPxLang.RwWizRadWel,This wizard will help you to perform initial configuration of radars in RadarWatch.,该向导会帮助你完成初步的雷达配置。
+V1.81,SPxLang.RwWizWel1,Welcome,欢迎
+V1.81,SPxLang.RwWizWel2,"Please answer the questions on the following pages. You may move forward and backwards through the wizard as required, or finish at any point.","请回答下面的问题，你可以略过或返回，或者在任何点选择完成。"
+V1.81,SPxLang.SecondaryTrackTypeNone,None,空
+V1.81,SPxLang.SharedFeatureDialog1,Current Master:,现主用:
+V1.81,SPxLang.SharedFeatureDialog2,Request Master,请求主用
+V1.81,SPxLang.SharedFeatureDialog3,Release Master,释放主用
+V1.81,SPxLang.SharedFeatureDialog4,Reload,重新加载
+V1.81,SPxLang.SharedFeatureDialog5,None,空
+V1.81,SPxLang.SharedFeatureDialog6,This User,本用户
+V1.81,SPxLang.SharedFeatureDialog7,Various Users,其他用户
+V1.81,SPxLang.TabbedDialogEnable,Enable,启用
+V1.81,SPxLang.TextEntryCancel,Cancel,取消
+V1.81,SPxLang.TextEntryOK,OK,OK
+
+
+V1.81,SPxLang.ProRangeAdjust,ProRangeAdjust,距离修正
+V1.81,SPxLang.ProGainOffset,ProGainOffset,增益偏置
+V1.81,SPxLang.ProSTC,ProSTC,海杂波抑制
+V1.81,SPxLang.OWlProSTC,OWlProSTC,海杂波抑制2
+V1.81,SPxLang.ProFTC,ProFTC,雨杂波抑制
+V1.81,SPxLang.ProClutterIntegrate,ProClutterIntegrate,杂波图建立
+V1.81,SPxLang.ProClutterCombine,ProClutterCombine,杂波图融合
+V1.81,SPxLang.ProCFAR,ProCFAR,恒虚警检测
+V1.81,SPxLang.ProSSI64,ProSSI64,天线间周期积累
+V1.81,SPxLang.ProWorldMapBlank,ProWorldMapBlank,海岸线屏蔽
+V1.81,SPxLang.ProAreaBlank,ProAreaBlank,自定义区域屏蔽
+V1.81,SPxLang.ProPlotExt,ProPlotExt,点迹凝聚
+V1.81,SPxLang.ProPlotMerge,ProPlotMerge,点迹融合
+V1.81,SPxLang.ProCFAR,ProCFAR,恒虚警检测
+V1.81,SPxLang.ProMRS,ProMRS,多次反射抑制
+V1.81,SPxLang.ProUSM,ProUSM,波束锐化
+
+
+V1.81,SPxLang.ProRangeAdjustRangeScale,RangeScale,乘数
+V1.81,SPxLang.ProRangeAdjustRangeScaleLongDesc,Range scaling multiplier,距离缩放乘数
+V1.81,SPxLang.ProRangeAdjustRangeDelta,RangeDelta,偏移量
+V1.81,SPxLang.ProRangeAdjustRangeDeltaLongDesc,Range offset in metres,距离偏移量
+
+
+V1.81,SPxLang.ProCFARWindowSizeSample,WindowSizeSample,窗口大小（采样点）
+V1.81,SPxLang.ProCFARWindowSizeSampleLongDesc,Window size defined in samples,窗口大小，以采样点数为单位
+V1.81,SPxLang.ProCFARWindowSizeWorld,WindowSizeWorld,窗口大小（米）
+V1.81,SPxLang.ProCFARWindowSizeWorldLongDesc,Window size defined in metres,窗口大小，以米为单位
+V1.81,SPxLang.ProCFARThreshDelta,ThreshDelta,门限
+V1.81,SPxLang.ProCFARThreshDeltaLongDesc,Threshold level above window average,窗口平均值以上的门限水平
+V1.81,SPxLang.ProCFARThreshDeltaStop,ThreshDeltaStop,门限迟滞
+V1.81,SPxLang.ProCFARThreshDeltaStopLongDesc,hreshold hysteresis,门限迟滞
+V1.81,SPxLang.ProCFARSDFactor,SDFactor,标准差因子
+V1.81,SPxLang.ProCFARSDFactorLongDesc,Add this multiple of local standard deviation,加上此倍数的局部标准差
+V1.81,SPxLang.ProCFARThreshOutputValue,ThreshOutputValue,输出值
+V1.81,SPxLang.ProCFARThreshOutputValueLongDesc,Sample value to set when above threshold,当超过门限时设置的采样值
+
+
+V1.81,SPxLang.ProSTCGainAtRange0,GainAtRange0,零距离增益系数
+V1.81,SPxLang.ProSTCGainAtRange0LongDesc,Start gain at zero range,在零距离处开始增益
+V1.81,SPxLang.ProSTCActiveRangeWorld,ActiveRangeWorld,有效距离（米）
+V1.81,SPxLang.ProSTCActiveRangeWorldLongDesc,End of attenuation range defined in metres,以米为单位定义的衰减距离结束
+V1.81,SPxLang.ProSTCActiveRangeSample,ActiveRangeSample,有效距离（采样点）
+V1.81,SPxLang.ProSTCActiveRangeSampleLongDesc,End of attenuation range defined in samples,以采样点为单位定义的衰减距离结束
+V1.81,SPxLang.ProSTCStartRangeWorld,StartRangeWorld,起始距离（米）
+V1.81,SPxLang.ProSTCStartRangeWorldLongDesc,Hold initial gain for this range in metres,在此距离（米）内保持初始增益
+V1.81,SPxLang.ProSTCStartRangeSample,StartRangeSample,起始距离（采样点）
+V1.81,SPxLang.ProSTCStartRangeSampleLongDesc,Hold initial gain for this range in samples,在此距离（采样点）内保持初始增益
+
+
+
+V1.81,SPxLang.ProFTCWindowSizeSample,WindowSizeSample,窗口大小（采样点）
+V1.81,SPxLang.ProFTCWindowSizeSampleLongDesc,Window size defined in samples,窗口大小，以采样点数为单位
+V1.81,SPxLang.ProFTCWindowSizeWorld,WindowSizeWorld,窗口大小（米）
+V1.81,SPxLang.ProFTCWindowSizeWorldLongDesc,Window size defined in metres,窗口大小，以米为单位
+V1.81,SPxLang.ProFTCLevel,Level,等级
+V1.81,SPxLang.ProFTCLevelLongDesc,Fraction of local average to subtract,减去的局部平均值的比例
+
+
+V1.81,SPxLang.ProGainOffsetGain,Gain,全局增益
+V1.81,SPxLang.ProGainOffsetGainLongDesc,Global gain to apply,应用全局增益
+V1.81,SPxLang.ProGainOffsetOffset,Offset,全局偏移
+V1.81,SPxLang.ProGainOffsetOffsetLongDesc,Global offset to apply,应用全局偏移
+V1.81,SPxLang.ProGainOffsetLocalRegion,LocalRegion,局部区域
+V1.81,SPxLang.ProGainOffsetLocalRegionLongDesc,Optional region for local gain/offset,可选的局部增益/偏移区域
+V1.81,SPxLang.ProGainOffsetLocalGain,LocalGain,局部增益
+V1.81,SPxLang.ProGainOffsetLocalGainLongDesc,Local gain to apply,应用的局部增益
+V1.81,SPxLang.ProGainOffsetLocalOffset,LocalOffset,局部偏移
+V1.81,SPxLang.ProGainOffsetLocalOffsetLongDesc,Local offset to apply,应用的局部偏移
+
+
+V1.81,SPxLang.ProClutterIntegrateTimeConstant,TimeConstant,时间常数
+V1.81,SPxLang.ProClutterIntegrateTimeConstantLongDesc,Steady state time constant,稳态时间常数
+V1.81,SPxLang.ProClutterIntegrateSlowDecay,SlowDecay,衰减速率
+V1.81,SPxLang.ProClutterIntegrateSlowDecayLongDesc,Clutter map rate of decay,杂波图的衰减速率
+V1.81,SPxLang.ProClutterIntegrateTimeConstantStartup,TimeConstantStartup,建立期时间常数
+V1.81,SPxLang.ProClutterIntegrateTimeConstantStartupLongDesc,Time constant to use for StartupRevs,启动时使用的时间常数
+V1.81,SPxLang.ProClutterIntegrateSlowDecayStartup,SlowDecayStartup,建立期衰减速率
+V1.81,SPxLang.ProClutterIntegrateSlowDecayStartupLongDesc,Rate of decay to use for StartupRevs,启动时使用的衰减速率
+V1.81,SPxLang.ProClutterIntegrateStartupRevs,StartupRevs,建立期天线圈数
+V1.81,SPxLang.ProClutterIntegrateStartupRevsLongDesc,Number of revs to use TimeConstantStartup,启动时使用的时间常数的圈数
+V1.81,SPxLang.ProClutterIntegrateHoldRangeMult,HoldRangeMult,距离乘数
+V1.81,SPxLang.ProClutterIntegrateHoldRangeMultLongDesc,Multiplier on target range dimension,目标距离维度的倍数
+V1.81,SPxLang.ProClutterIntegrateHoldAzimuthMult,HoldAzimuthMult,方位乘数
+V1.81,SPxLang.ProClutterIntegrateHoldAzimuthMultLongDesc,Multiplier on target azimuth dimension,目标方位角维度的倍数
+V1.81,SPxLang.ProClutterIntegrateHoldShadowMult,HoldShadowMult,阴影区乘数
+V1.81,SPxLang.ProClutterIntegrateHoldShadowMultLongDesc,Multiplier on shadow area size,阴影区域大小的倍数
+V1.81,SPxLang.ProClutterIntegrateHoldShadowAdd,HoldShadowAdd,阴影区增量
+V1.81,SPxLang.ProClutterIntegrateHoldShadowAddLongDesc,elta to add to shadow area size,增加到阴影区域大小的增量
+V1.81,SPxLang.ProClutterIntegrateScrollNumCells,ScrollNumCells,滚动单元数
+V1.81,SPxLang.ProClutterIntegrateScrollNumCellsLongDesc,Moving platform scrolling control,移动平台滚动控制
+V1.81,SPxLang.ProClutterIntegrateLoadFromFileFloor,LoadFromFileFloor,从文件加载
+V1.81,SPxLang.ProClutterIntegrateLoadFromFileFloorLongDesc,Name of file to initialise from,初始化所用文件的名称
+V1.81,SPxLang.ProClutterIntegrateUseFloor,UseFloor,使用文件底限
+V1.81,SPxLang.ProClutterIntegrateUseFloorLongDesc,Use loaded file as a lower limit,使用加载的文件作为底限
+
+
+
+V1.81,SPxLang.ProClutterCombineMode,Mode,融合模式
+V1.81,SPxLang.ProClutterCombineModeLongDesc,Clutter combination mode,杂波组合模式
+V1.81,SPxLang.ProClutterCombineRangeMode,RangeMode,距离模式
+V1.81,SPxLang.ProClutterCombineRangeModeLongDesc,Clutter range adjustment mode,杂波距离调整模式
+V1.81,SPxLang.ProClutterCombineMinA,MinA,最小值A
+V1.81,SPxLang.ProClutterCombineMinALongDesc,Minimum A (radar video),最小A（雷达视频）
+V1.81,SPxLang.ProClutterCombineGainA,GainA,增益A
+V1.81,SPxLang.ProClutterCombineGainALongDesc,PIM-A gain (radar video),PIM-A增益（雷达视频）
+V1.81,SPxLang.ProClutterCombineMinB,MinB,最小值B
+V1.81,SPxLang.ProClutterCombineMinBLongDesc,Minimum B (clutter map),最小B（杂波图）
+V1.81,SPxLang.ProClutterCombineGainB,GainB,增益B
+V1.81,SPxLang.ProClutterCombineGainBLongDesc,PIM-B gain (clutter map),PIM-B增益（杂波图）
+V1.81,SPxLang.ProClutterCombineInfillStartAziDegs,InfillStartAziDegs,填充起始方位
+V1.81,SPxLang.ProClutterCombineInfillStartAziDegsLongDesc,Start azimuth for infill video,填充视频的开始方位角度
+V1.81,SPxLang.ProClutterCombineInfillStopAziDegs,InfillStopAziDegs,填充结束方位
+V1.81,SPxLang.ProClutterCombineInfillStopAziDegsLongDesc,Stop azimuth for infill video,填充视频的结束方位角度
+V1.81,SPxLang.ProClutterCombineInfillStartRangeMetres,InfillStartRangeMetres,填充起始距离
+V1.81,SPxLang.ProClutterCombineInfillStartRangeMetresLongDesc,Start range for infill video,填充视频的开始距离
+V1.81,SPxLang.ProClutterCombineInfillStopRangeMetres,InfillStopRangeMetres,填充结束距离
+V1.81,SPxLang.ProClutterCombineInfillStopRangeMetresLongDesc,Stop range for infill video,填充视频的结束距离
+V1.81,SPxLang.ProClutterCombineUseLSBIndicator,UseLSBIndicator,使用LSB指示器
+V1.81,SPxLang.ProClutterCombineUseLSBIndicatorLongDesc,Use LSB as A/B Indicator,使用LSB作为A/B指示器
+
+
+V1.81,SPxLang.ProSSI64FullWindowSize,FullWindowSize,完整窗口大小
+V1.81,SPxLang.ProSSI64FullWindowSizeLongDesc,Number of scans to integrate,集成的扫描数
+V1.81,SPxLang.ProSSI64RecentWindowSize,RecentWindowSize,最近窗口大小
+V1.81,SPxLang.ProSSI64RecentWindowSizeLongDesc,Window for recent detections,最近检测的窗口
+V1.81,SPxLang.ProSSI64FullHitCountThreshold,FullHitCountThreshold,完整窗口命中门限
+V1.81,SPxLang.ProSSI64FullHitCountThresholdLongDesc,Minimum hits needed in full window,全窗口所需的最小命中数
+V1.81,SPxLang.ProSSI64RecentHitCountThreshold,RecentHitCountThreshold,最近窗口命中门限
+V1.81,SPxLang.ProSSI64RecentHitCountThresholdLongDesc,Minimum hits in recent window,最近窗口的最小命中数
+V1.81,SPxLang.ProSSI64IntegrationVideoThreshold,IntegrationVideoThreshold,集成视频门限
+V1.81,SPxLang.ProSSI64IntegrationVideoThresholdLongDesc,Integrate if video is greater than this,如果视频大于此值则集成
+V1.81,SPxLang.ProSSI64InstantVideoThreshold,InstantVideoThreshold,即时视频门限
+V1.81,SPxLang.ProSSI64InstantVideoThresholdLongDesc,Output 255 if video is greater than this,如果视频大于此值则输出255
+V1.81,SPxLang.ProSSI64InstantVideoOutput,InstantVideoOutput,即时视频输出
+V1.81,SPxLang.ProSSI64InstantVideoOutputLongDesc,Value to output if video is above instant threshold,如果视频高于即时门限，则输出的值
+
+
+V1.81,SPxLang.ProPlotExtStartRangeMetres,StartRangeMetres,起始距离
+V1.81,SPxLang.ProPlotExtStartRangeMetresLongDesc,Minimum target position in range,目标在距离上的最小位置
+V1.81,SPxLang.ProPlotExtThresholdStart,ThresholdStart,最小目标采样值（跨度起始）
+V1.81,SPxLang.ProPlotExtThresholdStartLongDesc,Min target sample value at start of span,跨度开始时的最小目标采样值
+V1.81,SPxLang.ProPlotExtThresholdStop,ThresholdStop,最小目标采样值（跨度结束）
+V1.81,SPxLang.ProPlotExtThresholdStopLongDesc,Min target sample value at end of span,跨度结束时的最小目标采样值
+V1.81,SPxLang.ProPlotExtMinSpanLengthSamples,MinSpanLengthSamples,跨度最小采样数
+V1.81,SPxLang.ProPlotExtMinSpanLengthSamplesLongDesc,Minimum target span in samples,目标跨度的最小采样数
+V1.81,SPxLang.ProPlotExtMinBlobRangeMetres,MinBlobRangeMetres,最小blob大小（距离维度：米）
+V1.81,SPxLang.ProPlotExtMinBlobRangeMetresLongDesc,Minimum blob size in range,最小blob大小（距离维度）
+V1.81,SPxLang.ProPlotExtMaxBlobRangeMetres,MaxBlobRangeMetres,最大blob大小（距离维度：米）
+V1.81,SPxLang.ProPlotExtMaxBlobRangeMetresLongDesc,Maximum blob size in range,最大blob大小（距离维度）
+V1.81,SPxLang.ProPlotExtMinBlobAzimuthDegrees,MinBlobAzimuthDegrees,最小blob大小（方位维度：度）
+V1.81,SPxLang.ProPlotExtMinBlobAzimuthDegreesLongDesc,Minimum blob size in azimuth in degrees,方位角度内的最小blob大小
+V1.81,SPxLang.ProPlotExtMaxBlobAzimuthDegrees,MaxBlobAzimuthDegrees,最大blob大小（方位维度：度）
+V1.81,SPxLang.ProPlotExtMaxBlobAzimuthDegreesLongDesc,Maximum blob size in azimuth in degrees,方位角度内的最大blob大小
+V1.81,SPxLang.ProPlotExtMinBlobAzimuthMetres,MinBlobAzimuthMetres,最小blob大小（方位维度：米）
+V1.81,SPxLang.ProPlotExtMinBlobAzimuthMetresLongDesc,Minimum blob size in azimuth in metres,方位米内的最小blob大小
+V1.81,SPxLang.ProPlotExtMaxBlobAzimuthMetres,MaxBlobAzimuthMetres,最大blob大小（方位维度：米）
+V1.81,SPxLang.ProPlotExtMaxBlobAzimuthMetresLongDesc,Maximum blob size in azimuth in metres,方位米内的最大blob大小
+V1.81,SPxLang.ProPlotExtMinBlobWeight,MinBlobWeight,最小单元数
+V1.81,SPxLang.ProPlotExtMinBlobWeightLongDesc,Minimum number of cells,最小单元数
+V1.81,SPxLang.ProPlotExtPreserveVideo,PreserveVideo,保留视频
+V1.81,SPxLang.ProPlotExtPreserveVideoLongDesc,Preserve video or blank below threshold,保留视频或在阈值以下清空
+V1.81,SPxLang.ProPlotExtWorldMapInhibitLandMetres,WorldMapInhibitLandMetres,屏蔽陆地点迹
+V1.81,SPxLang.ProPlotExtWorldMapInhibitLandMetresLongDesc,Inland range from coastline to inhibit blobs,从海岸线到内陆的距离以抑制blobs
+V1.81,SPxLang.ProPlotExtWorldMapInhibitSeaMetres,WorldMapInhibitSeaMetres,屏蔽海向点迹
+V1.81,SPxLang.ProPlotExtWorldMapInhibitSeaMetresLongDesc,Seaward range from coastline to inhibit blobs,从海岸线到海向的距离以抑制blobs
+V1.81,SPxLang.ProPlotExtSmallBlobSectorLimit,SmallBlobSectorLimit,扇区小点迹数量限制
+V1.81,SPxLang.ProPlotExtSmallBlobSectorLimitLongDesc,Limit on number of small plots per sector,每个扇区小点迹的数量限制（如果非零）
+V1.81,SPxLang.ProPlotExtSmallBlobWeight,SmallBlobWeight,小点迹数量权重限制
+V1.81,SPxLang.ProPlotExtSmallBlobWeightLongDesc,Weight limit for small plots,小点迹的权重限制（如果非零）
+V1.81,SPxLang.ProPlotExtCentroidMode,CentroidMode,质心模式
+V1.81,SPxLang.ProPlotExtCentroidModeLongDesc,0=weighted 1=intensity-based 2=leading-edge,0=加权 1=基于强度 2=前沿
+V1.81,SPxLang.ProPlotExtIFFPattern,IFFPattern,IFF模式
+V1.81,SPxLang.ProPlotExtIFFPatternLongDesc,IFF interlace pattern,IFF交错模式
+V1.81,SPxLang.ProPlotExtIFFStartSample,IFFStartSample,IFF起始采样位置
+V1.81,SPxLang.ProPlotExtIFFStartSampleLongDesc,IFF start sample index,IFF开始采样索引
+V1.81,SPxLang.ProPlotExtAllowNonQualifiers,AllowNonQualifiers,允许不符合条件的点迹
+V1.81,SPxLang.ProPlotExtAllowNonQualifiersLongDesc,Allow non-qualifying plots,允许不符合条件的点迹
+
+
+V1.81,SPxLang.ProPlotMergeMode,Mode,融合模式
+V1.81,SPxLang.ProPlotMergeModeLongDesc,Plot merging mode,点迹融合模式
+V1.81,SPxLang.ProPlotMergeKeepComponents,KeepComponents,保持原始部分
+V1.81,SPxLang.ProPlotMergeKeepComponentsLongDesc,Keep original plots in database,在数据库中保持原始点迹
+V1.81,SPxLang.ProPlotMergeMinMergedRangeMetres,MinMergedRangeMetres,最小距离
+V1.81,SPxLang.ProPlotMergeMinMergedRangeMetresLongDesc,Minimum range of merged plots,融合点迹的最小距离
+V1.81,SPxLang.ProPlotMergeMaxMergedRangeMetres,MaxMergedRangeMetres,最大距离
+V1.81,SPxLang.ProPlotMergeMaxMergedRangeMetresLongDesc,Maximum range of merged plots,融合点迹的最大距离
+V1.81,SPxLang.ProPlotMergeMinMergedAzimuthDegrees,MinMergedAzimuthDegrees,最小方位角度
+V1.81,SPxLang.ProPlotMergeMinMergedAzimuthDegreesLongDesc,Min azimuth extent of merged plots in degrees,融合点迹的最小方位角度
+V1.81,SPxLang.ProPlotMergeMaxMergedAzimuthDegrees,MaxMergedAzimuthDegrees,最大方位角度
+V1.81,SPxLang.ProPlotMergeMaxMergedAzimuthDegreesLongDesc,Max azimuth extent of merged plots in degrees,融合点迹的最大方位角度
+V1.81,SPxLang.ProPlotMergeMinMergedAzimuthMetres,MinMergedAzimuthMetres,最小方位：米
+V1.81,SPxLang.ProPlotMergeMinMergedAzimuthMetresLongDesc,Min azimuth extent of merged plots in metres,融合点迹的最小方位：米
+V1.81,SPxLang.ProPlotMergeMaxMergedAzimuthMetres,MaxMergedAzimuthMetres,最大方位：米
+V1.81,SPxLang.ProPlotMergeMaxMergedAzimuthMetresLongDesc,Max azimuth extent of merged plots in metres,融合点迹的最大方位：米
+V1.81,SPxLang.ProPlotMergeMergeMarginDegrees,MergeMarginDegrees,方位门限
+V1.81,SPxLang.ProPlotMergeMergeMarginDegreesLongDesc,Merging threshold in azimuth,融合的方位角门限
+V1.81,SPxLang.ProPlotMergeMergeMarginMetres,MergeMarginMetres,距离门限
+V1.81,SPxLang.ProPlotMergeMergeMarginMetresLongDesc,Merging threshold in range,融合的距离门限
+V1.81,SPxLang.ProPlotMergeNumSectorsBack,NumSectorsBack,向后查看的扇区数
+V1.81,SPxLang.ProPlotMergeNumSectorsBackLongDesc,Number of sectors to look backwards,向后查看的扇区数
+V1.81,SPxLang.ProPlotMergeAISLengthThreshold,AISLengthThreshold,AIS长度门限
+V1.81,SPxLang.ProPlotMergeAISLengthThresholdLongDesc,Length of large AIS targets or 0 to disable,大型AIS目标的长度 或0以禁用
+V1.81,SPxLang.ProMRSSlpoeSuppres,SlpoeSuppres,抑制斜率
+V1.81,SPxLang.ProMRSSlpoeSuppresLongDesc,SlpoeSuppres,反应杂波随距离衰减程度
+V1.81,SPxLang.ProMRSThreshold,Threshold,门限
+V1.81,SPxLang.ProMRSThresholdLongDesc,Threshold,目标强回波幅度值 可通过A显获得
+V1.81,SPxLang.ProMRSExtrapolateRangeMetres,ExtrapolateRangeMetres,延伸距离：米
+V1.81,SPxLang.ProMRSExtrapolateRangeMetresLongDesc,ExtrapolateRangeMetres,该距离内不进行抑制
+V1.81,SPxLang.ProMRSWindowSizeWorld,WindowSizeWorld,窗口尺寸：米
+V1.81,SPxLang.ProMRSWindowSizeWorldLongDesc,WindowSizeWorld,单次处理的距离
+V1.81,SPxLang.ProMRSActiveEndRangeMetres,ActiveEndRangeMetres,有效起始距离：米
+V1.81,SPxLang.ProMRSActiveEndRangeMetresLongDesc,ActiveEndRangeMetres,起始距离
+V1.81,SPxLang.ProMRSActiveStartRangeMetres,ActiveStartRangeMetres,有效终止距离：米
+V1.81,SPxLang.ProMRSActiveStartRangeMetresLongDesc,ActiveStartRangeMetres,终止距离
+
+V1.81,SPxLang.OWlProSTCDampCodeDelta,DampCodeDelta,平均强度
+V1.81,SPxLang.OWlProSTCDampCodeDeltaLongDesc,DampCodeDelta,1km海杂波的平均强度
+V1.81,SPxLang.OWlProSTCDBwithRange,DBwithRange,次方系数
+V1.81,SPxLang.OWlProSTCDBwithRangeLongDesc,DBwithRange,强度随距离的次方关系
+
+V1.81,SPxLang.ProUSMFiltRadius,FiltRadius,半径
+V1.81,SPxLang.ProUSMFiltRadiusLongDesc,FiltRadius,一半的方位波束宽度内雷达触发数
+V1.81,SPxLang.ProUSMAmount,Amount,等级
+V1.81,SPxLang.ProUSMAmountLongDesc,Amount,数值越大则锐化效果越明显，0表示不锐化

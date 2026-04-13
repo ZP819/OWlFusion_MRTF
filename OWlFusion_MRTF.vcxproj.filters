@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files\fusion">
+      <UniqueIdentifier>{a6e9d0e9-06af-415c-8645-041ce3578389}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fusion">
+      <UniqueIdentifier>{ec69026a-7501-427a-93e6-6d001c902a2d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OWlFusionApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OWlFusionDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OWlFusionPpi.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CoordinateTransformation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OWlSystemMesgDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OWlFuseConfigDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EncryptHasp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Fusion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OWlDisplayCtrlDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OWlRadarPosConfigDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OWlEncryptFile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OWlRadarSensor.cpp">
+      <Filter>Source Files\fusion</Filter>
+    </ClCompile>
+    <ClCompile Include="OWlRadarSensorManager.cpp">
+      <Filter>Source Files\fusion</Filter>
+    </ClCompile>
+    <ClCompile Include="OWlRadarTracksFusion.cpp">
+      <Filter>Source Files\fusion</Filter>
+    </ClCompile>
+    <ClCompile Include="OWlRadarSensorViewConfigDlg.cpp">
+      <Filter>Source Files\fusion</Filter>
+    </ClCompile>
+    <ClCompile Include="OWlRadarSensorOverviewDlg.cpp">
+      <Filter>Source Files\fusion</Filter>
+    </ClCompile>
+    <ClCompile Include="OWlRadarSensorRender.cpp">
+      <Filter>Source Files\fusion</Filter>
+    </ClCompile>
+    <ClCompile Include="OWlUniTrackRender.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OWlFusionApp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OWlFusionDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OWlFusionPpi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CoordinateTransformation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OWlSystemMesgDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OWlFuseConfigDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EncryptHasp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Fusion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OWlDisplayCtrlDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OWlRadarPosConfigDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OWlEncryptFile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OWlRadarTracksFusion.h">
+      <Filter>Header Files\fusion</Filter>
+    </ClInclude>
+    <ClInclude Include="OWlRadarSensor.h">
+      <Filter>Header Files\fusion</Filter>
+    </ClInclude>
+    <ClInclude Include="OWlRadarSensorManager.h">
+      <Filter>Header Files\fusion</Filter>
+    </ClInclude>
+    <ClInclude Include="OWlRadarSensorViewConfigDlg.h">
+      <Filter>Header Files\fusion</Filter>
+    </ClInclude>
+    <ClInclude Include="OWlRadarSensorOverviewDlg.h">
+      <Filter>Header Files\fusion</Filter>
+    </ClInclude>
+    <ClInclude Include="OWlRadarSensorRender.h">
+      <Filter>Header Files\fusion</Filter>
+    </ClInclude>
+    <ClInclude Include="OWlUniTrackRender.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\icon_centre.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\icon_down.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\icon_down_left.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\icon_down_right.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\icon_left.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\icon_right.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\icon_up.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\icon_up_left.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\icon_up_right.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\icon_zoom_in.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\icon_zoom_out.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\SPxIcon.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\VTSIcon.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="OWlFusion.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\OWlFusion.rc2">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>

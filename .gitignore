@@ -1,0 +1,38 @@
+﻿# Visual Studio
+.vs/
+*.VC.db
+*.VC.opendb
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build outputs
+Debug/
+Release/
+x64/
+x86/
+UniDebugStaticMFC_64/
+UniReleaseStaticMFC_64/
+
+# Intermediate files
+*.obj
+*.pch
+*.idb
+*.pdb
+*.ilk
+*.log
+*.tlog
+*.lastbuildstate
+*.ipch
+
+# App artifacts
+*.exe
+*.dll
+*.lib
+*.exp
+*.iobj
+*.ipdb
+
+.vscode/
+*.aps

@@ -28,11 +28,6 @@ UniReleaseStaticMFC_64/
 
 # App artifacts
 *.exe
-*.dll
-*.lib
-*.exp
-*.iobj
-*.ipdb
 
 .vscode/
 *.aps

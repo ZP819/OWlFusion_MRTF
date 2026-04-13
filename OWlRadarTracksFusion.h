@@ -124,6 +124,25 @@ private:
 	void handleAassiocatedRadarTrack(SPxRadarTrack* track);
 	//雷达航迹对应融合航迹为独立融合航迹
 	void handleAassiocatedRadarTrackFusedSingle(SPxRadarTrack* track, SPxRadarTrack* fusedTrack);
+	/*
+	 * 仅用于 P0-A 止血补丁的内部辅助函数（不改变外部接口）：
+	 * 1) findBestFusedCandidateForTrack:
+	 *    在“排除当前 fused”的前提下，从 fusedDB 中选择最优候选，修复“单源 fused 后无法再合并”。
+	 * 2) refreshFusedTrackFromMembers:
+	 *    当成员集合发生变化后，强制按剩余成员重算 fused 状态，修复“剔除/切换后状态不一致”。
+	 * 3) sendDeletePacketForFusedTrack:
+	 *    统一删除报文发送路径，避免分支散落导致行为不一致。
+	 */
+	SPxRadarTrack* findBestFusedCandidateForTrack(
+		SPxRadarTrack* track,
+		UINT32 excludedFusedID,
+		double* bestDistMetresRtn);
+
+	bool refreshFusedTrackFromMembers(
+		SPxRadarTrack* fusedTrack,
+		SPxRadarTrack* preferredSizeTrack);
+
+	void sendDeletePacketForFusedTrack(UINT32 fusedID);
 	
 	void resetRadarTrackUserData(RadarTrackUserData* rud);
 public:

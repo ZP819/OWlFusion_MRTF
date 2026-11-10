@@ -1,5 +1,6 @@
 ﻿#include "stdafx.h"
 #include "OWlUniTrackRender.h"
+#include "OWlRadarTracksFusion.h"
 
 
 void OWlConvertTimeZoneToCN(SPxTime_t* ti)
@@ -36,6 +37,34 @@ string formatHex32(UINT32 val)
 {
 	char buf[32] = { 0 };
 	sprintf_s(buf, "0x%08X", val);
+	return string(buf);
+}
+
+string boolToYesNo(bool value)
+{
+	return value ? "是" : "否";
+}
+
+string getSnapshotTimeText(const SPxTime_t& ts)
+{
+	if (ts.secs <= 0)
+	{
+		return kCaptionUnknown;
+	}
+
+	SPxTime_t localTs = ts;
+	OWlConvertTimeZoneToCN(&localTs);
+	tm timeInfo = { 0 };
+	SPxTimeGetTmFromEpoch(&timeInfo, &localTs);
+
+	char buf[64] = { 0 };
+	sprintf_s(buf, "%04d-%02d-%02d %02d:%02d:%02d",
+		timeInfo.tm_year + 1900,
+		timeInfo.tm_mon + 1,
+		timeInfo.tm_mday,
+		timeInfo.tm_hour,
+		timeInfo.tm_min,
+		timeInfo.tm_sec);
 	return string(buf);
 }
 
@@ -201,8 +230,8 @@ void appendCommonTrackInfo(string& txt, SPxUniTrack* track)
 
 	appendCaptionLine(txt, "ID: ", to_string(track->GetID()));
 	appendCaptionLine(txt, "统一ID: ", to_string(track->GetUnifiedID()));
-	appendCaptionLine(txt, "次级ID: ", to_string(track->GetSecondaryID()));
-	appendCaptionLine(txt, "次级来源: ", getSensorTypeText(track->GetSecondarySensorType()));
+	/*appendCaptionLine(txt, "次级ID: ", to_string(track->GetSecondaryID()));
+	appendCaptionLine(txt, "次级来源: ", getSensorTypeText(track->GetSecondarySensorType()));*/
 
 	int sourceIndex = track->GetSourceIndex();
 	if (sourceIndex >= 0)
@@ -304,8 +333,8 @@ void appendRadarRptInfo(string& txt, SPxRadarTrack* track)
 		}
 		if (extRpt->extMask & SPX_PACKET_TRACK_EXT_FUSION)
 		{
-			appendCaptionLine(txt, "融合传感器类型: ", getSensorTypesMaskText(extRpt->fusion.sensorTypes));
-			appendCaptionLine(txt, "融合传感器位图: ", formatHex32(extRpt->fusion.sensors));
+			/*appendCaptionLine(txt, "融合传感器类型: ", getSensorTypesMaskText(extRpt->fusion.sensorTypes));
+			appendCaptionLine(txt, "融合传感器位图: ", formatHex32(extRpt->fusion.sensors));*/
 		}
 	}
 }
@@ -371,6 +400,7 @@ OWlUniTrackRender::OWlUniTrackRender(
 {
 	m_uniDb = uniDb;
 	m_uniTrackRender = uniTrackRender;
+	m_radarTrackFusion = NULL;
 
 
 	SetClassName("OWlUniTrackRender");
@@ -379,6 +409,15 @@ OWlUniTrackRender::OWlUniTrackRender(
 
 OWlUniTrackRender::~OWlUniTrackRender()
 {
+}
+
+void OWlUniTrackRender::SetFusion(OWlRadarTracksFusion* fusion)
+{
+	/*
+	 * P0-2：由上层注入融合管理对象，
+	 * 渲染层只读取只读快照，不修改融合逻辑状态。
+	 */
+	m_radarTrackFusion = fusion;
 }
 
 
@@ -475,6 +514,62 @@ string OWlUniTrackRender::getRadarTrackCaptionTxt(SPxRadarTrack* track)
 
 	appendCommonTrackInfo(txt, track);
 	appendRadarRptInfo(txt, track);
+
+	/*
+	 * P0-2：选中雷达目标时，展示融合核心阶段状态，
+	 * 便于在线观察“候选选择-预融合-正式融合-剔除”链路。
+	 */
+	if (m_radarTrackFusion)
+	{
+		OWlRadarTrackDebugSnapshot snapshot = { 0 };
+		if (m_radarTrackFusion->GetRadarTrackDebugSnapshot(track->GetUnifiedID(), &snapshot))
+		{
+			appendCaptionLine(txt, "----组网调试----", "");
+			appendCaptionLine(txt, "阶段: ", snapshot.stage[0] ? string(snapshot.stage) : kCaptionUnknown);
+			appendCaptionLine(txt, "关联fusedID: ", to_string(snapshot.fusedID));
+			appendCaptionLine(txt, "预关联fusedID: ", to_string(snapshot.preFusedID));
+			appendCaptionLine(txt, "命中计数: ", to_string(snapshot.hitCount));
+			appendCaptionLine(txt, "失败计数: ", to_string(snapshot.failCount));
+			appendCaptionLine(txt, "更新计数: ", to_string(snapshot.count));
+			appendCaptionLine(txt, "候选fusedID: ", to_string(snapshot.candidateFusedID));
+			appendCaptionLine(txt, "候选距离: ", formatDouble("%.2f m", snapshot.candidateDistMetres));
+			appendCaptionLine(txt, "候选有效: ", boolToYesNo(snapshot.candidateValid));
+			appendCaptionLine(txt, "候选命中: ", boolToYesNo(snapshot.candidateFuseHit));
+			appendCaptionLine(txt, "关联状态: ", boolToYesNo(snapshot.isAssociated));
+			appendCaptionLine(txt, "延迟发送队列: ", to_string(snapshot.deferredQueueSize));
+			appendCaptionLine(txt, "快照时间: ", getSnapshotTimeText(snapshot.lastUpdateTs));
+
+			/*
+			 * 新增：展示 fuseEngine 最近一次“门限 vs 实际误差”的完整判定样本。
+			 * 这些字段来自 OWlRadarTracksFusion::recordFuseEvalDebugMetrics，
+			 * 用于在线判断“阈值过严/过松”以及误差主要落在 X 还是 Y 轴。
+			 */
+			appendCaptionLine(txt, "评估样本有效: ", boolToYesNo(snapshot.fuseEvalAvailable));
+			if (snapshot.fuseEvalAvailable)
+			{
+				appendCaptionLine(txt, "门限倍数: ", to_string((int)snapshot.fuseEvalThreshMulti));
+				appendCaptionLine(txt, "配置方位误差: ", formatDouble("%.3f °", snapshot.fuseEvalCfgAziObsDiffDegs));
+				appendCaptionLine(txt, "配置距离误差: ", formatDouble("%.3f m", snapshot.fuseEvalCfgDisObsDiffMetres));
+				appendCaptionLine(txt, "原始偏差dx/dy: ", formatDoublePair("%.2f m, %.2f m", snapshot.fuseEvalDxMetres, snapshot.fuseEvalDyMetres));
+				appendCaptionLine(txt, "实际误差|X|/|Y|: ", formatDoublePair("%.2f m, %.2f m", snapshot.fuseEvalDiffXMetres, snapshot.fuseEvalDiffYMetres));
+				appendCaptionLine(txt, "融合门限X/Y: ", formatDoublePair("%.2f m, %.2f m", snapshot.fuseEvalThreshXMetres, snapshot.fuseEvalThreshYMetres));
+				//appendCaptionLine(txt, "极坐标误差R/A: ", formatDoublePair("%.2f m, %.2f °", snapshot.fuseEvalDiffRangeMetres, snapshot.fuseEvalDiffAzimuthDegs));
+				appendCaptionLine(txt, "X命中: ", boolToYesNo(snapshot.fuseEvalXHit));
+				appendCaptionLine(txt, "Y命中: ", boolToYesNo(snapshot.fuseEvalYHit));
+				appendCaptionLine(txt, "融合命中: ", boolToYesNo(snapshot.fuseEvalHit));
+			}
+			else
+			{
+				appendCaptionLine(txt, "融合判定: ", "暂无有效样本");
+			}
+		}
+		else
+		{
+			appendCaptionLine(txt, "----组网调试----", "");
+			appendCaptionLine(txt, "快照: ", "暂无");
+		}
+	}
+
 	return txt;
 }
 
@@ -577,7 +672,7 @@ string OWlUniTrackRender::getRadarFusedTrackCaptionTxt(SPxRadarTrack* track)
 	appendRadarRptInfo(txt, track);
 	appendFusedMembersInfo(txt, m_uniDb, track);
 
-	const SPxPacketTrackExtended* extRpt = track->GetExtRpt();
+	/*const SPxPacketTrackExtended* extRpt = track->GetExtRpt();
 	if (extRpt && (extRpt->extMask & SPX_PACKET_TRACK_EXT_FUSION))
 	{
 		for (int i = 0; i < SPX_MAX_NUM_TRACK_IDS; i++)
@@ -591,6 +686,55 @@ string OWlUniTrackRender::getRadarFusedTrackCaptionTxt(SPxRadarTrack* track)
 			char buf[64] = { 0 };
 			sprintf_s(buf, "#%d ID:%u", i + 1, fusedSourceTrackID);
 			appendCaptionLine(txt, "融合源ID: ", buf);
+		}
+	}*/
+
+	/*
+	 * P0-2：融合航迹标牌补充 fused 快照。
+	 * 用于观测成员数量、mask 变化、刷新删除路径等关键状态。
+	 */
+	if (m_radarTrackFusion)
+	{
+		OWlFusedTrackDebugSnapshot snapshot = { 0 };
+		if (m_radarTrackFusion->GetFusedTrackDebugSnapshot(track->GetID(), &snapshot))
+		{
+			appendCaptionLine(txt, "----融合调试----", "");
+			appendCaptionLine(txt, "阶段: ", snapshot.stage[0] ? string(snapshot.stage) : kCaptionUnknown);
+			appendCaptionLine(txt, "成员数: ", to_string(snapshot.memberCount));
+			appendCaptionLine(txt, "sensors位图: ", formatHex32(snapshot.sensorsMask));
+			//appendCaptionLine(txt, "sensorTypes位图: ", formatHex32(snapshot.sensorTypesMask));
+			appendCaptionLine(txt, "融合航速: ", formatDouble("%.2f m/s", snapshot.speedMps));
+			appendCaptionLine(txt, "融合航向: ", formatDouble("%.2f °", snapshot.courseDegrees));
+			appendCaptionLine(txt, "刷新删除: ", boolToYesNo(snapshot.deletedByRefresh));
+			appendCaptionLine(txt, "延迟发送队列: ", to_string(snapshot.deferredQueueSize));
+			appendCaptionLine(txt, "快照时间: ", getSnapshotTimeText(snapshot.lastUpdateTs));
+
+			/*
+			 * 新增：融合轨迹侧也展示“最近一次雷达航迹 vs 当前 fused”判定细节。
+			 * 这样选中 fused 目标时可直接看到门限和误差，不需要再去反查成员轨迹。
+			 */
+			appendCaptionLine(txt, "最近评估有效: ", boolToYesNo(snapshot.lastEvalAvailable));
+			if (snapshot.lastEvalAvailable)
+			{
+				appendCaptionLine(txt, "评估雷达统一ID: ", to_string(snapshot.lastEvalRadarUnifiedID));
+				appendCaptionLine(txt, "评估雷达TrackID: ", to_string(snapshot.lastEvalRadarTrackID));
+				appendCaptionLine(txt, "门限倍数: ", to_string((int)snapshot.lastEvalThreshMulti));
+				appendCaptionLine(txt, "实际误差|X|/|Y|: ", formatDoublePair("%.2f m, %.2f m", snapshot.lastEvalDiffXMetres, snapshot.lastEvalDiffYMetres));
+				appendCaptionLine(txt, "融合门限X/Y: ", formatDoublePair("%.2f m, %.2f m", snapshot.lastEvalThreshXMetres, snapshot.lastEvalThreshYMetres));
+				//appendCaptionLine(txt, "极坐标误差R/A: ", formatDoublePair("%.2f m, %.2f °", snapshot.lastEvalDiffRangeMetres, snapshot.lastEvalDiffAzimuthDegs));
+				appendCaptionLine(txt, "X命中: ", boolToYesNo(snapshot.lastEvalXHit));
+				appendCaptionLine(txt, "Y命中: ", boolToYesNo(snapshot.lastEvalYHit));
+				appendCaptionLine(txt, "融合命中: ", boolToYesNo(snapshot.lastEvalHit));
+			}
+			else
+			{
+				appendCaptionLine(txt, "融合判定: ", "暂无有效样本");
+			}
+		}
+		else
+		{
+			appendCaptionLine(txt, "----融合调试----", "");
+			appendCaptionLine(txt, "快照: ", "暂无");
 		}
 	}
 

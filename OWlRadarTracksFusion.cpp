@@ -27,6 +27,112 @@ static const double OWL_ASSOCIATION_DISTANCE_METRES = 1000.0;
 static const UINT32 OWL_FUSED_TRACK_SENDER_ID = 99;
 static const int OWL_FUSED_TRACK_MAX_IDS = 3000;
 
+/*
+ * P0：发送逻辑移出大锁（仅改内部实现，不改外部接口）。
+ *
+ * 设计说明：
+ * 1) onRadarTrackUpdate 在大锁内执行成员关系与融合状态更新；
+ * 2) 锁内不直接做网络发送，而是把待发送包暂存到“线程本地队列”；
+ * 3) 退出大锁后统一 flush，避免网络发送阻塞融合主锁。
+ *
+ * 采用 thread_local 的原因：
+ * - 不改变现有函数签名与回调路径；
+ * - 同一线程内可自然继承“锁内 defer、锁外 flush”的语义；
+ * - 避免跨线程共享队列导致额外锁竞争。
+ */
+struct DeferredTrackPacketSend
+{
+	SPxPacketTrackExtended ext;
+	bool sendToLocal = false;
+	bool sendToExternal = false;
+};
+
+static thread_local bool g_isDeferringTrackPacketSend = false;
+static thread_local vector<DeferredTrackPacketSend> g_deferredTrackPacketSends;
+
+/*
+ * 立即发送单个航迹扩展包。
+ * 返回值：所有目标 sender 均发送成功返回 true，否则 false。
+ */
+static bool SendTrackPacketNow(
+	SPxPacketSender* localSender,
+	SPxPacketSender* externalSender,
+	const SPxPacketTrackExtended& ext,
+	bool sendToLocal,
+	bool sendToExternal)
+{
+	const int bufLen = sizeof(SPxPacketTrackExtended);
+	unsigned char buf[bufLen] = { 0 };
+	SPxRemoteServer::TrackPackNet(&(ext.norm.min), &(ext.norm), &ext, buf, bufLen);
+
+	SPxTime_t now;
+	SPxTimeGetEpoch(&now);
+
+	bool ok = true;
+	if (sendToLocal && localSender)
+	{
+		SPxErrorCode err = localSender->SendPacketB(SPX_PACKET_TYPEB_TRACK_EXT, now, &buf, bufLen);
+		if (err != SPX_NO_ERROR)
+		{
+			ok = false;
+		}
+	}
+
+	if (sendToExternal && externalSender)
+	{
+		SPxErrorCode err = externalSender->SendPacketB(SPX_PACKET_TYPEB_TRACK_EXT, now, &buf, bufLen);
+		if (err != SPX_NO_ERROR)
+		{
+			ok = false;
+		}
+	}
+
+	return ok;
+}
+
+/*
+ * 锁内调用时：入队，不发送；
+ * 非锁内 defer 场景：立即发送。
+ */
+static bool QueueOrSendTrackPacket(
+	SPxPacketSender* localSender,
+	SPxPacketSender* externalSender,
+	const SPxPacketTrackExtended& ext,
+	bool sendToLocal,
+	bool sendToExternal)
+{
+	if (g_isDeferringTrackPacketSend)
+	{
+		DeferredTrackPacketSend item;
+		item.ext = ext;
+		item.sendToLocal = sendToLocal;
+		item.sendToExternal = sendToExternal;
+		g_deferredTrackPacketSends.push_back(item);
+		return true;
+	}
+
+	return SendTrackPacketNow(localSender, externalSender, ext, sendToLocal, sendToExternal);
+}
+
+/* 锁外统一下发锁内积压的发送包。 */
+static void FlushDeferredTrackPackets(
+	SPxPacketSender* localSender,
+	SPxPacketSender* externalSender)
+{
+	if (g_deferredTrackPacketSends.empty())
+	{
+		return;
+	}
+
+	for (int i = 0; i < (int)g_deferredTrackPacketSends.size(); i++)
+	{
+		const DeferredTrackPacketSend& item = g_deferredTrackPacketSends[i];
+		SendTrackPacketNow(localSender, externalSender, item.ext, item.sendToLocal, item.sendToExternal);
+	}
+
+	g_deferredTrackPacketSends.clear();
+}
+
 static void RemoveUnifiedTrackFromVec(vector<UINT32>& trackVec, UINT32 trackUnifiedID)
 {
 	for (auto it = trackVec.begin(); it != trackVec.end(); )
@@ -192,6 +298,12 @@ OWlRadarTracksFusion::OWlRadarTracksFusion(SPxUniTrackDatabase* uniTrackDb)
 
 	//初始化
 	m_lock.Initialise();
+	/*
+	 * P0-1：调试快照锁初始化。
+	 * 该锁仅保护调试快照 map，不参与融合主流程判定，
+	 * 避免调试读取影响融合主链路性能。
+	 */
+	m_debugLock.Initialise();
 	m_tracksRtn = new SPxUniTrackDatabase::TrackDist_t*[RADAR_SENSORS_MAX_NUM];
 	fusedTrackDB = m_uniTrackDb->GetFusedTrackSource(0);
 
@@ -295,9 +407,18 @@ int OWlRadarTracksFusion::UniTrackDBEventFunc(
 
 void  OWlRadarTracksFusion::onRadarTrackCreate(SPxRadarTrack* track)
 {
-	
+	/*
+	 * P0-1：雷达目标创建时立即写入初始调试快照。
+	 * 这样在目标刚出现时，标牌就能显示组网内部状态。
+	 */
+	updateRadarTrackDebugSnapshot(
+		track,
+		"radar_create",
+		NULL,
+		0.0,
+		false,
+		false);
 }
-
 void OWlRadarTracksFusion::onFusedTrackUpdate(SPxRadarTrack* track)
 {
 	if (!track)
@@ -321,6 +442,7 @@ void OWlRadarTracksFusion::onFusedTrackUpdate(SPxRadarTrack* track)
 	const SPxPacketTrackExtended* extRpt = track->GetExtRpt();
 	if (!extRpt)
 	{
+		updateFusedTrackDebugSnapshot(track, "fused_update_no_ext", false);
 		return;
 	}
 
@@ -352,20 +474,39 @@ void OWlRadarTracksFusion::onFusedTrackUpdate(SPxRadarTrack* track)
 		deduplicateTrackVec(memberUnifiedIDs);
 		fud->trackVec = memberUnifiedIDs;
 	}
-}
 
+	/*
+	 * P0-1：记录 fused 在“外部更新回调”下的最新状态。
+	 */
+	updateFusedTrackDebugSnapshot(track, "fused_update", false);
+}
 void OWlRadarTracksFusion::onRadarTrackDelete(SPxRadarTrack* track)
 {
-	RadarTrackUserData* rud = (RadarTrackUserData*)track->GetUserData();
-	if (!rud)
+	if (!track)
 	{
 		return;
 	}
 
+	UINT32 radarUnifiedID = track->GetUnifiedID();
+	RadarTrackUserData* rud = (RadarTrackUserData*)track->GetUserData();
+	if (!rud)
+	{
+		removeRadarTrackDebugSnapshot(radarUnifiedID);
+		return;
+	}
+
+	updateRadarTrackDebugSnapshot(
+		track,
+		"radar_delete",
+		NULL,
+		0.0,
+		false,
+		false);
+
 	SPxRadarTrack* fusedTrack = (SPxRadarTrack*)fusedTrackDB->GetTrack(rud->fusedID);
 	if (fusedTrack)
 	{
-	FusedTrackUserData* fud = (FusedTrackUserData*)fusedTrack->GetUserData();
+		FusedTrackUserData* fud = (FusedTrackUserData*)fusedTrack->GetUserData();
 		if (fud)
 		{
 			/*
@@ -386,22 +527,25 @@ void OWlRadarTracksFusion::onRadarTrackDelete(SPxRadarTrack* track)
 	}
 
 	delete rud;
+	removeRadarTrackDebugSnapshot(radarUnifiedID);
 }
-
 void OWlRadarTracksFusion::onFusedTrackDelete(SPxRadarTrack* track)
 {
-	const SPxPacketTrackExtended* extRpt = track->GetExtRpt();
-	
+	if (!track)
+	{
+		return;
+	}
+
 	FusedTrackUserData* fud = (FusedTrackUserData*)track->GetUserData();
 	if (fud)
 	{
 		for (int i = 0; i < fud->trackVec.size(); i++)
 		{
 			UINT32 uniqueID = (fud->trackVec[i]);
-			SPxRadarTrack* track = (SPxRadarTrack*)m_uniTrackDb->GetTrack(uniqueID);
-			if (track)
+			SPxRadarTrack* memberTrack = (SPxRadarTrack*)m_uniTrackDb->GetTrack(uniqueID);
+			if (memberTrack)
 			{
-				RadarTrackUserData* rud = (RadarTrackUserData*)track->GetUserData();
+				RadarTrackUserData* rud = (RadarTrackUserData*)memberTrack->GetUserData();
 				if (rud)
 				{
 					if (rud->fusedID != 0)
@@ -409,147 +553,249 @@ void OWlRadarTracksFusion::onFusedTrackDelete(SPxRadarTrack* track)
 						rud->fusedID = 0;
 					}
 				}
+
+				/*
+				 * P0-1：fused 删除后，成员雷达轨迹的调试快照也要同步为“已解绑”。
+				 */
+				updateRadarTrackDebugSnapshot(
+					memberTrack,
+					"fused_delete_detach_member",
+					NULL,
+					0.0,
+					false,
+					false);
 			}
 		}
 
 		delete fud;
 	}
-	
-	
 
 	UINT32 id = track->GetID();
 	m_idPool.releaseID(id);
+	removeFusedTrackDebugSnapshot(id);
 }
-
-
-
-
 void OWlRadarTracksFusion::onRadarTrackUpdate(SPxRadarTrack* track)
 {
-	SPxAutoLock lock(m_lock);
-
-	//check userData
-	RadarTrackUserData* rud = (RadarTrackUserData*)track->GetUserData();
-	if (!rud)
-	{
-		rud = new RadarTrackUserData();
-		memset(rud, 0, sizeof(RadarTrackUserData));
-		track->SetUserData(rud);
-	}
-
-
-	rud->count++;
-	if (rud->count < 2)//延迟一圈，否则来不及存入内存数据库
+	if (!track)
 	{
 		return;
 	}
 
+	bool shouldFlushDeferredPackets = false;
 
-	/**********************************************************************/
-	if (track->GetIsSelected())
 	{
-		char buf[1024] = { 0 };
-		sprintf_s(buf, "track fusedId=%d  perfusedId=%d   hitCount=%d", rud->fusedID, rud->preFusedID, rud->hitCount);
-		OWlError(OWL_ERR_INFO, buf);
-	}
+		SPxAutoLock lock(m_lock);
 
-	const SPxPacketTrackExtended* extRpt = track->GetExtRpt();
-	if (rud->fusedID == 0)//该目标还未与融合航迹关联
-	{
-		handleUnAssiocatedRadarTrack(track);
-	}
-	else//该航迹已和融合航迹关联
-	{
-		handleAassiocatedRadarTrack(track);
-	}
-}
+		/*
+		 * P0：在进入大锁时打开“发送延迟”开关，
+		 * 锁内所有发送请求仅入队，不做网络 I/O。
+		 */
+		g_deferredTrackPacketSends.clear();
+		g_isDeferringTrackPacketSend = true;
 
-
-bool OWlRadarTracksFusion::fuseEngine(SPxRadarTrack* track, SPxRadarTrack* fusedTrack, UINT8 threshMulti)
-{
-	bool ret = false;
-
-
-	/* 获取内部航迹，理论上只有一个 */
-
-	SPxRadarTrack* interTrack = NULL;
-	
-	//20240222 注意：融合航迹本身就是一个完整意义上的航迹,直接用融合航迹本身进行融合判断
-
-	interTrack = fusedTrack;
-	
-	if (interTrack)
-	{
-		//雷达观测误差（由外部配置）
-		const double radarAziObserveDiffDegsLocal =
-			(this->radarAziObserveDiffDegs > EPS) ? this->radarAziObserveDiffDegs : EPS;
-		const double radarDisObserveDiffMetresLocal =
-			(this->radarDisObserveDiffMetres > EPS) ? this->radarDisObserveDiffMetres : EPS;
-		double radarAziObserveDiffRad = radarAziObserveDiffDegsLocal / 180.0 * PI;
-
-		const SPxPacketTrackExtended* interTrackExtRpt = interTrack->GetExtRpt();
-		double interTrackRangeMetres = interTrackExtRpt->norm.min.rangeMetres;
-		double interTrackAziRad = interTrackExtRpt->norm.min.azimuthDegrees / 180.0 * PI;
-		double interTrackLatDegs = interTrackExtRpt->latDegs;
-		double interTrackLonDegs = interTrackExtRpt->longDegs;
-
-		const SPxPacketTrackExtended* trackExtRpt = track->GetExtRpt();
-		double trackRangeMetres = trackExtRpt->norm.min.rangeMetres;
-		double trackAziRad = trackExtRpt->norm.min.azimuthDegrees / 180.0 * PI;
-		double trackLatDegs = trackExtRpt->latDegs;
-		double trackLonDegs = trackExtRpt->longDegs;
-
-		/* 转换到直角坐标 */
-		double interTrackMeasErrXMetres = 
-			radarDisObserveDiffMetresLocal * sin(interTrackAziRad)
-			+ interTrackRangeMetres * radarAziObserveDiffRad * cos(interTrackAziRad);
-		double interTrackMeasErrYMetres = radarDisObserveDiffMetresLocal * cos(interTrackAziRad)
-			+ interTrackRangeMetres * radarAziObserveDiffRad * sin(interTrackAziRad);
-
-		double trackMeasErrXMetres =
-			radarDisObserveDiffMetresLocal * sin(trackAziRad)
-			+ trackRangeMetres * radarAziObserveDiffRad * cos(trackAziRad);
-		double trackMeasErrYMetres = radarDisObserveDiffMetresLocal * cos(trackAziRad)
-			+ trackRangeMetres * radarAziObserveDiffRad * sin(trackAziRad);
-
-		double threshXMetres = threshMulti * sqrt((interTrackMeasErrXMetres*interTrackMeasErrXMetres + trackMeasErrXMetres*trackMeasErrXMetres));
-		double dxMetres = 0;
-		double dyMetres = 0;
-		SPxLatLongDiffMetres(interTrackLatDegs, interTrackLonDegs,
-			trackLatDegs, trackLonDegs, &dxMetres, &dyMetres);
-		double diffXMetres = fabs(dxMetres);
-		bool isXHit = diffXMetres < threshXMetres + EPS;
-
-		double threshYMetres = threshMulti * sqrt((interTrackMeasErrYMetres*interTrackMeasErrYMetres + trackMeasErrYMetres*trackMeasErrYMetres));
-		double diffYMetres = fabs(dyMetres);
-		bool isYHit = diffYMetres < threshYMetres;
-			
-
-		if (isXHit && isYHit)
+		//check userData
+		RadarTrackUserData* rud = (RadarTrackUserData*)track->GetUserData();
+		if (!rud)
 		{
-			ret = true;
+			rud = new RadarTrackUserData();
+			memset(rud, 0, sizeof(RadarTrackUserData));
+			track->SetUserData(rud);
 		}
 
+		rud->count++;
+		updateRadarTrackDebugSnapshot(
+			track,
+			"radar_update_enter",
+			NULL,
+			0.0,
+			false,
+			false);
+		if (rud->count < 2)//延迟一圈，否则来不及存入内存数据库
+		{
+			updateRadarTrackDebugSnapshot(
+				track,
+				"radar_update_wait_next_scan",
+				NULL,
+				0.0,
+				false,
+				false);
+			g_isDeferringTrackPacketSend = false;
+			g_deferredTrackPacketSends.clear();
+			return;
+		}
+
+		/**********************************************************************/
 		if (track->GetIsSelected())
 		{
 			char buf[1024] = { 0 };
-			sprintf_s(buf, "track=%d  iner=%d, diffXMetres=%0.2f threshXMetres=%0.2f diffYMetres=%0.2f threshYMetres=%0.2f"
-				, track->GetID(),interTrack->GetID()
-				, diffXMetres, threshXMetres, diffYMetres, threshYMetres);
+			sprintf_s(buf, "track fusedId=%d  perfusedId=%d   hitCount=%d", rud->fusedID, rud->preFusedID, rud->hitCount);
 			OWlError(OWL_ERR_INFO, buf);
 		}
+
+		if (rud->fusedID == 0)//该目标还未与融合航迹关联
+		{
+			handleUnAssiocatedRadarTrack(track);
+		}
+		else//该航迹已和融合航迹关联
+		{
+			handleAassiocatedRadarTrack(track);
+		}
+
+		updateRadarTrackDebugSnapshot(
+			track,
+			"radar_update_done",
+			NULL,
+			0.0,
+			false,
+			false);
+
+		/* 锁内状态处理结束，允许锁外统一发送。 */
+		g_isDeferringTrackPacketSend = false;
+		shouldFlushDeferredPackets = true;
+	}
+
+	/*
+	 * P0：网络发送统一放在锁外执行，
+	 * 降低大锁持有时间，避免网络抖动放大为融合主链路阻塞。
+	 */
+	if (shouldFlushDeferredPackets)
+	{
+		FlushDeferredTrackPackets(m_trackFusedSenderLocal, m_trackFusedSender);
+	}
+}
+
+bool OWlRadarTracksFusion::fuseEngine(SPxRadarTrack* track, SPxRadarTrack* fusedTrack, UINT8 threshMulti)
+{
+	/*
+	 * Detailed runtime metrics are collected here for debug overlay:
+	 * - configured threshold parameters;
+	 * - actual x/y errors and x/y thresholds;
+	 * - range/azimuth differences in polar space.
+	 */
+	bool ret = false;
+
+	OWlFuseEvalDebugMetrics metrics = { 0 };
+	metrics.threshMulti = threshMulti;
+	if (track)
+	{
+		metrics.radarUnifiedID = track->GetUnifiedID();
+		metrics.radarTrackID = track->GetID();
+	}
+	if (fusedTrack)
+	{
+		metrics.fusedID = fusedTrack->GetID();
+	}
+
+	SPxRadarTrack* interTrack = fusedTrack;
+	if (!track || !interTrack)
+	{
+		recordFuseEvalDebugMetrics(metrics);
+		return false;
+	}
+
+	const double radarAziObserveDiffDegsLocal =
+		(this->radarAziObserveDiffDegs > EPS) ? this->radarAziObserveDiffDegs : EPS;
+	const double radarDisObserveDiffMetresLocal =
+		(this->radarDisObserveDiffMetres > EPS) ? this->radarDisObserveDiffMetres : EPS;
+	const double radarAziObserveDiffRad = radarAziObserveDiffDegsLocal / 180.0 * PI;
+
+	metrics.cfgAziObsDiffDegs = radarAziObserveDiffDegsLocal;
+	metrics.cfgDisObsDiffMetres = radarDisObserveDiffMetresLocal;
+
+	const SPxPacketTrackExtended* interTrackExtRpt = interTrack->GetExtRpt();
+	const SPxPacketTrackExtended* trackExtRpt = track->GetExtRpt();
+	if (!interTrackExtRpt || !trackExtRpt)
+	{
+		recordFuseEvalDebugMetrics(metrics);
+		return false;
+	}
+
+	const double interTrackRangeMetres = interTrackExtRpt->norm.min.rangeMetres;
+	const double interTrackAziDegs = interTrackExtRpt->norm.min.azimuthDegrees;
+	const double interTrackAziRad = interTrackAziDegs / 180.0 * PI;
+	const double interTrackLatDegs = interTrackExtRpt->latDegs;
+	const double interTrackLonDegs = interTrackExtRpt->longDegs;
+
+	const double trackRangeMetres = trackExtRpt->norm.min.rangeMetres;
+	const double trackAziDegs = trackExtRpt->norm.min.azimuthDegrees;
+	const double trackAziRad = trackAziDegs / 180.0 * PI;
+	const double trackLatDegs = trackExtRpt->latDegs;
+	const double trackLonDegs = trackExtRpt->longDegs;
+
+	/* Convert measurement uncertainty to Cartesian axes. */
+	const double interTrackMeasErrXMetres =
+		radarDisObserveDiffMetresLocal * sin(interTrackAziRad)
+		+ interTrackRangeMetres * radarAziObserveDiffRad * cos(interTrackAziRad);
+	const double interTrackMeasErrYMetres =
+		radarDisObserveDiffMetresLocal * cos(interTrackAziRad)
+		+ interTrackRangeMetres * radarAziObserveDiffRad * sin(interTrackAziRad);
+
+	const double trackMeasErrXMetres =
+		radarDisObserveDiffMetresLocal * sin(trackAziRad)
+		+ trackRangeMetres * radarAziObserveDiffRad * cos(trackAziRad);
+	const double trackMeasErrYMetres =
+		radarDisObserveDiffMetresLocal * cos(trackAziRad)
+		+ trackRangeMetres * radarAziObserveDiffRad * sin(trackAziRad);
+
+	const double threshXMetres = threshMulti * sqrt(
+		(interTrackMeasErrXMetres * interTrackMeasErrXMetres)
+		+ (trackMeasErrXMetres * trackMeasErrXMetres));
+	const double threshYMetres = threshMulti * sqrt(
+		(interTrackMeasErrYMetres * interTrackMeasErrYMetres)
+		+ (trackMeasErrYMetres * trackMeasErrYMetres));
+
+	double dxMetres = 0.0;
+	double dyMetres = 0.0;
+	SPxLatLongDiffMetres(interTrackLatDegs, interTrackLonDegs,
+		trackLatDegs, trackLonDegs, &dxMetres, &dyMetres);
+
+	const double diffXMetres = fabs(dxMetres);
+	const double diffYMetres = fabs(dyMetres);
+	const bool isXHit = (diffXMetres < threshXMetres + EPS);
+	const bool isYHit = (diffYMetres < threshYMetres);
+
+	ret = (isXHit && isYHit);
+
+	/* Normalize azimuth difference to [0, 180] deg. */
+	double diffAzimuthDegs = fabs(interTrackAziDegs - trackAziDegs);
+	while (diffAzimuthDegs > 360.0)
+	{
+		diffAzimuthDegs -= 360.0;
+	}
+	if (diffAzimuthDegs > 180.0)
+	{
+		diffAzimuthDegs = 360.0 - diffAzimuthDegs;
+	}
+
+	metrics.hasValue = true;
+	metrics.dxMetres = dxMetres;
+	metrics.dyMetres = dyMetres;
+	metrics.diffXMetres = diffXMetres;
+	metrics.diffYMetres = diffYMetres;
+	metrics.threshXMetres = threshXMetres;
+	metrics.threshYMetres = threshYMetres;
+	metrics.diffRangeMetres = fabs(interTrackRangeMetres - trackRangeMetres);
+	metrics.diffAzimuthDegs = diffAzimuthDegs;
+	metrics.isXHit = isXHit;
+	metrics.isYHit = isYHit;
+	metrics.isFuseHit = ret;
+
+	recordFuseEvalDebugMetrics(metrics);
+
+	if (track->GetIsSelected())
+	{
+		char buf[1024] = { 0 };
+		sprintf_s(buf,
+			"track=%d iner=%d diffX=%.2f thX=%.2f diffY=%.2f thY=%.2f hit=%d",
+			track->GetID(), interTrack->GetID(),
+			diffXMetres, threshXMetres, diffYMetres, threshYMetres,
+			(ret ? 1 : 0));
+		OWlError(OWL_ERR_INFO, buf);
 	}
 
 	return ret;
 }
 
-
-/*
- * 将统一成员列表做“稳定去重”。
- * 说明：
- * - 保持原有顺序，仅移除重复 UnifiedID；
- * - 用于修复 trackVec 被重复插入后引发的融合状态污染。
- */
 void OWlRadarTracksFusion::deduplicateTrackVec(vector<UINT32>& trackVec)
 {
 	for (int i = 0; i < (int)trackVec.size(); i++)
@@ -733,14 +979,24 @@ void OWlRadarTracksFusion::sendDeletePacketForFusedTrack(UINT32 fusedID)
 	ext.norm.min.id = fusedID;
 	ext.norm.min.status = SPX_PACKET_TRACK_STATUS_DELETED;
 
-	const int bufLen = sizeof(SPxPacketTrackExtended);
-	unsigned char buf[bufLen] = { 0 };
-	SPxRemoteServer::TrackPackNet(&(ext.norm.min), &(ext.norm), &ext, buf, bufLen);
+	/*
+	 * P0-1：记录 fused 删除发送动作，便于界面观察“由重算触发删除”的链路。
+	 */
+	SPxRadarTrack* fusedTrack = fusedTrackDB ? fusedTrackDB->GetTrack(fusedID) : NULL;
+	if (fusedTrack)
+	{
+		updateFusedTrackDebugSnapshot(fusedTrack, "fused_send_delete_packet", true);
+	}
+	else
+	{
+		removeFusedTrackDebugSnapshot(fusedID);
+	}
 
-	SPxTime_t now;
-	SPxTimeGetEpoch(&now);
-	m_trackFusedSenderLocal->SendPacketB(SPX_PACKET_TYPEB_TRACK_EXT, now, &buf, bufLen);
-	m_trackFusedSender->SendPacketB(SPX_PACKET_TYPEB_TRACK_EXT, now, &buf, bufLen);
+	/*
+	 * P0：删除包在锁内场景只入队，锁外统一 flush。
+	 * 语义保持不变：本地回灌 + 对外分发都发送。
+	 */
+	QueueOrSendTrackPacket(m_trackFusedSenderLocal, m_trackFusedSender, ext, true, true);
 }
 
 /*
@@ -762,6 +1018,10 @@ bool OWlRadarTracksFusion::refreshFusedTrackFromMembers(
 	FusedTrackUserData* fud = (FusedTrackUserData*)fusedTrack->GetUserData();
 	if (!fud || fud->trackVec.empty())
 	{
+		/*
+		 * P0-1：记录“成员为空触发删除”。
+		 */
+		updateFusedTrackDebugSnapshot(fusedTrack, "fused_refresh_empty_members", true);
 		sendDeletePacketForFusedTrack(fusedTrack->GetID());
 		return false;
 	}
@@ -772,6 +1032,10 @@ bool OWlRadarTracksFusion::refreshFusedTrackFromMembers(
 	deduplicateTrackVec(fud->trackVec);
 	if (fud->trackVec.empty())
 	{
+		/*
+		 * P0-1：去重后为空也属于可观测删除路径。
+		 */
+		updateFusedTrackDebugSnapshot(fusedTrack, "fused_refresh_empty_after_dedup", true);
 		sendDeletePacketForFusedTrack(fusedTrack->GetID());
 		return false;
 	}
@@ -779,6 +1043,7 @@ bool OWlRadarTracksFusion::refreshFusedTrackFromMembers(
 	SPxPacketTrackExtended* fusedTrackExtRpt = (SPxPacketTrackExtended*)fusedTrack->GetExtRpt();
 	if (!fusedTrackExtRpt)
 	{
+		updateFusedTrackDebugSnapshot(fusedTrack, "fused_refresh_no_ext", false);
 		return false;
 	}
 
@@ -863,11 +1128,19 @@ bool OWlRadarTracksFusion::refreshFusedTrackFromMembers(
 	fusedTrackExtRpt->norm.yMetres = yM;
 
 	const SPxPacketTrackExtended* ext = fusedTrack->GetExtRpt();
-	const int bufLen = sizeof(SPxPacketTrackExtended);
-	unsigned char buf[bufLen] = { 0 };
-	SPxRemoteServer::TrackPackNet(&(ext->norm.min), &(ext->norm), ext, buf, bufLen);
-	SPxTimeGetEpoch(&now);
-	m_trackFusedSender->SendPacketB(SPX_PACKET_TYPEB_TRACK_EXT, now, &buf, bufLen);
+	if (ext)
+	{
+		/*
+		 * P0：锁内路径只入队，锁外统一发送。
+		 * 该路径保持原语义：仅对外发送，不走 local sender。
+		 */
+		QueueOrSendTrackPacket(m_trackFusedSenderLocal, m_trackFusedSender, *ext, false, true);
+	}
+
+	/*
+	 * P0-1：记录 fused 重算并发布后的最终状态。
+	 */
+	updateFusedTrackDebugSnapshot(fusedTrack, "fused_refresh_publish", false);
 
 	return true;
 }
@@ -965,6 +1238,7 @@ void OWlRadarTracksFusion::preFuse(SPxRadarTrack* track)
 	/* 预融合阶段必须存在候选 fused。 */
 	if (rud->preFusedID == 0)
 	{
+		updateRadarTrackDebugSnapshot(track, "prefuse_no_candidate", NULL, 0.0, false, false);
 		return;
 	}
 
@@ -974,6 +1248,7 @@ void OWlRadarTracksFusion::preFuse(SPxRadarTrack* track)
 		/* 候选 fused 不存在：清空预融合状态，等待后续重新选择候选。 */
 		rud->preFusedID = 0;
 		rud->hitCount = 0;
+		updateRadarTrackDebugSnapshot(track, "prefuse_candidate_missing", NULL, 0.0, false, false);
 		return;
 	}
 
@@ -990,12 +1265,14 @@ void OWlRadarTracksFusion::preFuse(SPxRadarTrack* track)
 		/* 本次判定失败：放弃当前候选。 */
 		rud->preFusedID = 0;
 		rud->hitCount = 0;
+		updateRadarTrackDebugSnapshot(track, "prefuse_reject", fusedTrack, 0.0, true, false);
 		return;
 	}
 
 	/* 命中次数不足：继续预融合。 */
 	if (rud->hitCount < FUSION_HIT_COUNT_THRESH)
 	{
+		updateRadarTrackDebugSnapshot(track, "prefuse_wait_hit", fusedTrack, 0.0, true, true);
 		return;
 	}
 
@@ -1067,7 +1344,13 @@ void OWlRadarTracksFusion::preFuse(SPxRadarTrack* track)
 	 * preferredSizeTrack 使用当前并入轨迹，确保尺寸字段有可用来源。
 	 */
 	refreshFusedTrackFromMembers(fusedTrack, track);
+
+	/*
+	 * P0-1：记录预融合正式提交结果。
+	 */
+	updateRadarTrackDebugSnapshot(track, "prefuse_commit", fusedTrack, 0.0, true, true);
 }
+
 void OWlRadarTracksFusion::computeFusedTrackPosSpeedCourse(SPxRadarTrack* fusedTrack
 	, SPxLatLong_t* posRet, double* speedRet, double* courseRet)
 {
@@ -1091,16 +1374,30 @@ void OWlRadarTracksFusion::computeFusedTrackPosSpeedCourse(SPxRadarTrack* fusedT
 				double rangeMetres = track->GetRangeMetres();
 				if (rangeMetres < EPS)
 				{
-					all_rangeMeteres += 1 / 100;
+					all_rangeMeteres += 1.0 / 100.0;
 				}
 				else
 				{
-					all_rangeMeteres += 1 / rangeMetres;
+					all_rangeMeteres += 1.0 / rangeMetres;
 				}
 			}
 		}
 
 		double x = 0, y = 0;
+		/*
+		 * P0：分母防护。
+		 * 当有效成员缺失或权重和过小（<=EPS）时，禁止进入除法；
+		 * 回退策略：保持输出为“当前 fused 报文中的速度/航向”，位置使用已累计值（默认 0）。
+		 */
+		if (all_rangeMeteres <= EPS)
+		{
+			if (extRpt)
+			{
+				*speedRet = extRpt->norm.min.speedMps;
+				*courseRet = extRpt->norm.min.courseDegrees;
+			}
+			return;
+		}
 		double m_weight = 0;
 		double trackx = 0, tracky = 0;
 		for (int i = 0; i < fud->trackVec.size(); i++)
@@ -1124,13 +1421,13 @@ void OWlRadarTracksFusion::computeFusedTrackPosSpeedCourse(SPxRadarTrack* fusedT
 				y = cos(m_radian)*s;
 
 				double rangeMetres = track->GetRangeMetres();
-				if (rangeMetres == 0)
+				if (rangeMetres < EPS)
 				{
-					m_weight = (1 / 100) / all_rangeMeteres;
+					m_weight = (1.0 / 100.0) / all_rangeMeteres;
 				}
 				else
 				{
-					m_weight = (1 / rangeMetres) / all_rangeMeteres;
+					m_weight = (1.0 / rangeMetres) / all_rangeMeteres;
 				}
 				fusedPos.latDegs += (m_weight*Lat);
 				fusedPos.longDegs += (m_weight*Lon);
@@ -1209,6 +1506,14 @@ void OWlRadarTracksFusion::onFusedTrackCreate(SPxRadarTrack* track)
 		{
 			rud->fusedID = track->GetID();
 		}
+
+		updateRadarTrackDebugSnapshot(
+			radarTrack,
+			"fused_create_attach_member",
+			track,
+			0.0,
+			true,
+			true);
 	}
 
 	/*
@@ -1224,19 +1529,56 @@ void OWlRadarTracksFusion::onFusedTrackCreate(SPxRadarTrack* track)
 			{
 				rud->fusedID = track->GetID();
 			}
+
+			updateRadarTrackDebugSnapshot(
+				radarTrack,
+				"fused_create_attach_member_legacy",
+				track,
+				0.0,
+				true,
+				true);
 		}
 	}
+
+	/*
+	 * P0-1：记录 fused 创建后的初始快照。
+	 */
+	updateFusedTrackDebugSnapshot(track, "fused_create", false);
 }
 
 
 
 void OWlRadarTracksFusion::handleUnAssiocatedRadarTrack(SPxRadarTrack* track)
 {
+	if (!track)
+	{
+		return;
+	}
+
 	//是否处于预融合状态
 	RadarTrackUserData* rud = (RadarTrackUserData*)track->GetUserData();
+	if (!rud)
+	{
+		return;
+	}
+
 	const SPxPacketTrackExtended* extRpt = track->GetExtRpt();
+	if (!extRpt)
+	{
+		updateRadarTrackDebugSnapshot(track, "unassoc_no_ext", NULL, 0.0, false, false);
+		return;
+	}
+
 	if (rud->preFusedID != 0)
 	{
+		SPxRadarTrack* preFusedTrack = fusedTrackDB->GetTrack(rud->preFusedID);
+		updateRadarTrackDebugSnapshot(
+			track,
+			"unassoc_prefuse_continue",
+			preFusedTrack,
+			0.0,
+			(preFusedTrack != NULL),
+			false);
 		preFuse(track);
 	}
 	else
@@ -1267,13 +1609,18 @@ void OWlRadarTracksFusion::handleUnAssiocatedRadarTrack(SPxRadarTrack* track)
 			}
 		}
 
+		updateRadarTrackDebugSnapshot(
+			track,
+			(isNearestFusedTrackVaild ? (isFused ? "unassoc_candidate_hit" : "unassoc_candidate_miss") : "unassoc_candidate_invalid"),
+			fusedTrack,
+			disMetresRtn,
+			isNearestFusedTrackVaild,
+			isFused);
 
 		//不符合关联,则直接新建单独融合航迹
 		//if (!isNearestFusedTrackVaild || !isFused)
 		if (!isNearestFusedTrackVaild || rud->failCount > FUSION_FIAL_COUNT_THRESH)
 		{
-			
-
 			SPxPacketTrackExtended ext = { 0 };
 			memcpy(&ext, extRpt, sizeof(SPxPacketTrackExtended));
 
@@ -1296,6 +1643,14 @@ void OWlRadarTracksFusion::handleUnAssiocatedRadarTrack(SPxRadarTrack* track)
 				rud->fusedID = 0;
 				rud->preFusedID = 0;
 				rud->hitCount = 0;
+
+				updateRadarTrackDebugSnapshot(
+					track,
+					"unassoc_create_fused_id_exhausted",
+					NULL,
+					0.0,
+					false,
+					false);
 				return;
 			}
 			ext.norm.min.id = (UINT32)newFusedID;
@@ -1346,14 +1701,13 @@ void OWlRadarTracksFusion::handleUnAssiocatedRadarTrack(SPxRadarTrack* track)
 			ext.norm.xMetres = xM;
 			ext.norm.yMetres = yM;
 
-			const int bufLen = sizeof(SPxPacketTrackExtended);
-			unsigned char buf[bufLen] = { 0 };
-			SPxRemoteServer::TrackPackNet(&(ext.norm.min), &(ext.norm), &ext, buf, bufLen);
-			SPxTime_t now;
-			SPxTimeGetEpoch(&now);
-			SPxErrorCode errLocal = m_trackFusedSenderLocal->SendPacketB(SPX_PACKET_TYPEB_TRACK_EXT, now, &buf, bufLen);
-			SPxErrorCode errExt = m_trackFusedSender->SendPacketB(SPX_PACKET_TYPEB_TRACK_EXT, now, &buf, bufLen);
-			if (errLocal != SPX_NO_ERROR || errExt != SPX_NO_ERROR)
+			/*
+			 * P0：创建 fused 的发送改为“可延迟发送”。
+			 * - 锁内：仅入队；
+			 * - 锁外：统一 flush。
+			 */
+			bool sendOk = QueueOrSendTrackPacket(m_trackFusedSenderLocal, m_trackFusedSender, ext, true, true);
+			if (!sendOk)
 			{
 				int zp = 1;
 			}
@@ -1365,10 +1719,16 @@ void OWlRadarTracksFusion::handleUnAssiocatedRadarTrack(SPxRadarTrack* track)
 			rud->hitCount = 0;
 			rud->preFusedID = 0;
 
+			updateRadarTrackDebugSnapshot(
+				track,
+				"unassoc_create_single_fused",
+				NULL,
+				0.0,
+				false,
+				false);
 		}
 	}
 }
-
 void OWlRadarTracksFusion::handleAassiocatedRadarTrack(SPxRadarTrack* track)
 {
 	/*
@@ -1395,6 +1755,8 @@ void OWlRadarTracksFusion::handleAassiocatedRadarTrack(SPxRadarTrack* track)
 		sprintf_s(buf, "fusedTrack=%d no exist", rud->fusedID);
 		OWlError(OWL_ERR_WARNING, buf);
 
+		updateRadarTrackDebugSnapshot(track, "assoc_fused_missing", NULL, 0.0, false, false);
+
 		/* 融合目标已不存在，清空绑定关系。 */
 		resetRadarTrackUserData(rud);
 		return;
@@ -1417,6 +1779,7 @@ void OWlRadarTracksFusion::handleAassiocatedRadarTrack(SPxRadarTrack* track)
 		 * 单成员 fused：允许该轨迹寻找更优 fused（迁移逻辑在子函数内）。
 		 * 子函数可能触发 preFuse 并改变 rud->fusedID，因此后续使用“最新 fusedID”再刷新。
 		 */
+		updateRadarTrackDebugSnapshot(track, "assoc_single_member", fusedTrack, 0.0, true, false);
 		handleAassiocatedRadarTrackFusedSingle(track, fusedTrack);
 
 		SPxRadarTrack* currentFusedTrack = fusedTrackDB->GetTrack(rud->fusedID);
@@ -1424,11 +1787,14 @@ void OWlRadarTracksFusion::handleAassiocatedRadarTrack(SPxRadarTrack* track)
 		{
 			refreshFusedTrackFromMembers(currentFusedTrack, track);
 		}
+
+		updateRadarTrackDebugSnapshot(track, "assoc_single_member_done", currentFusedTrack, 0.0, (currentFusedTrack != NULL), false);
 		return;
 	}
 
 	/* 多成员 fused：执行维持性门限判定。 */
-	if (!fuseEngine(track, fusedTrack, 4))
+	bool maintainHit = fuseEngine(track, fusedTrack, 4);
+	if (!maintainHit)
 	{
 		rud->failCount++;
 
@@ -1463,12 +1829,15 @@ void OWlRadarTracksFusion::handleAassiocatedRadarTrack(SPxRadarTrack* track)
 		 * 避免再用被剔除轨迹刷新 fused（旧逻辑缺陷）。
 		 */
 		refreshFusedTrackFromMembers(fusedTrack, NULL);
+		updateRadarTrackDebugSnapshot(track, "assoc_remove_member", fusedTrack, 0.0, true, false);
 		return;
 	}
 
 	/* 正常维持：统一按成员集合重算 fused。 */
 	refreshFusedTrackFromMembers(fusedTrack, track);
+	updateRadarTrackDebugSnapshot(track, "assoc_refresh", fusedTrack, 0.0, true, maintainHit);
 }
+
 void OWlRadarTracksFusion::handleAassiocatedRadarTrackFusedSingle(SPxRadarTrack* track, SPxRadarTrack* fusedTrack)
 {
 	/*
@@ -1492,6 +1861,8 @@ void OWlRadarTracksFusion::handleAassiocatedRadarTrackFusedSingle(SPxRadarTrack*
 	/* 已在预融合状态：继续走 preFuse 状态机，不重复挑选候选。 */
 	if (rud->preFusedID != 0)
 	{
+		SPxRadarTrack* preFusedTrack = fusedTrackDB->GetTrack(rud->preFusedID);
+		updateRadarTrackDebugSnapshot(track, "single_prefuse_continue", preFusedTrack, 0.0, (preFusedTrack != NULL), false);
 		preFuse(track);
 		return;
 	}
@@ -1519,6 +1890,8 @@ void OWlRadarTracksFusion::handleAassiocatedRadarTrackFusedSingle(SPxRadarTrack*
 		sprintf_s(buf, "single fused track=%d choose candidate fused=%d dist=%.2f",
 			fusedTrack->GetID(), bestFusedTrack->GetID(), bestDistMetres);
 		OWlError(OWL_ERR_INFO, buf);
+
+		updateRadarTrackDebugSnapshot(track, "single_choose_candidate", bestFusedTrack, bestDistMetres, true, true);
 	}
 	else
 	{
@@ -1526,8 +1899,10 @@ void OWlRadarTracksFusion::handleAassiocatedRadarTrackFusedSingle(SPxRadarTrack*
 		rud->preFusedID = 0;
 		rud->hitCount = 0;
 		rud->failCount = 0;
+		updateRadarTrackDebugSnapshot(track, "single_no_candidate", NULL, 0.0, false, false);
 	}
 }
+
 void OWlRadarTracksFusion::resetRadarTrackUserData(RadarTrackUserData* rud)
 {
 	rud->failCount = 0;
@@ -1537,6 +1912,251 @@ void OWlRadarTracksFusion::resetRadarTrackUserData(RadarTrackUserData* rud)
 	//rud->count = 0;
 }
 
+
+void OWlRadarTracksFusion::recordFuseEvalDebugMetrics(const OWlFuseEvalDebugMetrics& metrics)
+{
+	/*
+	 * Keep the latest fuse decision sample for both dimensions:
+	 * - radarUnifiedID view (for radar track caption);
+	 * - fusedID view (for fused track caption).
+	 */
+	if (metrics.radarUnifiedID == 0 && metrics.fusedID == 0)
+	{
+		return;
+	}
+
+	SPxAutoLock lock(m_debugLock);
+	if (metrics.radarUnifiedID != 0)
+	{
+		m_lastFuseEvalByRadarUnifiedID[metrics.radarUnifiedID] = metrics;
+	}
+	if (metrics.fusedID != 0)
+	{
+		m_lastFuseEvalByFusedID[metrics.fusedID] = metrics;
+	}
+}
+
+void OWlRadarTracksFusion::updateRadarTrackDebugSnapshot(
+	SPxRadarTrack* track,
+	const char* stage,
+	SPxRadarTrack* candidateFusedTrack,
+	double candidateDistMetres,
+	bool candidateValid,
+	bool candidateFuseHit)
+{
+	if (!track)
+	{
+		return;
+	}
+
+	OWlRadarTrackDebugSnapshot snapshot = { 0 };
+	snapshot.unifiedID = track->GetUnifiedID();
+	snapshot.trackID = track->GetID();
+	snapshot.sourceIndex = track->GetSourceIndex();
+
+	RadarTrackUserData* rud = (RadarTrackUserData*)track->GetUserData();
+	if (rud)
+	{
+		snapshot.fusedID = rud->fusedID;
+		snapshot.preFusedID = rud->preFusedID;
+		snapshot.hitCount = rud->hitCount;
+		snapshot.failCount = rud->failCount;
+		snapshot.count = rud->count;
+	}
+	snapshot.isAssociated = (snapshot.fusedID != 0);
+
+	if (candidateFusedTrack)
+	{
+		snapshot.candidateFusedID = candidateFusedTrack->GetID();
+	}
+	snapshot.candidateDistMetres = candidateDistMetres;
+	snapshot.candidateValid = candidateValid;
+	snapshot.candidateFuseHit = candidateFuseHit;
+	snapshot.deferredQueueSize = (UINT32)g_deferredTrackPacketSends.size();
+	SPxTimeGetEpoch(&snapshot.lastUpdateTs);
+
+	if (stage)
+	{
+		strncpy_s(snapshot.stage, sizeof(snapshot.stage), stage, _TRUNCATE);
+	}
+	else
+	{
+		strncpy_s(snapshot.stage, sizeof(snapshot.stage), "unknown", _TRUNCATE);
+	}
+
+	/*
+	 * Copy latest fuse-engine metrics into the radar snapshot,
+	 * so UI can directly show threshold and measured errors.
+	 */
+	SPxAutoLock lock(m_debugLock);
+	auto evalIt = m_lastFuseEvalByRadarUnifiedID.find(snapshot.unifiedID);
+	if (evalIt != m_lastFuseEvalByRadarUnifiedID.end())
+	{
+		const OWlFuseEvalDebugMetrics& eval = evalIt->second;
+		snapshot.fuseEvalAvailable = eval.hasValue;
+		snapshot.fuseEvalThreshMulti = eval.threshMulti;
+		snapshot.fuseEvalCfgAziObsDiffDegs = eval.cfgAziObsDiffDegs;
+		snapshot.fuseEvalCfgDisObsDiffMetres = eval.cfgDisObsDiffMetres;
+		snapshot.fuseEvalDxMetres = eval.dxMetres;
+		snapshot.fuseEvalDyMetres = eval.dyMetres;
+		snapshot.fuseEvalDiffXMetres = eval.diffXMetres;
+		snapshot.fuseEvalDiffYMetres = eval.diffYMetres;
+		snapshot.fuseEvalThreshXMetres = eval.threshXMetres;
+		snapshot.fuseEvalThreshYMetres = eval.threshYMetres;
+		snapshot.fuseEvalDiffRangeMetres = eval.diffRangeMetres;
+		snapshot.fuseEvalDiffAzimuthDegs = eval.diffAzimuthDegs;
+		snapshot.fuseEvalXHit = eval.isXHit;
+		snapshot.fuseEvalYHit = eval.isYHit;
+		snapshot.fuseEvalHit = eval.isFuseHit;
+	}
+
+	m_radarTrackDebugSnapshots[snapshot.unifiedID] = snapshot;
+}
+
+void OWlRadarTracksFusion::updateFusedTrackDebugSnapshot(
+	SPxRadarTrack* fusedTrack,
+	const char* stage,
+	bool deletedByRefresh)
+{
+	if (!fusedTrack)
+	{
+		return;
+	}
+
+	OWlFusedTrackDebugSnapshot snapshot = { 0 };
+	snapshot.fusedID = fusedTrack->GetID();
+	snapshot.deletedByRefresh = deletedByRefresh;
+
+	FusedTrackUserData* fud = (FusedTrackUserData*)fusedTrack->GetUserData();
+	if (fud)
+	{
+		snapshot.memberCount = (UINT32)fud->trackVec.size();
+	}
+
+	const SPxPacketTrackExtended* extRpt = fusedTrack->GetExtRpt();
+	if (extRpt)
+	{
+		snapshot.sensorsMask = extRpt->fusion.sensors;
+		snapshot.sensorTypesMask = extRpt->fusion.sensorTypes;
+		snapshot.speedMps = extRpt->norm.min.speedMps;
+		snapshot.courseDegrees = extRpt->norm.min.courseDegrees;
+	}
+
+	snapshot.deferredQueueSize = (UINT32)g_deferredTrackPacketSends.size();
+	SPxTimeGetEpoch(&snapshot.lastUpdateTs);
+
+	if (stage)
+	{
+		strncpy_s(snapshot.stage, sizeof(snapshot.stage), stage, _TRUNCATE);
+	}
+	else
+	{
+		strncpy_s(snapshot.stage, sizeof(snapshot.stage), "unknown", _TRUNCATE);
+	}
+
+	/*
+	 * Copy latest fuse-engine metrics mapped by fusedID.
+	 */
+	SPxAutoLock lock(m_debugLock);
+	auto evalIt = m_lastFuseEvalByFusedID.find(snapshot.fusedID);
+	if (evalIt != m_lastFuseEvalByFusedID.end())
+	{
+		const OWlFuseEvalDebugMetrics& eval = evalIt->second;
+		snapshot.lastEvalAvailable = eval.hasValue;
+		snapshot.lastEvalRadarUnifiedID = eval.radarUnifiedID;
+		snapshot.lastEvalRadarTrackID = eval.radarTrackID;
+		snapshot.lastEvalThreshMulti = eval.threshMulti;
+		snapshot.lastEvalDiffXMetres = eval.diffXMetres;
+		snapshot.lastEvalDiffYMetres = eval.diffYMetres;
+		snapshot.lastEvalThreshXMetres = eval.threshXMetres;
+		snapshot.lastEvalThreshYMetres = eval.threshYMetres;
+		snapshot.lastEvalDiffRangeMetres = eval.diffRangeMetres;
+		snapshot.lastEvalDiffAzimuthDegs = eval.diffAzimuthDegs;
+		snapshot.lastEvalXHit = eval.isXHit;
+		snapshot.lastEvalYHit = eval.isYHit;
+		snapshot.lastEvalHit = eval.isFuseHit;
+	}
+
+	m_fusedTrackDebugSnapshots[snapshot.fusedID] = snapshot;
+}
+
+void OWlRadarTracksFusion::removeRadarTrackDebugSnapshot(UINT32 unifiedID)
+{
+	if (unifiedID == 0)
+	{
+		return;
+	}
+
+	SPxAutoLock lock(m_debugLock);
+	auto it = m_radarTrackDebugSnapshots.find(unifiedID);
+	if (it != m_radarTrackDebugSnapshots.end())
+	{
+		m_radarTrackDebugSnapshots.erase(it);
+	}
+
+	auto evalIt = m_lastFuseEvalByRadarUnifiedID.find(unifiedID);
+	if (evalIt != m_lastFuseEvalByRadarUnifiedID.end())
+	{
+		m_lastFuseEvalByRadarUnifiedID.erase(evalIt);
+	}
+}
+
+void OWlRadarTracksFusion::removeFusedTrackDebugSnapshot(UINT32 fusedID)
+{
+	if (fusedID == 0)
+	{
+		return;
+	}
+
+	SPxAutoLock lock(m_debugLock);
+	auto it = m_fusedTrackDebugSnapshots.find(fusedID);
+	if (it != m_fusedTrackDebugSnapshots.end())
+	{
+		m_fusedTrackDebugSnapshots.erase(it);
+	}
+
+	auto evalIt = m_lastFuseEvalByFusedID.find(fusedID);
+	if (evalIt != m_lastFuseEvalByFusedID.end())
+	{
+		m_lastFuseEvalByFusedID.erase(evalIt);
+	}
+}
+
+bool OWlRadarTracksFusion::GetRadarTrackDebugSnapshot(UINT32 unifiedID, OWlRadarTrackDebugSnapshot* snapshotRtn)
+{
+	if (unifiedID == 0 || !snapshotRtn)
+	{
+		return false;
+	}
+
+	SPxAutoLock lock(m_debugLock);
+	auto it = m_radarTrackDebugSnapshots.find(unifiedID);
+	if (it == m_radarTrackDebugSnapshots.end())
+	{
+		return false;
+	}
+
+	*snapshotRtn = it->second;
+	return true;
+}
+
+bool OWlRadarTracksFusion::GetFusedTrackDebugSnapshot(UINT32 fusedID, OWlFusedTrackDebugSnapshot* snapshotRtn)
+{
+	if (fusedID == 0 || !snapshotRtn)
+	{
+		return false;
+	}
+
+	SPxAutoLock lock(m_debugLock);
+	auto it = m_fusedTrackDebugSnapshots.find(fusedID);
+	if (it == m_fusedTrackDebugSnapshots.end())
+	{
+		return false;
+	}
+
+	*snapshotRtn = it->second;
+	return true;
+}
 
 int OWlRadarTracksFusion::SetParameter(char* parameterName, char* parameterValue)
 {

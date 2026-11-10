@@ -534,6 +534,14 @@ BOOL OWlFusionPpi::OnInitDialog()
 
 
 	m_radarTrackFusion = new OWlRadarTracksFusion(m_uniTrackDb);
+	if (m_owlUniTrackRender)
+	{
+		/*
+		 * P0-2：将融合管理对象注入标牌渲染器。
+		 * 渲染层只读快照，不改融合流程。
+		 */
+		m_owlUniTrackRender->SetFusion(m_radarTrackFusion);
+	}
 
 	//m_navData->SetActive(0);
 	SPxObj::SetStateFromConfigAll();

@@ -1,5 +1,6 @@
 #pragma once
 
+class OWlRadarTracksFusion;
 
 class OWlUniTrackRender 
 	:public SPxRendererWin
@@ -9,6 +10,7 @@ public:
 		SPxUniTrackDatabase* uniDb,
 		SPxUniTrackRenderer* uniTrackRender);
 	~OWlUniTrackRender();
+	void SetFusion(OWlRadarTracksFusion* fusion);
 
 	
 	virtual SPxErrorCode renderAll(void);
@@ -17,6 +19,7 @@ public:
 private:
 	SPxUniTrackRenderer* m_uniTrackRender;
 	SPxUniTrackDatabase* m_uniDb;
+	OWlRadarTracksFusion* m_radarTrackFusion;
 
 private:
 	

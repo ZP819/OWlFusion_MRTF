@@ -31,3 +31,28 @@ UniReleaseStaticMFC_64/
 
 .vscode/
 *.aps
+
+# ===== OWlFusion_MRTF 追加（2026-11-09，G2/G3/G4）=====
+
+# 地图瓦片缓存（G2），只保留占位图
+Config/MapTiles/*
+!Config/MapTiles/placeholder.png
+
+# 运行日志与运行期文件
+SPxErrors.txt
+*.rpi.lockfile
+
+# 运行期解密出的明文（加密版本 confige.ini、lae.csv 才需要跟踪）
+/config.ini
+/la.csv
+Config/config.ini
+
+# SPx SDK 头文件副本（G3，不参与编译；SDK 在 E:\CP）
+spx_Includes/
+
+# 其他工具留下的目录
+codex_space/
+cursor_space/
+
+# Claude Code 个人设置
+.claude/settings.local.json
